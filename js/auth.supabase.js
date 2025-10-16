@@ -34,9 +34,7 @@
       options: {
         data: { name, userType, accountType: userType, phone, country },
         // Redirect confirmed email link to production admin base
-        emailRedirectTo: (function(){
-          try { return new URL('/admin/', window.location.origin).href; } catch(_) { return '/admin/'; }
-        })(),
+        emailRedirectTo: "https://www.gangagamesblog.com/admin",
       },
     });
     if (error) throw error;
