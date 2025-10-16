@@ -71,8 +71,9 @@
         }
         await ensureProfile(data.session)
         if ($) $('#signInModal').modal('hide')
-        // Redirect to dashboard route (React app)
-        window.location.href = 'http://localhost:8080/dashboard'
+        // Redirect to admin app on production domain
+        try { window.location.href = new URL('/admin/', window.location.origin).href }
+        catch { window.location.href = '/admin/' }
       })
     }
 
@@ -118,7 +119,8 @@
         }
         await ensureProfile(data.session, { name: name, userType: userType, password: password })
         if ($) $('#signUpModal').modal('hide')
-        window.location.href = 'http://localhost:8080/dashboard'
+        try { window.location.href = new URL('/admin/', window.location.origin).href }
+        catch { window.location.href = '/admin/' }
       })
     }
   })

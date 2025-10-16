@@ -33,8 +33,10 @@
       password,
       options: {
         data: { name, userType, accountType: userType, phone, country },
-        // Redirect confirmed email link to the React dashboard (vite dev server)
-        emailRedirectTo: 'http://localhost:8080/',
+        // Redirect confirmed email link to production admin base
+        emailRedirectTo: (function(){
+          try { return new URL('/admin/', window.location.origin).href; } catch(_) { return '/admin/'; }
+        })(),
       },
     });
     if (error) throw error;
@@ -54,8 +56,11 @@
       try {
         await signIn(String(email), String(password), !!rememberMe);
         $('#signInModal').modal('hide');
-        // Redirect to React dashboard
-        setTimeout(() => { window.location.href = 'http://localhost:8080/dashboard'; }, 500);
+        // Redirect to admin app on production domain
+        setTimeout(() => {
+          try { window.location.href = new URL('/admin/', window.location.origin).href; }
+          catch { window.location.href = '/admin/'; }
+        }, 500);
       } catch (err) {
         alert('Sign in failed: ' + (err?.message || err));
       }
