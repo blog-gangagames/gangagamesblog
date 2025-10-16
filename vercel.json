@@ -1,8 +1,9 @@
 {
-  // Vercel config for the static public site at repo root
-  // Rewrites enable pretty URLs for articles and categories without a custom server
-  "routes": [
-    { "src": "/category/[^/]+/?$", "dest": "/category-style-v2.html" },
-    { "src": "/(?!category)(?!.*\\.)[A-Za-z0-9\\-]+/?$", "dest": "/article-detail-v1.html" }
+  "version": 2,
+  "rewrites": [
+    { "source": "/category/:slug([A-Za-z0-9\\-]+)", "destination": "/category-style-v2.html" },
+    { "source": "/category/:slug([A-Za-z0-9\\-]+)/", "destination": "/category-style-v2.html" },
+    { "source": "/:slug([A-Za-z0-9\\-]+)", "destination": "/article-detail-v1.html" },
+    { "source": "/:slug([A-Za-z0-9\\-]+)/", "destination": "/article-detail-v1.html" }
   ]
 }
