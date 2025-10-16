@@ -1,0 +1,1350 @@
+/* NEWS Dropdown Fixes */
+.dropdown-menu.megamenu {
+    /* Responsive width and equal padding to avoid oversizing */
+    width: 100% !important;
+    max-width: clamp(1040px, 92vw, 1240px) !important;
+    padding: clamp(16px, 2vw, 24px) !important;
+    margin-top: 0 !important;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1050 !important; /* ensure dropdown overlays navbar */
+    display: none !important; /* default: hidden until hovered or .show */
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Unified dropdown arrow indicators across all pages (match homepage) */
+.dropdown-toggle[data-toggle="dropdown"]::after {
+    content: "▼";
+    border: none !important;
+    vertical-align: middle !important;
+    margin-left: 6px !important;
+    font-size: 10px !important;
+    color: #4a90e2 !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Rotate indicator when open via hover or expanded state */
+.dropdown:hover .dropdown-toggle::after,
+.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg) !important;
+}
+
+/* Ensure topbar account dropdown overlays correctly */
+.topbar .dropdown-menu {
+    position: absolute !important;
+    z-index: 1050 !important;
+}
+
+/* Megamenu list link arrows, consistent across pages */
+.megamenu .list-unstyled li {
+    position: relative !important;
+    padding-left: 8px !important;
+}
+
+/* Default: no arrows in megamenu list links (match homepage minimal look) */
+.megamenu .list-unstyled li a::before {
+    content: none !important;
+}
+
+/* No hover arrow shift since arrows are disabled */
+.megamenu .list-unstyled li a:hover::before { content: none !important; }
+
+/* Show dropdown via Bootstrap's .show class (click), not hover */
+.dropdown-menu.megamenu.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Enable hover-open behavior so dropdowns show on hover */
+.navbar-hover .dropdown:hover > .dropdown-menu,
+.navbar-hover .nav-item:hover > .dropdown-menu {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Ensure clicked-open menus stay visible even when parent is hovered */
+.navbar-hover .dropdown:hover > .dropdown-menu.show,
+.navbar-hover .nav-item:hover > .dropdown-menu.show {
+    display: block !important;
+}
+
+.dropdown-menu.megamenu .popular__news-header-carousel {
+    padding: 20px !important;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Inject a heading above posts without changing HTML */
+.dropdown-menu.megamenu .popular__news-header-carousel::before {
+    content: "Recent";
+    display: block;
+    color: #bcd0ff !important;
+    letter-spacing: .5px !important;
+    margin: 4px 12px 10px 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    border-bottom: 2px solid rgba(74, 144, 226, 0.35) !important;
+    padding-bottom: 6px !important;
+}
+
+.dropdown-menu.megamenu .top__news__slider {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    margin: 0 auto;
+}
+
+/* Work with the actual HTML structure using .item classes */
+.top__news__slider-container {
+    display: flex !important;
+    visibility: visible !important;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.top__news__slider .item {
+    display: block !important;
+    visibility: visible !important;
+    flex: 0 0 auto;
+    width: 260px;
+    margin: 0 10px;
+}
+
+/* Ensure article entries are visible */
+.top__news__slider .item .article__entry {
+    display: flex !important;
+    visibility: visible !important;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.top__news__slider .item .article__image {
+    display: block !important;
+    visibility: visible !important;
+    height: 140px;
+    overflow: hidden;
+}
+
+.top__news__slider .item .article__image img {
+    display: block !important;
+    visibility: visible !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top__news__slider .item .article__content {
+    display: flex !important;
+    visibility: visible !important;
+    flex-direction: column;
+    padding: 12px;
+    flex-grow: 1;
+}
+
+.top__news__slider .item .article__content h5 {
+    display: block !important;
+    visibility: visible !important;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: auto;
+    color: #333;
+}
+
+.top__news__slider .item .article__content ul {
+    display: block !important;
+    visibility: visible !important;
+    margin-bottom: 10px;
+}
+
+.top__news__slider .item .article__content li {
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+.scroll-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 10;
+    padding: 0 10px;
+}
+
+.scroll-btn {
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.scroll-btn:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.scroll-left {
+    margin-left: 5px;
+}
+
+.scroll-right {
+    margin-right: 5px;
+}
+
+/* NEWS dropdown beautification: polished card visuals and spacing */
+.top__news__slider .item + .item {
+    margin-left: 16px !important;
+}
+
+.top__news__slider .item {
+    vertical-align: top !important;
+}
+
+.top__news__slider .item .article__entry {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: box-shadow .25s ease, transform .25s ease !important;
+}
+
+.top__news__slider .item .article__entry:hover {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28) !important;
+    transform: translateY(-2px) !important;
+}
+
+.top__news__slider .item .article__image img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.top__news__slider .item .article__content {
+    padding: 12px 14px 14px 14px !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline span {
+    color: #b9c3d8 !important;
+    font-size: 12px !important;
+}
+
+.top__news__slider .item .article__content h5 {
+    margin: 6px 0 0 0 !important;
+}
+
+.top__news__slider .item .article__content h5 a {
+    color: #eaf0ff !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+}
+
+.top__news__slider .item .article__content h5 a:hover {
+    color: #4a90e2 !important;
+}
+
+/* Ensure dropdown slider never hides its children and container isn't absolute */
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider {
+    overflow: visible !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    /* Use a variable gap so items and spaces balance nicely */
+    --news-gap: 24px;
+    gap: 0 !important; /* rely on margin-left for cross-browser spacing */
+    /* Allow horizontal scrolling of posts only */
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+}
+
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider-container {
+    position: relative !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+}
+
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider-container .item {
+    display: flex !important;
+}
+
+/* Force four items on one horizontal line */
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider .item {
+    /* 4 items with 3 gaps: ensure total equals container width */
+    flex: 0 0 calc((100% - (3 * var(--news-gap))) / 4) !important;
+    max-width: calc((100% - (3 * var(--news-gap))) / 4) !important;
+    margin: 0 !important;
+    scroll-snap-align: start !important;
+}
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider .item + .item {
+    margin-left: var(--news-gap) !important;
+}
+
+/* RECENT NEWS heading style like reference */
+.recent-news-title {
+    color: #bcd0ff !important;
+    letter-spacing: .5px !important;
+    margin: 4px 12px 6px 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+}
+
+/* Remove extra left/right inner gutter to avoid large empty spaces */
+.dropdown-menu.megamenu .popular__news-header-carousel .top__news__slider {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Inline author and date chips */
+.top__news__slider .item .article__content ul.list-inline {
+    display: flex !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline .list-inline-item span {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 9999px !important;
+    padding: 2px 8px !important;
+    color: #eaf0ff !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+/* Consistent card height across dropdown */
+.top__news__slider .item .article__entry {
+    min-height: 270px !important;
+}
+
+/* Widen inner posts container to near full dropdown width and keep equal edges */
+.dropdown-menu.megamenu .container.wrap__mobile-megamenu {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.dropdown-menu.megamenu .popular__news-header-carousel {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    /* Add side gutters so posts don’t touch the edges */
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+}
+
+.dropdown-menu.megamenu .top__news__slider {
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.dropdown-menu.megamenu .top__news__slider-container {
+    width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+}
+
+/* Author and date inline on a single line, no wrapping */
+.top__news__slider .item .article__content ul.list-inline {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 8px !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline .list-inline-item {
+    display: inline-flex !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline .list-inline-item span {
+    white-space: nowrap !important;
+}
+
+/* Remove chip backgrounds/borders on author and date */
+.top__news__slider .item .article__content ul.list-inline .list-inline-item span {
+    background: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+    color: #b9c3d8 !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+/* Hover-open behavior: show megamenu on hover for both Categories and News */
+.navbar-hover .nav-item.dropdown.has-megamenu:hover > .dropdown-menu.megamenu {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 1100 !important; /* ensure hovered menu overlays siblings */
+}
+
+/* Ensure hovered menu uses default positioning to avoid squeezing */
+.navbar-hover .nav-item.dropdown.has-megamenu:hover {
+    position: static !important;
+}
+
+/* Keep non-hovered megamenus hidden even if .show was toggled before */
+.navbar-hover .nav-item.dropdown.has-megamenu:not(:hover) > .dropdown-menu.megamenu.show {
+    display: none !important;
+}
+
+/* Categories Dropdown: Center alignment */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .dropdown-menu.megamenu .row {
+    justify-content: center !important;
+}
+
+/* Account dropdown: remove white hover and unify item widths */
+.topbar .topbar-link .dropdown .dropdown-menu {
+    overflow: hidden !important; /* clip hover backgrounds to rounded corners */
+    border-radius: 12px !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu li {
+    width: 100% !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: transparent !important; /* no white base */
+    color: #eaf0ff !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item:hover,
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item:focus,
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item:active {
+    /* lighter purple hover to match site header */
+    background: rgba(98, 85, 194, 0.22) !important;
+    color: #ffffff !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ensure no white hover from li wrapper */
+.topbar .topbar-link .dropdown .dropdown-menu li:hover {
+    background: rgba(98, 85, 194, 0.22) !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu li:hover > .dropdown-item {
+    background: transparent !important; /* keep anchor transparent so wrapper color shows */
+    color: #ffffff !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .col-megamenu {
+    text-align: center !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .title {
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled {
+    text-align: center !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a {
+    display: inline-block !important;
+    text-align: center !important;
+    width: auto !important;
+}
+/* Center the menu container under the trigger while preserving existing width */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu > .dropdown-menu.megamenu {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Homepage-aligned Categories Megamenu visuals across all pages */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu > .dropdown-menu.megamenu {
+  background: linear-gradient(135deg, #1a1c4a 0%, #2a2d5a 100%) !important;
+  border: 1px solid rgba(74, 144, 226, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  padding: 12px 12px 20px 12px !important;
+  min-height: 320px !important;
+  margin-top: 8px !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: absolute !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .wrap__mobile-megamenu { padding-top: 16px !important; padding-bottom: 32px !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .popular__news-header-carousel { padding-top: 16px !important; padding-bottom: 32px !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .top__news__slider { margin-top: 20px !important; }
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .container { max-width: 100% !important; width: 100% !important; padding: 0 24px !important; }
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .title {
+  color: #4a90e2 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 2px solid #4a90e2 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled { margin: 0 !important; padding: 0 !important; text-align: left !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li { margin-bottom: 6px !important; padding-left: 0 !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a {
+  color: #e6e9ef !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 8px 12px !important;
+  display: block !important;
+  transition: all 0.3s ease !important;
+  border-radius: 6px !important;
+  position: relative !important;
+  text-align: left !important;
+  width: 100% !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a:hover {
+  color: #ffffff !important;
+  background-color: rgba(74, 144, 226, 0.2) !important;
+  padding-left: 16px !important;
+  transform: translateX(4px) !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a::before {
+  content: "▶" !important;
+  position: absolute !important;
+  left: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #4a90e2 !important;
+  font-size: 10px !important;
+  opacity: 0 !important;
+  transition: all 0.3s ease !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a:hover::before { opacity: 1 !important; left: 12px !important; }
+
+@media (max-width: 768px) {
+  .navbar .nav-item.dropdown.has-megamenu.categories-megamenu > .dropdown-menu.megamenu {
+    padding: 16px !important;
+    width: 100vw !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+  .navbar .nav-item.dropdown.has-megamenu.categories-megamenu .title { font-size: 14px !important; }
+  .navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a { font-size: 13px !important; padding: 6px 10px !important; }
+}
+
+/* Modal Visuals: Unified colors, typography, buttons */
+#signUpModal .modal-title,
+#signInModal .modal-title,
+#signUpModalLabel,
+#signInModalLabel {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 24px !important;
+}
+
+#signUpModal .modal-body,
+#signInModal .modal-body {
+  padding: 24px 32px 32px 32px !important;
+}
+
+#signUpModal label,
+#signInModal label {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin-bottom: 6px !important;
+}
+
+#signUpModal .form-control,
+#signInModal .form-control,
+#signUpModal select,
+#signInModal select {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  height: 44px !important;
+}
+
+#signUpModal .form-control:focus,
+#signInModal .form-control:focus,
+#signUpModal select:focus,
+#signInModal select:focus {
+  outline: none !important;
+  border-color: #4a90e2 !important;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2) !important;
+}
+
+#signUpModal select,
+#signInModal select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22white%22%3E%3Cpath d=%22M7 10l5 5 5-5z%22/%3E%3C/svg%3E') !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 16px !important;
+  padding-right: 36px !important;
+}
+
+#signUpModal .btn-primary,
+#signInModal .btn-primary {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  height: 44px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+#signUpModal .modal-footer,
+#signInModal .modal-footer {
+  border: none !important;
+  background: none !important;
+  padding: 0 32px 32px 32px !important;
+}
+
+#signUpModal .modal-footer p,
+#signInModal .modal-footer p {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+#signUpModal .modal-footer a,
+#signInModal .modal-footer a {
+  color: #4a90e2 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+/* Normalize modal headers and close buttons to match homepage */
+#signUpModal .modal-header,
+#signInModal .modal-header {
+  background: none !important;
+  border: none !important;
+  padding: 32px 32px 0 32px !important;
+}
+
+#signUpModal .close,
+#signInModal .close {
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Hide legacy input icons in modals to keep design clean */
+#signUpModal .modal-body i.fa,
+#signInModal .modal-body i.fa {
+  display: none !important;
+}
+
+/* Constrain Sign Up / Sign In modals within viewport */
+#signUpModal .modal-dialog,
+#signInModal .modal-dialog {
+  width: auto !important;
+  max-width: min(480px, calc(100vw - 32px)) !important;
+  margin: 16px auto !important;
+  box-sizing: border-box !important;
+}
+
+#signUpModal .modal-content,
+#signInModal .modal-content {
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: calc(100vh - 32px) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important; /* keep rounded corners clean */
+}
+
+#signUpModal .modal-header,
+#signInModal .modal-header,
+#signUpModal .modal-footer,
+#signInModal .modal-footer {
+  flex-shrink: 0 !important;
+}
+
+#signUpModal .modal-body,
+#signInModal .modal-body {
+  overflow-y: auto !important;
+}
+
+/* Small screens: slightly tighter gutters */
+@media (max-width: 480px) {
+  #signUpModal .modal-dialog,
+  #signInModal .modal-dialog {
+    max-width: calc(100vw - 24px) !important;
+    margin: 12px auto !important;
+  }
+  #signUpModal .modal-content,
+  #signInModal .modal-content {
+    max-height: calc(100vh - 24px) !important;
+  }
+}
+
+/* Constrain legacy aside modal if used */
+#modal_aside_right .modal-dialog.modal-dialog-aside {
+  width: auto !important;
+  max-width: min(420px, calc(100vw - 16px)) !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+#modal_aside_right .modal-content {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: auto !important;
+}
+/* News Megamenu: constrain hover-open to header, prevent below-hero trigger */
+/* Do not alter visuals; only adjust pointer-events so hidden menu can't capture hover */
+.navbar-hover .nav-item.dropdown.has-megamenu > .dropdown-menu.megamenu {
+  pointer-events: none;
+}
+
+/* Enable interactions only when actually visible or hovered via header link */
+.navbar-hover .nav-item.dropdown.has-megamenu > a.nav-link.dropdown-toggle:hover + .dropdown-menu.megamenu,
+.navbar-hover .nav-item.dropdown.has-megamenu:hover > .dropdown-menu.megamenu,
+.navbar-hover .nav-item.dropdown.has-megamenu .dropdown-menu.megamenu.show {
+  pointer-events: auto;
+}
+
+/* Categories dropdown: center alignment overrides */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .row {
+  justify-content: center !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .col-megamenu {
+  text-align: center !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .title {
+  text-align: center !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled {
+  text-align: center !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a {
+  display: inline-block !important;
+  text-align: center !important;
+  width: auto !important;
+}
+
+/* Keep dropdown container centered under trigger */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu > .dropdown-menu.megamenu {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Neutralize hover shift for perfectly centered items */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a:hover {
+  transform: none !important;
+  padding-left: 12px !important; /* keep original left padding */
+}
+
+/* Disable left-arrow indicator for centered layout */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a::before {
+  content: none !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a:hover::before {
+  content: none !important;
+}
+
+/* Breadcrumb: remove white box under header on category and article pages */
+ul.breadcrumbs.bg-light,
+.breadcrumbs.bg-light {
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Slightly tighter vertical spacing to blend with header */
+.breadcrumbs {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+/* Breadcrumb separators: use text arrow to avoid FontAwesome dependency */
+.breadcrumbs__item:after {
+  content: "›" !important;
+  font-family: inherit !important;
+  display: inline-block !important;
+  position: relative !important;
+  font-size: 14px !important;
+  margin: 0 6px !important;
+}
+
+/* ---------------------------------------------
+   Brand palette and section title color utilities
+   --------------------------------------------- */
+:root {
+  --brand-orange: #ff7f00;
+  --brand-green: #28a745;
+  --brand-gold: #ffc107;
+}
+
+/* Section title text colors */
+.border_section.title-orange { color: var(--brand-orange) !important; }
+.border_section.title-green  { color: var(--brand-green)  !important; }
+.border_section.title-gold   { color: var(--brand-gold)   !important; }
+
+/* Override underline accent on section titles */
+.wrapper__list__article .border_section.title-orange:before { background: var(--brand-orange) !important; }
+.wrapper__list__article .border_section.title-green:before  { background: var(--brand-green)  !important; }
+.wrapper__list__article .border_section.title-gold:before   { background: var(--brand-gold)   !important; }
+
+/* ---------------------------------------------
+   Category badge color utilities
+   --------------------------------------------- */
+.article__category.cat-color-orange,
+.card__post__category.cat-color-orange,
+.card__post__list .category.cat-color-orange,
+.category.cat-color-orange {
+  background: var(--brand-orange) !important;
+  color: #ffffff !important;
+}
+
+.article__category.cat-color-green,
+.card__post__category.cat-color-green,
+.card__post__list .category.cat-color-green,
+.category.cat-color-green {
+  background: var(--brand-green) !important;
+  color: #ffffff !important;
+}
+
+.article__category.cat-color-gold,
+.card__post__category.cat-color-gold,
+.card__post__list .category.cat-color-gold,
+.category.cat-color-gold {
+  background: var(--brand-gold) !important;
+  color: #ffffff !important;
+}
+
+/* ---------------------------------------------
+   Button palette overrides (Bootstrap)
+   --------------------------------------------- */
+:root {
+  --brand-primary: #2563eb;
+  --brand-primary-dark: #1e40af;
+  --brand-secondary: #64748b;
+  --brand-secondary-dark: #475569;
+  --brand-success: #22c55e;
+  --brand-success-dark: #16a34a;
+  --brand-danger: #ef4444;
+  --brand-danger-dark: #b91c1c;
+  --brand-info: #06b6d4;
+  --brand-info-dark: #0e7490;
+  --brand-dark: #0f172a;
+  --brand-light: #f1f5f9;
+
+  --social-facebook: #1877f2;
+  --social-twitter: #1da1f2;
+  --social-whatsapp: #25d366;
+  --social-telegram: #0088cc;
+  --social-linkedin: #0a66c2;
+  --social-instagram: #e1306c;
+}
+
+.btn {
+  font-weight: 600 !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+/* Primary */
+.btn-primary {
+  background: var(--brand-primary) !important;
+  background-image: none !important;
+  border-color: var(--brand-primary) !important;
+  color: #ffffff !important;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--brand-primary-dark) !important;
+  background-image: none !important;
+  border-color: var(--brand-primary-dark) !important;
+  color: #ffffff !important;
+}
+.btn-outline-primary {
+  color: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+  background-color: transparent !important;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  color: #ffffff !important;
+  background: var(--brand-primary) !important;
+  background-image: none !important;
+  border-color: var(--brand-primary) !important;
+}
+
+/* Secondary */
+.btn-secondary {
+  background-color: var(--brand-secondary) !important;
+  border-color: var(--brand-secondary) !important;
+  color: #ffffff !important;
+}
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--brand-secondary-dark) !important;
+  border-color: var(--brand-secondary-dark) !important;
+}
+.btn-outline-secondary {
+  color: var(--brand-secondary) !important;
+  border-color: var(--brand-secondary) !important;
+  background-color: transparent !important;
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus {
+  color: #ffffff !important;
+  background-color: var(--brand-secondary) !important;
+  border-color: var(--brand-secondary) !important;
+}
+
+/* Success */
+.btn-success {
+  background-color: var(--brand-success) !important;
+  border-color: var(--brand-success) !important;
+  color: #ffffff !important;
+}
+.btn-success:hover,
+.btn-success:focus {
+  background-color: var(--brand-success-dark) !important;
+  border-color: var(--brand-success-dark) !important;
+}
+.btn-outline-success {
+  color: var(--brand-success) !important;
+  border-color: var(--brand-success) !important;
+  background-color: transparent !important;
+}
+.btn-outline-success:hover,
+.btn-outline-success:focus {
+  color: #ffffff !important;
+  background-color: var(--brand-success) !important;
+  border-color: var(--brand-success) !important;
+}
+
+/* Danger */
+.btn-danger {
+  background-color: var(--brand-danger) !important;
+  border-color: var(--brand-danger) !important;
+  color: #ffffff !important;
+}
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: var(--brand-danger-dark) !important;
+  border-color: var(--brand-danger-dark) !important;
+}
+.btn-outline-danger {
+  color: var(--brand-danger) !important;
+  border-color: var(--brand-danger) !important;
+  background-color: transparent !important;
+}
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+  color: #ffffff !important;
+  background-color: var(--brand-danger) !important;
+  border-color: var(--brand-danger) !important;
+}
+
+/* Info */
+.btn-info {
+  background-color: var(--brand-info) !important;
+  border-color: var(--brand-info) !important;
+  color: #ffffff !important;
+}
+.btn-info:hover,
+.btn-info:focus {
+  background-color: var(--brand-info-dark) !important;
+  border-color: var(--brand-info-dark) !important;
+}
+.btn-outline-info {
+  color: var(--brand-info) !important;
+  border-color: var(--brand-info) !important;
+  background-color: transparent !important;
+}
+.btn-outline-info:hover,
+.btn-outline-info:focus {
+  color: #ffffff !important;
+  background-color: var(--brand-info) !important;
+  border-color: var(--brand-info) !important;
+}
+
+/* Dark */
+.btn-dark {
+  background-color: var(--brand-dark) !important;
+  border-color: var(--brand-dark) !important;
+  color: #ffffff !important;
+}
+.btn-dark:hover,
+.btn-dark:focus {
+  filter: brightness(1.15) !important;
+}
+.btn-outline-dark {
+  color: var(--brand-dark) !important;
+  border-color: var(--brand-dark) !important;
+  background-color: transparent !important;
+}
+.btn-outline-dark:hover,
+.btn-outline-dark:focus {
+  color: #ffffff !important;
+  background-color: var(--brand-dark) !important;
+  border-color: var(--brand-dark) !important;
+}
+
+/* Light */
+.btn-light {
+  background-color: var(--brand-light) !important;
+  border-color: var(--brand-light) !important;
+  color: #0f172a !important;
+}
+.btn-outline-light {
+  color: #0f172a !important;
+  border-color: var(--brand-light) !important;
+  background-color: transparent !important;
+}
+.btn-outline-light:hover,
+.btn-outline-light:focus {
+  color: #0f172a !important;
+  background-color: var(--brand-light) !important;
+  border-color: var(--brand-light) !important;
+}
+
+/* Social buttons */
+.btn-social.facebook { background-color: var(--social-facebook) !important; color: #fff !important; }
+.btn-social.twitter  { background-color: var(--social-twitter) !important;  color: #fff !important; }
+.btn-social.whatsapp { background-color: var(--social-whatsapp) !important; color: #fff !important; }
+.btn-social.telegram { background-color: var(--social-telegram) !important; color: #fff !important; }
+.btn-social.linkedin { background-color: var(--social-linkedin) !important; color: #fff !important; }
+.btn-social.instagram { background-color: var(--social-instagram) !important; color: #fff !important; }
+
+.btn-social-o.facebook {
+  color: var(--social-facebook) !important;
+  border-color: var(--social-facebook) !important;
+  background-color: transparent !important;
+}
+.btn-social-o.facebook:hover, .btn-social-o.facebook:focus {
+  color: #fff !important;
+  background-color: var(--social-facebook) !important;
+  border-color: var(--social-facebook) !important;
+}
+.btn-linkedin-o.linkedin {
+  color: var(--social-linkedin) !important;
+  border-color: var(--social-linkedin) !important;
+  background-color: transparent !important;
+}
+.btn-linkedin-o.linkedin:hover, .btn-linkedin-o.linkedin:focus {
+  color: #fff !important;
+  background-color: var(--social-linkedin) !important;
+  border-color: var(--social-linkedin) !important;
+}
+.btn-social-o.twitter {
+  color: var(--social-twitter) !important;
+  border-color: var(--social-twitter) !important;
+  background-color: transparent !important;
+}
+.btn-social-o.twitter:hover, .btn-social-o.twitter:focus {
+  color: #fff !important;
+  background-color: var(--social-twitter) !important;
+  border-color: var(--social-twitter) !important;
+}
+.btn-social-o.instagram {
+  color: var(--social-instagram) !important;
+  border-color: var(--social-instagram) !important;
+  background-color: transparent !important;
+}
+.btn-social-o.instagram:hover, .btn-social-o.instagram:focus {
+  color: #fff !important;
+  background-color: var(--social-instagram) !important;
+  border-color: var(--social-instagram) !important;
+}
+.btn-social-o.whatsapp {
+  color: var(--social-whatsapp) !important;
+  border-color: var(--social-whatsapp) !important;
+}
+.btn-social-o.whatsapp:hover, .btn-social-o.whatsapp:focus {
+  color: #fff !important;
+  background-color: var(--social-whatsapp) !important;
+  border-color: var(--social-whatsapp) !important;
+}
+.btn-social-o.telegram {
+  color: var(--social-telegram) !important;
+  border-color: var(--social-telegram) !important;
+}
+.btn-social-o.telegram:hover, .btn-social-o.telegram:focus {
+  color: #fff !important;
+  background-color: var(--social-telegram) !important;
+  border-color: var(--social-telegram) !important;
+}
+.btn-social-o.linkedin {
+  color: var(--social-linkedin) !important;
+  border-color: var(--social-linkedin) !important;
+}
+.btn-social-o.linkedin:hover, .btn-social-o.linkedin:focus {
+  color: #fff !important;
+  background-color: var(--social-linkedin) !important;
+  border-color: var(--social-linkedin) !important;
+}
+
+/* ---------------------------------------------
+   Popular Categories: keep brand colors on hover
+   --------------------------------------------- */
+/* Sidebar/any blog-tags anchors */
+.blog-tags .list-inline .list-inline-item a.cat-color-orange:hover,
+.blog-tags .list-inline .list-inline-item a.cat-color-orange:focus,
+.blog-tags a.cat-color-orange:hover,
+.blog-tags a.cat-color-orange:focus {
+  color: #fff !important;
+  background-color: #ff7f00 !important;
+  border-color: #ff7f00 !important;
+}
+
+.blog-tags .list-inline .list-inline-item a.cat-color-green:hover,
+.blog-tags .list-inline .list-inline-item a.cat-color-green:focus,
+.blog-tags a.cat-color-green:hover,
+.blog-tags a.cat-color-green:focus {
+  color: #fff !important;
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.blog-tags .list-inline .list-inline-item a.cat-color-gold:hover,
+.blog-tags .list-inline .list-inline-item a.cat-color-gold:focus,
+.blog-tags a.cat-color-gold:hover,
+.blog-tags a.cat-color-gold:focus {
+  color: #fff !important;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+/* Footer tag list */
+.wrapper__footer .widget__footer .blog-tags ul li a.cat-color-orange:hover,
+.wrapper__footer .widget__footer .blog-tags ul li a.cat-color-orange:focus {
+  color: #fff !important;
+  background-color: #ff7f00 !important;
+  border-color: #ff7f00 !important;
+}
+
+.wrapper__footer .widget__footer .blog-tags ul li a.cat-color-green:hover,
+.wrapper__footer .widget__footer .blog-tags ul li a.cat-color-green:focus {
+  color: #fff !important;
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+.wrapper__footer .widget__footer .blog-tags ul li a.cat-color-gold:hover,
+.wrapper__footer .widget__footer .blog-tags ul li a.cat-color-gold:focus {
+  color: #fff !important;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
+/* ---------------------------------------------
+   Author & Date colors (accessible on dark BG)
+   --------------------------------------------- */
+.card__post__author-info .list-inline .list-inline-item span.text-primary,
+.wrap__profile-author-detail .list-inline .list-inline-item span.text-primary,
+.masonary__title-info-author .list-inline .list-inline-item span.text-primary {
+  color: #8ea6ff !important; /* author default: deeper brand blue */
+}
+
+.card__post__author-info .list-inline .list-inline-item span.text-primary:hover,
+.wrap__profile-author-detail .list-inline .list-inline-item span.text-primary:hover,
+.masonary__title-info-author .list-inline .list-inline-item span.text-primary:hover {
+  color: #ff7f00 !important; /* hover accent */
+}
+
+.card__post__author-info .list-inline .list-inline-item span.text-dark,
+.wrap__profile-author-detail .list-inline .list-inline-item span.text-dark,
+.masonary__title-info-author .list-inline .list-inline-item span.text-dark {
+  color: #8a94ad !important; /* date/meta muted */
+}
+
+/* Anchor variants if templates use links */
+.card__post__author-info .list-inline .list-inline-item a.text-primary,
+.wrap__profile-author-detail .list-inline .list-inline-item a.text-primary,
+.masonary__title-info-author .list-inline .list-inline-item a.text-primary { color: #8ea6ff !important; }
+.card__post__author-info .list-inline .list-inline-item a.text-primary:hover,
+.wrap__profile-author-detail .list-inline .list-inline-item a.text-primary:hover,
+.masonary__title-info-author .list-inline .list-inline-item a.text-primary:hover { color: #ff7f00 !important; }
+.card__post__author-info .list-inline .list-inline-item a.text-dark,
+.wrap__profile-author-detail .list-inline .list-inline-item a.text-dark,
+.masonary__title-info-author .list-inline .list-inline-item a.text-dark { color: #8a94ad !important; }
+
+/* Category article entries: author & date in lists/cards */
+.article__entry .article__content ul.list-inline .list-inline-item span.text-primary,
+.wrapper__list__article .article__entry .article__content ul.list-inline .list-inline-item span.text-primary,
+.popular__news-header-carousel .article__entry .article__content ul.list-inline .list-inline-item span.text-primary {
+  color: #8ea6ff !important;
+}
+.article__entry .article__content ul.list-inline .list-inline-item span.text-primary:hover,
+.wrapper__list__article .article__entry .article__content ul.list-inline .list-inline-item span.text-primary:hover,
+.popular__news-header-carousel .article__entry .article__content ul.list-inline .list-inline-item span.text-primary:hover {
+  color: #ff7f00 !important;
+}
+.article__entry .article__content ul.list-inline .list-inline-item a.text-primary,
+.wrapper__list__article .article__entry .article__content ul.list-inline .list-inline-item a.text-primary,
+.popular__news-header-carousel .article__entry .article__content ul.list-inline .list-inline-item a.text-primary { color: #8ea6ff !important; }
+.article__entry .article__content ul.list-inline .list-inline-item a.text-primary:hover,
+.wrapper__list__article .article__entry .article__content ul.list-inline .list-inline-item a.text-primary:hover,
+.popular__news-header-carousel .article__entry .article__content ul.list-inline .list-inline-item a.text-primary:hover { color: #ff7f00 !important; }
+.article__entry .article__content ul.list-inline .list-inline-item span.text-dark,
+.wrapper__list__article .article__entry .article__content ul.list-inline .list-inline-item span.text-dark,
+.popular__news-header-carousel .article__entry .article__content ul.list-inline .list-inline-item span.text-dark { color: #8a94ad !important; }
+
+/* Remove forced hide of under-hero carousel to allow dynamic rendering */
+/* body.home .popular__news-header-carousel,
+.popular__news-header + .popular__news-header-carousel {
+  display: none !important;
+} */
+
+/* Ensure the under-hero carousel is visible */
+.popular__news-header-carousel {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Hide dummy right-column posts above the hero and make left column full width */
+.popular__news-header .popular__news-right {
+  display: block !important;
+}
+/* Restore two-column layout proportions for the hero header only on desktop */
+@media (min-width: 768px) {
+  .popular__news-header .col-md-8 {
+    flex: 0 0 66.6667% !important;
+    max-width: 66.6667% !important;
+  }
+}
+/* On mobile, ensure hero and right column are full width and stacked */
+@media (max-width: 767.98px) {
+  .popular__news-header .col-md-8,
+  .popular__news-header .col-md-4,
+  .popular__news-header .popular__news-right {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Compact trending strip under header (scroll posts) */
+/* Reduce vertical padding for the first section under header only */
+header + section.bg-light {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
+
+/* Remove extra vertical margins inside trending strip container */
+header + section.bg-light .wrapp__list__article-responsive,
+header + section.bg-light .wrapp__list__article-responsive-carousel {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Tighten item body spacing to keep the strip short */
+header + section.bg-light .wrapp__list__article-responsive-carousel .card__post__body {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  display: flex;
+  justify-content: center; /* vertically center inner text block */
+}
+
+/* Reduce author info bottom margin within the strip */
+header + section.bg-light .wrapp__list__article-responsive-carousel .card__post__author-info {
+  margin-bottom: 0 !important;
+}
+
+/* Slightly denser title line for compact height */
+header + section.bg-light .wrapp__list__article-responsive-carousel .card__post__title h6 {
+  line-height: 1.25 !important;
+}
+/* Remove extra title container margins */
+header + section.bg-light .wrapp__list__article-responsive-carousel .card__post__title {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Extra-compact on mobile */
+@media (max-width: 767.98px) {
+  header + section.bg-light {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+}
+
+/* Vertically center content in the trending strip */
+header + section.bg-light .row {
+  align-items: center !important; /* Bootstrap row is flex; center its children */
+}
+header + section.bg-light .wrapp__list__article-responsive-carousel {
+  display: flex;               /* Allow centering of the slider block */
+  align-items: center;         /* Center the slider vertically in the strip */
+}
+header + section.bg-light .wrapp__list__article-responsive-carousel .card__post-list {
+  align-items: center !important; /* Center image and text within each item */
+}
+/* Ensure each slick item has no extra vertical padding */
+header + section.bg-light .wrapp__list__article-responsive-carousel .item {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Make thumbnails larger on mobile within the trending strip */
+@media (max-width: 767.98px) {
+  header + section.bg-light .wrapp__list__article-responsive-carousel .image-sm {
+    flex: 0 0 42% !important;
+    width: 42% !important;
+    max-width: 42% !important;
+  }
+}
+@media (max-width: 575.98px) {
+  header + section.bg-light .wrapp__list__article-responsive-carousel .image-sm {
+    flex: 0 0 46% !important;
+    width: 46% !important;
+    max-width: 46% !important;
+  }
+}

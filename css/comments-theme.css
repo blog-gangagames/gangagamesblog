@@ -1,0 +1,77 @@
+/* Comment form theme updated to purple scheme */
+#comments,
+#comments .comment-respond {
+  background-color: #141024; /* deep purple-tinted background */
+}
+
+#comments .comments-title,
+#comments .comment-reply-title,
+#comments label,
+#comments .comment-notes,
+#comments .logged-in-as,
+#comments .comment-list .comment-author,
+#comments .comment-list .comment-metadata,
+#comments .no-comments {
+  color: #eae6ff; /* light lavender text */
+}
+
+#comments .comment-respond input[type="text"],
+#comments .comment-respond input[type="email"],
+#comments .comment-respond input[type="url"],
+#comments .comment-respond input[type="search"],
+#comments .comment-respond input[type="password"],
+#comments .comment-respond textarea {
+  background-color: #1c1538; /* input background */
+  color: #f7f5ff;
+  border: 1px solid #3b2b6d; /* purple border */
+}
+
+#comments .comment-respond input::placeholder,
+#comments .comment-respond textarea::placeholder {
+  color: #c3b8e6; /* soft lavender placeholder */
+}
+
+#comments .comment-respond .form-submit input[type="submit"],
+#comments .comment-respond .form-submit button,
+#comments .comment-respond .submit {
+  background-color: #7c3aed; /* primary purple */
+  border-color: #7c3aed;
+  color: #ffffff;
+}
+
+#comments .comment-respond .form-submit input[type="submit"]:hover,
+#comments .comment-respond .form-submit button:hover,
+#comments .comment-respond .submit:hover {
+  background-color: #8b5cf6; /* hover violet */
+  border-color: #8b5cf6;
+  color: #ffffff;
+}
+
+/* comment list visuals */
+#comments .comment-list li {
+  border-top: 1px solid #2a2250; /* divider tint */
+}
+
+#comments .comment-list .comment-content {
+  color: #f2efff;
+}
+
+/* inputs spacing tidy */
+#comments .comment-respond p,
+#comments .comment-respond .comment-form-author,
+#comments .comment-respond .comment-form-email,
+#comments .comment-respond .comment-form-comment {
+  margin-bottom: 12px;
+}
+
+#comments .comment-respond input,
+#comments .comment-respond textarea {
+  padding: 10px 12px;
+}
+
+/* keep border radius consistent */
+#comments .comment-respond input,
+#comments .comment-respond textarea,
+#comments .comment-respond .submit {
+  border-radius: 6px;
+}
