@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "engines": { "node": "20.x" },
   "scripts": {
-    "build": "npm --prefix admin ci && npm --prefix admin run build && mkdir -p public/admin && cp -r admin/dist/* public/admin/ && cp admin.html public/admin.html"
+    "build": "npm --prefix admin ci && npm --prefix admin run build && mkdir -p public/admin && cp -r admin/dist/* public/admin/ && cp admin.html public/admin.html && echo 'Build completed successfully'"
   }
 }
 
