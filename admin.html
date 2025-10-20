@@ -22,12 +22,14 @@
     <button id="signInBtn">Sign In</button>
   </div>
   <script>
+    // Simple password gate. For production, replace with proper auth.
     const PASSWORD = "Gangagamesblog@2025";
     document.getElementById('signInBtn').onclick = function() {
       const input = document.getElementById('adminPassword').value;
       const errorDiv = document.getElementById('error');
       if (input === PASSWORD) {
-        window.location.href = "dashboard.html";
+        // Redirect to the React dashboard path handled by Vercel rewrites
+        window.location.href = "/dashboard";
       } else {
         errorDiv.textContent = "Incorrect password.";
         errorDiv.style.display = "block";

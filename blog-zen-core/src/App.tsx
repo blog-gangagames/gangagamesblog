@@ -14,7 +14,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/admin">
+      <BrowserRouter basename="">
         {/* Global auth redirector */}
         <AuthRedirector />
         <Routes>
