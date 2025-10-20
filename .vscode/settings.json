@@ -23,5 +23,6 @@
   ],
   "liveServer.settings.port": 5503
   ,
-  "css.lint.unknownAtRules": "ignore"
+  "css.lint.unknownAtRules": "ignore",
+  "git.ignoreLimitWarning": true
 }

@@ -1,9 +1,11 @@
 {
   "routes": [
-    { "src": "/category/[^/]+/?$", "dest": "/category-style-v2.html" },
-    { "src": "/(?!category)(?!.*\\.)[A-Za-z0-9\\-]+/?$", "dest": "/article-detail-v1.html" },
-    { "src": "/admin", "dest": "/admin.html" },
-    { "src": "/admin/", "dest": "/admin.html" },
-    { "src": "/admin/:path*", "dest": "/admin/index.html" }
+    { "src": "/category/[^/]+/?$", "dest": "/public/category-style-v2.html" },
+    { "src": "/(?!category)(?!.*\\.)[A-Za-z0-9\\-]+/?$", "dest": "/public/article-detail-v1.html" },
+    { "src": "/admin/:path*", "dest": "/admin-build/index.html" },
+    { "src": "/admin", "dest": "/admin-build/index.html" },
+    { "src": "/admin/", "dest": "/admin-build/index.html" },
+    { "src": "/", "dest": "/public/index.html" },
+    { "src": "/:path*", "dest": "/public/:path*" }
   ]
 }
