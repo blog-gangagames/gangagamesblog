@@ -1,6 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "public",
   "rewrites": [
     { "source": "/admin", "destination": "/test.html" },
     { "source": "/dashboard/:path*", "destination": "/admin/index.html" }
