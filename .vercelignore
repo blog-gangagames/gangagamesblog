@@ -1,0 +1,10 @@
+node_modules
+.vscode
+.git
+api-server
+blog-zen-code
+GangaGames
+supabase
+tools
+*.db
+*.log
