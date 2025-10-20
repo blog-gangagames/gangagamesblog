@@ -6,7 +6,7 @@ import { componentTagger } from "lovable-tagger";
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   // Ensure assets resolve when hosted under /admin
-  base: "/",
+  base: "/admin/",
   server: {
     host: "::",
     port: 8080,

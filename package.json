@@ -1,0 +1,11 @@
+{
+  "name": "ganga-root",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run build:admin",
+    "build:admin": "npm --prefix admin ci && npm --prefix admin run build && node tools/copy-admin-to-public.mjs"
+  }
+}
+
+
