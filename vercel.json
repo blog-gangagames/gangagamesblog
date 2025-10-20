@@ -2,6 +2,8 @@
   "routes": [
     { "src": "/category/[^/]+/?$", "dest": "/category-style-v2.html" },
     { "src": "/(?!category)(?!.*\\.)[A-Za-z0-9\\-]+/?$", "dest": "/article-detail-v1.html" },
-    { "src": "/admin(?:/.*)?$", "dest": "https://www.gangagamesblog.com/admin" }
+    { "src": "/admin", "dest": "/admin.html" },
+    { "src": "/admin/", "dest": "/admin.html" },
+    { "src": "/admin/:path*", "dest": "/admin/index.html" }
   ]
 }
