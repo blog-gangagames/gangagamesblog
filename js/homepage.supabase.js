@@ -45,6 +45,8 @@
       var cultureHtmlCache = readCache('home:culture-lifestyle-html', CACHE_MAX_AGE);
       var tipsHtmlCache = readCache('home:tips-strategies-html', CACHE_MAX_AGE);
       var sidebarHtmlCache = readCache('home:latest-sidebar-html', CACHE_MAX_AGE);
+      var popularHeaderHtmlCache = readCache('home:popular-header-html', CACHE_MAX_AGE);
+      var trendingHtmlCache = readCache('home:trending-html', CACHE_MAX_AGE);
       
       // Render HTML content directly if available
       if (heroHtmlCache) {
@@ -101,6 +103,29 @@
           }
         }
       
+      if (popularHeaderHtmlCache) {
+        var $popularHeader = $('#dropdownNewsSlider');
+        $popularHeader.html(popularHeaderHtmlCache);
+        try {
+          if (!$popularHeader.hasClass('slick-initialized')) {
+            $popularHeader.slick({
+              slidesToShow: 4,
+              slidesToScroll: 4,
+              autoplay: true,
+              dots: false,
+              lazyLoad: 'progressive',
+              prevArrow: false,
+              nextArrow: false,
+              responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true } },
+                { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+                { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+              ]
+            });
+          }
+        } catch(e) { console.warn('[homepage] Error initializing popular header carousel:', e); }
+      }
+      
       if (popularHtmlCache) {
         $('#popularPostsList').html(popularHtmlCache);
       }
@@ -115,6 +140,29 @@
       
       if (sidebarHtmlCache) {
         $('#latestPostsSmallList').html(sidebarHtmlCache);
+      }
+      
+      if (trendingHtmlCache) {
+        var $trend = $('.wrapp__list__article-responsive-carousel');
+        $trend.html(trendingHtmlCache);
+        try {
+          if (!$trend.hasClass('slick-initialized')) {
+            $trend.slick({
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              autoplay: true,
+              dots: false,
+              lazyLoad: 'progressive',
+              prevArrow: false,
+              nextArrow: false,
+              responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true } },
+                { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+                { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+              ]
+            });
+          }
+        } catch(e) { console.warn('[homepage] Error initializing trending slider:', e); }
       }
       
       // Apply category colors to all rendered content
@@ -140,6 +188,8 @@
       writeCache('home:culture-lifestyle-html', $('#cultureLifestyleGrid').html());
       writeCache('home:tips-strategies-html', $('#tipsStrategiesList').html());
       writeCache('home:latest-sidebar-html', $('#latestPostsSmallList').html());
+      writeCache('home:popular-header-html', $('#dropdownNewsSlider').html());
+      writeCache('home:trending-html', $('.wrapp__list__article-responsive-carousel').html());
     } catch(e) {
       console.warn('[homepage] Error caching rendered HTML:', e);
     }
@@ -254,14 +304,51 @@
     } catch (e) {}
   }
 
-  function safeImage(p){ 
-  var imgUrl = (p && p.image_url) ? p.image_url : 'images/gangalogo.png';
-  // Ensure image path is absolute if it's relative
-  if (imgUrl && imgUrl.startsWith('images/') && !imgUrl.startsWith('/images/')) {
-    imgUrl = '/' + imgUrl;
+  // Category-based Unsplash fallbacks for missing post images
+  var UNSPLASH_FALLBACKS = {
+    'sports betting': 'https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&auto=format&fit=crop&w=1200',
+    'cricket betting': 'https://images.unsplash.com/photo-1518081461900-126a5e284fc3?q=80&auto=format&fit=crop&w=1200',
+    'football betting': 'https://images.unsplash.com/photo-1521419381108-200b5e32d3a4?q=80&auto=format&fit=crop&w=1200',
+    'tennis betting': 'https://images.unsplash.com/photo-1516005223398-19b9d3f1f61a?q=80&auto=format&fit=crop&w=1200',
+    'online slots': 'https://images.unsplash.com/photo-1534209373440-8b0f80e93942?q=80&auto=format&fit=crop&w=1200',
+    'poker': 'https://images.unsplash.com/photo-1547128410-114395b0be61?q=80&auto=format&fit=crop&w=1200',
+    'roulette': 'https://images.unsplash.com/photo-1514684070672-d3b970b5a54b?q=80&auto=format&fit=crop&w=1200',
+    'news industry updates': 'https://images.unsplash.com/photo-1556761175-4b46a572f05b?q=80&auto=format&fit=crop&w=1200',
+    'culture lifestyle': 'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&auto=format&fit=crop&w=1200',
+    'tips strategies hub': 'https://images.unsplash.com/photo-1484417894907-623942c8ee29?q=80&auto=format&fit=crop&w=1200',
+    'default': 'https://images.unsplash.com/photo-1502877338535-766e1452684a?q=80&auto=format&fit=crop&w=1200'
+  };
+  function normKey(s){
+    try { return String(s||'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim(); } catch(_) { return ''; }
   }
-  return imgUrl;
-}
+  function fallbackUnsplash(p){
+    try {
+      var rawCat = (p && (p.subcategory || p.main_category)) || '';
+      var key = normKey(rawCat);
+      return UNSPLASH_FALLBACKS[key] || UNSPLASH_FALLBACKS['default'];
+    } catch(_) { return UNSPLASH_FALLBACKS['default']; }
+  }
+
+  function safeImage(p){
+    try {
+      var raw = (p && p.image_url) ? String(p.image_url) : '';
+      if (!raw) return fallbackUnsplash(p);
+      var u = raw.trim();
+      // If already absolute http(s), use as-is
+      if (/^https?:\/\//i.test(u)) return u;
+      // Normalize local images
+      if (u.startsWith('images/')) return '/' + u;
+      if (u.startsWith('/images/')) return u;
+      // Resolve Supabase storage relative paths
+      var supa = (typeof window !== 'undefined' && window.SUPABASE_URL) ? window.SUPABASE_URL.replace(/\/+$/,'') : '';
+      if (supa) {
+        if (u.startsWith('/storage/v1/object/public/')) return supa + u;
+        if (u.startsWith('storage/v1/object/public/')) return supa + '/' + u;
+      }
+      // Fallback to raw if we can't resolve
+      return u;
+    } catch(_) { return fallbackUnsplash(p); }
+  }
   function safeTitle(p){ return (p && p.title) ? p.title : 'Untitled'; }
   function safeCategory(p){
     var raw = (p && p.subcategory) ? p.subcategory : (p && p.main_category ? p.main_category : '');
@@ -310,19 +397,43 @@
 
   async function fetchByLabel(label, limit){
     var client = getClient();
-    if (!client) return [];
     var aliases = categoryAliases(label);
+    var n = limit || 6;
+    if (!client) {
+      var loc = await fetchLocalPosts(n);
+      var aliasSet = {};
+      aliases.forEach(function(a){ aliasSet[normalizeKey(a)] = true; });
+      var filtered = loc.filter(function(p){
+        var mk = normalizeKey(p && p.main_category);
+        var sk = normalizeKey(p && p.subcategory);
+        return !!aliasSet[mk] || !!aliasSet[sk];
+      });
+      filtered.sort(function(a,b){
+        var at = new Date(a && (a.published_at || a.created_at) || 0).getTime();
+        var bt = new Date(b && (b.published_at || b.created_at) || 0).getTime();
+        return bt - at;
+      });
+      return filtered.slice(0, n);
+    }
     var base = client
       .from('posts')
       .select('id, title, image_url, created_at, published_at, status, main_category, subcategory')
       .eq('status','published');
-    var { data: byMain, error: errMain } = await base.in('main_category', aliases);
+    var { data: byMain, error: errMain } = await base
+      .in('main_category', aliases)
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .order('created_at', { ascending: false })
+      .limit(n);
     if (errMain) { console.warn('[homepage] fetchByLabel(main) error:', errMain.message || errMain); }
     var base2 = client
       .from('posts')
       .select('id, title, image_url, created_at, published_at, status, main_category, subcategory')
       .eq('status','published');
-    var { data: bySub, error: errSub } = await base2.in('subcategory', aliases);
+    var { data: bySub, error: errSub } = await base2
+      .in('subcategory', aliases)
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .order('created_at', { ascending: false })
+      .limit(n);
     if (errSub) { console.warn('[homepage] fetchByLabel(sub) error:', errSub.message || errSub); }
     var combined = ([]).concat(Array.isArray(byMain)?byMain:[], Array.isArray(bySub)?bySub:[]);
     var seen = {};
@@ -332,7 +443,22 @@
       var bt = new Date(b && (b.published_at || b.created_at) || 0).getTime();
       return bt - at;
     });
-    var n = limit || 6;
+    if (!dedup.length) {
+      var loc2 = await fetchLocalPosts(n);
+      var aliasSet2 = {};
+      aliases.forEach(function(a){ aliasSet2[normalizeKey(a)] = true; });
+      var filtered2 = loc2.filter(function(p){
+        var mk = normalizeKey(p && p.main_category);
+        var sk = normalizeKey(p && p.subcategory);
+        return !!aliasSet2[mk] || !!aliasSet2[sk];
+      });
+      filtered2.sort(function(a,b){
+        var at = new Date(a && (a.published_at || a.created_at) || 0).getTime();
+        var bt = new Date(b && (b.published_at || b.created_at) || 0).getTime();
+        return bt - at;
+      });
+      return filtered2.slice(0, n);
+    }
     return dedup.slice(0, n);
   }
 
@@ -346,7 +472,7 @@
       '<div class="card__post ">\n'
       + '  <div class="card__post__body card__post__transition">\n'
       + '    <a href="' + articleUrl(p) + '" data-article-id="' + (p && p.id ? p.id : '') + '" data-article-slug="' + slugifyTitle(title) + '">\n'
-      + '      <img src="' + img + '" class="img-fluid" alt="" onerror="this.onerror=null;this.src=\'/images/gangalogo.png\';">\n'
+      + '      <img src="' + img + '" class="img-fluid" alt="">\n'
       + '    </a>\n'
       + '    <div class="card__post__content bg__post-cover">\n'
       + '      <div class="card__post__category">' + cat + '</div>\n'
@@ -475,31 +601,31 @@
       .limit(limit || 6);
     if (error) { console.warn('[homepage] fetchLatest error:', error.message || error); return []; }
     var arr = Array.isArray(data) ? data : [];
-    if (!arr.length) { return []; }
     return arr;
   }
 
   async function fetchByMain(main, limit){
     var client = getClient();
-    if (!client) return [];
+    if (!client) { return []; }
     var { data, error } = await client
       .from('posts')
       .select('id, title, image_url, created_at, published_at, status, main_category, subcategory')
       .eq('status', 'published')
-      .eq('main_category', main)
+      .in('main_category', categoryAliases(main))
       .order('published_at', { ascending: false, nullsFirst: false })
       .order('created_at', { ascending: false })
       .limit(limit || 6);
-    if (error) { console.warn('[homepage] fetchByMain error:', error.message || error); return []; }
-    return Array.isArray(data) ? data : [];
+    if (error) {
+      console.warn('[homepage] fetchByMain error:', error.message || error);
+      return [];
+    }
+    var arr = Array.isArray(data) ? data : [];
+    return arr;
   }
 
   async function fetchPopular(limit){
     var client = getClient();
-    if (!client) {
-      var loc = await fetchLocalPosts(limit || 6);
-      return loc.sort(function(a,b){ return (b.views||0) - (a.views||0); });
-    }
+    if (!client) { return []; }
     var { data, error } = await client
       .from('posts')
       .select('id, title, image_url, created_at, published_at, status, main_category, subcategory, views')
@@ -507,9 +633,8 @@
       .order('views', { ascending: false })
       .order('published_at', { ascending: false, nullsFirst: false })
       .limit(limit || 6);
-    if (error) { console.warn('[homepage] fetchPopular error:', error.message || error); var loc2 = await fetchLocalPosts(limit || 6); return loc2.sort(function(a,b){ return (b.views||0) - (a.views||0); }); }
+    if (error) { console.warn('[homepage] fetchPopular error:', error.message || error); return []; }
     var arr = Array.isArray(data) ? data : [];
-    if (!arr.length) { var loc3 = await fetchLocalPosts(limit || 6); return loc3.sort(function(a,b){ return (b.views||0) - (a.views||0); }); }
     return arr;
   }
 
@@ -1368,6 +1493,15 @@ window.initHomepage = async function(){
         if (!readCache('home:hero-header', 3600) && !readCache('home:hero-header-html', 3600)) {
           $('.popular__news-header .card__post-carousel').not(':has(.item)').html('<div class="loading-placeholder">Loading featured posts...</div>');
         }
+        if (!readCache('home:hero-right', 3600) && !readCache('home:hero-right-html', 3600)) {
+          $('.popular__news-right').not(':has(.card__post)').html('<div class="loading-placeholder">Loading highlights...</div>');
+        }
+        if (!readCache('home:popular-header', 3600) && !readCache('home:popular-header-html', 3600)) {
+          $('#dropdownNewsSlider').not(':has(.item)').html('<div class="loading-placeholder">Loading top news...</div>');
+        }
+        if (!readCache('home:trending', 3600) && !readCache('home:trending-html', 3600)) {
+          $('.wrapp__list__article-responsive-carousel').not(':has(.item)').html('<div class="loading-placeholder">Loading trending...</div>');
+        }
         if (!readCache('home:latest-gaming', 3600) && !readCache('home:latest-gaming-html', 3600)) {
           $('#latestGamingGrid').not(':has(.row)').html('<div class="loading-placeholder">Loading news...</div>');
         }
@@ -1423,21 +1557,64 @@ function setDefaultCacheForFirstVisit() {
 
 function purgePlaceholderCaches(){
   try {
-    var keys = Object.keys(localStorage || {});
-    var placeholders = ['/images/gangalogo.png', '/images/newsimage1.png', 'images/gangalogo.png', 'images/newsimage1.png'];
-    keys.forEach(function(k){
-      if (k.indexOf('home:') === 0 && k.indexOf('-html') > -1){
-        var raw = localStorage.getItem(k);
-        if (!raw) return;
-        try {
-          var obj = JSON.parse(raw);
-          var html = obj && obj.data ? String(obj.data) : '';
-          var hasPlaceholder = placeholders.some(function(p){ return html.indexOf(p) !== -1; });
-          if (hasPlaceholder){ localStorage.removeItem(k); }
-        } catch(_){}
+    var keysHtml = [
+      'home:hero-header-html','home:hero-right-html','home:latest-gaming-html',
+      'home:latest-gaming-left-html','home:latest-gaming-right-html','home:sports-html',
+      'home:popular-posts-html','home:culture-lifestyle-html','home:tips-strategies-html',
+      'home:latest-sidebar-html','home:popular-header-html','home:trending-html'
+    ];
+    var keysData = [
+      'home:hero-header','home:hero-right','home:trending','home:latest-gaming',
+      'home:sports-carousel','home:popular-list','home:culture-lifestyle',
+      'home:tips-strategies','home:latest-sidebar'
+    ];
+    function containsPlaceholderHtml(s){
+      if (typeof s !== 'string' || s.length < 10) return true;
+      var badPatterns = [
+        '/images/', 'placeholder', 'dummy', 'lorem ipsum', 'data:image',
+        'gangalogo.png'
+      ];
+      var okPatterns = ['supabase.co','/storage/v1/object/public/'];
+      var lower = s.toLowerCase();
+      if (badPatterns.some(function(p){ return lower.indexOf(p) >= 0; })) {
+        if (okPatterns.some(function(p){ return s.indexOf(p) >= 0; })) { return false; }
+        return true;
       }
+      return false;
+    }
+    function isSuspiciousPost(p){
+      if (!p || typeof p !== 'object') return true;
+      var t = (p.title || '').toLowerCase();
+      var img = String(p.image_url || '');
+      if (t.indexOf('dummy') >= 0 || t.indexOf('placeholder') >= 0) return true;
+      if (!img) return true;
+      if (img.indexOf('/images/') >= 0) return true;
+      if (img.indexOf('http') !== 0) return true;
+      return false;
+    }
+    keysHtml.forEach(function(k){
+      var raw = localStorage.getItem(k);
+      if (!raw) return;
+      try {
+        var obj = JSON.parse(raw);
+        var html = obj && obj.data;
+        if (containsPlaceholderHtml(html)) {
+          localStorage.removeItem(k);
+        }
+      } catch(_){ localStorage.removeItem(k); }
     });
-  } catch(_){}
+    keysData.forEach(function(k){
+      var raw = localStorage.getItem(k);
+      if (!raw) return;
+      try {
+        var obj = JSON.parse(raw);
+        var arr = obj && obj.data;
+        if (!Array.isArray(arr) || arr.some(isSuspiciousPost)) {
+          localStorage.removeItem(k);
+        }
+      } catch(_){ localStorage.removeItem(k); }
+    });
+  } catch(e){ console.warn('[homepage] purgePlaceholderCaches error:', e); }
 }
 
   // Auto-run homepage init at earliest possible time to paint cached content

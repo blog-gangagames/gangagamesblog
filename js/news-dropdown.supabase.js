@@ -9,6 +9,24 @@
     } catch (e) { console.warn('[news-dropdown] Supabase client init failed:', e); return null; }
   }
 
+  // Simple localStorage cache helpers (cache posts arrays)
+  function readCache(key, maxAgeSeconds){
+    try {
+      var raw = localStorage.getItem(key);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      var ts = obj && obj.timestamp ? obj.timestamp : 0;
+      var ageSec = Math.floor((Date.now() - ts) / 1000);
+      if (ageSec > (maxAgeSeconds || 1800)) return null;
+      return Array.isArray(obj && obj.items) ? obj.items : null;
+    } catch(_) { return null; }
+  }
+  function writeCache(key, items){
+    try {
+      localStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), items: items || [] }));
+    } catch(_){}
+  }
+
   function slugifyTitle(t){
     try {
       return String(t || '')
@@ -71,7 +89,7 @@
   }
 
   function populateFallback($slider){
-    if (!$slider || !$slider.length) return;
+    if (!$slider || !$slider.length) return [];
     $slider.empty();
     var items = [
       { id: 'local-1', title: "Latest Cricket Odds and Tips", image_url: 'images/newsimage8.png', created_at: '2024-08-01' },
@@ -80,43 +98,92 @@
       { id: 'local-4', title: 'Top Roulette Strategies Explained', image_url: 'images/newsimage6.png', created_at: '2024-08-12' }
     ];
     items.forEach(function(p){ $slider.append(buildItem(p)); });
+    return items;
   }
 
   async function populateDropdown(){
     try {
       var $slider = $('#dropdownNewsSlider');
       if (!$slider || !$slider.length) { return; }
-      var posts = await fetchLatest(8);
-      $slider.empty();
-      if (!posts || posts.length === 0) {
-        populateFallback($slider);
-      } else {
-        posts.forEach(function(p){ $slider.append(buildItem(p)); });
+      // Cache-first paint
+      var cached = readCache('dropdown:news', 3600);
+      if (Array.isArray(cached) && cached.length) {
+        try { if ($slider.hasClass('slick-initialized')) { $slider.slick('unslick'); } } catch(_){}
+        $slider.empty();
+        cached.forEach(function(p){ $slider.append(buildItem(p)); });
+        try {
+          if (typeof $slider.slick === 'function') {
+            $slider.slick({
+              slidesToShow: 4,
+              slidesToScroll: 4,
+              autoplay: true,
+              dots: false,
+              lazyLoad: 'progressive',
+              prevArrow: false,
+              nextArrow: false,
+              responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true } },
+                { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+                { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+              ]
+            });
+          }
+        } catch (e) {
+          console.warn('[news-dropdown] slick init (cache) failed:', e);
+        }
       }
-      // If Slick was initialized earlier by global scripts, refresh it to pick up new slides
-      try {
-        if ($slider.hasClass('slick-initialized')) {
-          $slider.slick('unslick');
+      // Fetch fresh
+      var posts = await fetchLatest(8);
+      if (Array.isArray(posts) && posts.length) {
+        try { if ($slider.hasClass('slick-initialized')) { $slider.slick('unslick'); } } catch(_){}
+        $slider.empty();
+        posts.forEach(function(p){ $slider.append(buildItem(p)); });
+        try {
+          if (typeof $slider.slick === 'function') {
+            $slider.slick({
+              slidesToShow: 4,
+              slidesToScroll: 4,
+              autoplay: true,
+              dots: false,
+              lazyLoad: 'progressive',
+              prevArrow: false,
+              nextArrow: false,
+              responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true } },
+                { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+                { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+              ]
+            });
+          }
+        } catch (e) {
+          console.warn('[news-dropdown] slick reinit (fresh) failed:', e);
         }
-        // Reinitialize with the same settings used globally
-        if (typeof $slider.slick === 'function') {
-          $slider.slick({
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            autoplay: true,
-            dots: false,
-            lazyLoad: 'progressive',
-            prevArrow: false,
-            nextArrow: false,
-            responsive: [
-              { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true } },
-              { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 2 } },
-              { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } }
-            ]
-          });
+        try { writeCache('dropdown:news', posts); } catch(_){}
+      } else if (!cached || !cached.length) {
+        // Only fallback if no cache and no fresh posts
+        try { if ($slider.hasClass('slick-initialized')) { $slider.slick('unslick'); } } catch(_){}
+        var items = populateFallback($slider);
+        try {
+          if (typeof $slider.slick === 'function') {
+            $slider.slick({
+              slidesToShow: 4,
+              slidesToScroll: 4,
+              autoplay: true,
+              dots: false,
+              lazyLoad: 'progressive',
+              prevArrow: false,
+              nextArrow: false,
+              responsive: [
+                { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 3, infinite: true } },
+                { breakpoint: 768, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+                { breakpoint: 480, settings: { slidesToShow: 1, slidesToScroll: 1 } }
+              ]
+            });
+          }
+        } catch (e) {
+          console.warn('[news-dropdown] slick init (fallback) failed:', e);
         }
-      } catch (e) {
-        console.warn('[news-dropdown] slick reinit failed:', e);
+        try { writeCache('dropdown:news', items); } catch(_){}
       }
     } catch(e){ console.warn('[news-dropdown] populateDropdown error:', e && e.message ? e.message : e); }
   }
