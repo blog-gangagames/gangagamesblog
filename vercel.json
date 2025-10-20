@@ -2,6 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": "public",
   "rewrites": [
-    { "source": "/admin/:path*", "destination": "/admin/index.html" }
+    { "source": "/dashboard/:path*", "destination": "/admin/index.html" }
   ]
 }
