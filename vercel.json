@@ -1,15 +1,7 @@
-
 {
-  "builds": [
-    { "src": "public/**/*", "use": "@vercel/static" },
-    { "src": "admin-build/**/*", "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "^/admin(/.*)?$", "dest": "/admin-build/index.html" },
-    { "src": "/(css|js|images|assets)/(.*)", "dest": "/public/$1/$2" },
-    { "src": "/category/[^/]+/?$", "dest": "/public/category-style-v2.html" },
-    { "src": "/(?!category)(?!admin)(?!.*\\.)[A-Za-z0-9\\-]+/?$", "dest": "/public/article-detail-v1.html" },
-    { "src": "/", "dest": "/public/index.html" },
-    { "src": "/:path*", "dest": "/public/:path*" }
+  "rewrites": [
+    { "source": "/admin", "destination": "/admin-build/index.html" },
+    { "source": "/admin/", "destination": "/admin-build/index.html" },
+    { "source": "/admin/:path*", "destination": "/admin-build/index.html" }
   ]
 }
