@@ -66,7 +66,12 @@
       return Boolean(window.SUPABASE_URL && window.SUPABASE_ANON_KEY && !isPlaceholder(window.SUPABASE_URL) && !isPlaceholder(window.SUPABASE_ANON_KEY));
     }
     function getAdminUrl() { return window.ADMIN_URL || ADMIN_URL_FALLBACK; }
-  
+    
+    // Safety: prevent localhost redirects on production
+    if (location.hostname !== 'localhost' && /localhost|127\.0\.0\.1/.test(getAdminUrl())) {
+      window.ADMIN_URL = window.location.origin + '/';
+    }
+    
     async function getClient() {
       if (!validConfig()) {
         msg('Supabase config not set. Edit admin/public/config.js and set SUPABASE_URL to your Project URL and SUPABASE_ANON_KEY to your anon public key.');
