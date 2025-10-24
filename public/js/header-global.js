@@ -23,7 +23,7 @@
     try {
       var el = document.querySelector('.topbar .topbar-text') || document.querySelector('.topbar-text');
       if (el) { el.textContent = formatHeaderDate(); return true; }
-    } catch(_){}
+    } catch(_){ }
     return false;
   }
 
@@ -40,11 +40,11 @@
             var href = a.getAttribute('href') || '#';
             var label = (a.textContent || '').trim();
             if (label) { links.push({ label: label, href: href }); }
-          } catch(_){}
+          } catch(_){ }
         });
         if (links.length) { sections.push({ title: title || 'Categories', links: links }); }
       });
-    } catch(_){}
+    } catch(_){ }
     if (sections.length) return sections;
     return [
       { title: 'Casino Games', links: [
@@ -123,12 +123,10 @@
       extras.innerHTML = '<a class="mobile-menu-link" href="/index.html">Home</a>\n<a class="mobile-menu-link" href="#categories">Categories</a>\n<a class="mobile-menu-link" href="/contact.html">Contact</a>';
       container.appendChild(extras);
 
-      // Replace any existing simple nav
       var existingNav = modalBody.querySelector('nav.list-group');
       if (existingNav && existingNav.parentNode) existingNav.parentNode.removeChild(existingNav);
       modalBody.appendChild(container);
 
-      // Wire toggles
       container.querySelectorAll('.mobile-menu-toggle').forEach(function(btn){
         btn.addEventListener('click', function(){
           var expanded = btn.getAttribute('aria-expanded') === 'true';
@@ -137,7 +135,7 @@
           if (list) list.style.display = expanded ? 'none' : 'block';
         });
       });
-    } catch(_){}
+    } catch(_){ }
   }
 
   function ensureHeaderDate(){
@@ -152,5 +150,6 @@
   document.addEventListener('DOMContentLoaded', function(){
     ensureHeaderDate();
     renderMobileMenu();
+    // No link rewrites: keep absolute category and common links
   });
 })();

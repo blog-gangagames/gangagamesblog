@@ -86,7 +86,10 @@
         categoryAnchor.textContent = cat;
         try {
           var catSlug = slugifyTitle(cat).replace(/faqs-and-beginner-resources/,'faqs-beginner-resources');
-          categoryAnchor.setAttribute('href', '/category/' + catSlug + '/');
+          var catHref = ((window.location.pathname || '').indexOf('/public/') !== -1)
+            ? ('category/' + catSlug + '/')
+            : ('/category/' + catSlug + '/');
+          categoryAnchor.setAttribute('href', catHref);
         } catch(_){}
       }
     }
@@ -321,7 +324,10 @@
           categoryAnchor.textContent = cat;
           try {
             var catSlug = slugifyTitle(cat).replace(/faqs-and-beginner-resources/,'faqs-beginner-resources');
-            categoryAnchor.setAttribute('href', '/category/' + catSlug + '/');
+            var catHref = ((window.location.pathname || '').indexOf('/public/') !== -1)
+              ? ('category/' + catSlug + '/')
+              : ('/category/' + catSlug + '/');
+            categoryAnchor.setAttribute('href', catHref);
           } catch(_){}
         }
       }

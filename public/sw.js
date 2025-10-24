@@ -39,8 +39,12 @@ self.addEventListener('fetch', (event) => {
         /^\/index\.html$/i.test(path) ||
         path === '/'
       );
+      // If it's a category path like "/category/blackjack" and not found, serve the category shell
+      if (/^\/category\/[a-z0-9\-]+\/?$/i.test(path)) {
+        return fetch('/category-style-v2.html');
+      }
       // If it's a top-level slug path like "/my-post" and not excluded, serve article detail shell
-      if (!excluded && /^\/[a-z0-9\-]+\/?$/i.test(path)) {
+      if (!excluded && /^\/([a-z0-9\-]+)\/?$/i.test(path)) {
         return fetch('/article-detail-v1.html');
       }
       // Otherwise return the original response (even if not ok)

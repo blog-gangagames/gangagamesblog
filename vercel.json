@@ -1,7 +1,13 @@
 {
   "rewrites": [
-    { "source": "/admin", "destination": "/admin-build/index.html" },
-    { "source": "/admin/:path*", "destination": "/admin-build/index.html" },
-    { "source": "/dashboard/:path*", "destination": "/admin-build/index.html" }
+    { "source": "/", "destination": "/public/index.html" },
+
+    { "source": "/category/:slug", "destination": "/public/category-style-v2.html" },
+    { "source": "/category/:slug/", "destination": "/public/category-style-v2.html" },
+
+    { "source": "/:slug", "destination": "/public/article-detail-v1.html" },
+    { "source": "/:slug/", "destination": "/public/article-detail-v1.html" },
+
+    { "source": "/:path*", "destination": "/public/:path*" }
   ]
 }
