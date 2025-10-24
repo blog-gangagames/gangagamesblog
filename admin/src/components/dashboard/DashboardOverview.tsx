@@ -461,9 +461,7 @@ export function DashboardOverview() {
     const contentHtml = editorRef.current?.innerHTML || "";
     try {
       setIsPublishing(true);
-      const { data: sessionData } = await supabase.auth.getSession();
-      const user = sessionData?.session?.user;
-      if (!user) { alert('Sign in required to publish.'); return; }
+      // Remove sign-in requirement; allow publishing without a Supabase session
       const safeMain = mainCategory || MAIN_CATEGORIES[0];
       const safeSub = subcategory || (CATEGORY_TREE[safeMain]?.[0] ?? null);
       const insertPayload: any = {
@@ -477,7 +475,7 @@ export function DashboardOverview() {
         status,
         published_at: status === 'scheduled' ? (publishAt || null) : (status === 'published' ? new Date().toISOString() : null),
         image_url: featuredImage || null,
-        author_id: user.id,
+        // author_id intentionally omitted when unauthenticated
       };
       const { error } = await supabase
         .from('posts')

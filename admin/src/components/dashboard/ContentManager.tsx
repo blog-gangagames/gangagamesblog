@@ -284,12 +284,7 @@ export function ContentManager() {
   const runBulkAction = async (action: 'publish' | 'draft' | 'feature' | 'unfeature' | 'delete') => {
     if (selectedIds.length === 0) return;
     try {
-      const { data: sessionData } = await supabase.auth.getSession();
-      const user = sessionData?.session?.user;
-      if (!user) {
-        alert('You must be signed in to perform bulk actions.');
-        return;
-      }
+      // Remove auth requirement; allow bulk actions without a Supabase session
 
       if (action === 'delete') {
         const { data, error } = await supabase
@@ -656,9 +651,7 @@ export function ContentManager() {
       onSubmit={(payload: NewPostPayload) => {
         const create = async () => {
           try {
-            const { data: sessionData } = await supabase.auth.getSession();
-            const user = sessionData?.session?.user;
-            if (!user) { alert('You must be signed in to create posts.'); return; }
+            // Remove auth requirement; allow publishing without a Supabase session
             const safeMain = payload.mainCategory || MAIN_CATEGORIES[0];
             const safeSub = payload.subcategory || (CATEGORY_TREE[safeMain]?.[0] ?? null);
             const insertPayload: any = {
@@ -671,7 +664,7 @@ export function ContentManager() {
               featured: false,
               status: payload.status || 'draft',
               image_url: payload.featuredImage || null,
-              author_id: user.id,
+              // author_id intentionally omitted when unauthenticated
               published_at: payload.publishAt || null,
             };
             const { data, error } = await supabase
