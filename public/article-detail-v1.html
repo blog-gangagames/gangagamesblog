@@ -12,7 +12,8 @@
     
     <link rel="manifest" href="/site.webmanifest">
     <!-- favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
 
     <meta name="theme-color" content="#030303">
     <!-- google fonts -->
@@ -24,6 +25,66 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/comments-theme.css">
         <link rel="stylesheet" href="css/related-layout.css">
+        <style>
+          /* Mobile Menu Custom Styles */
+          .mobile-menu-toggle {
+            background: none;
+            border: none;
+            color: #ffffff;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          
+          .mobile-menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+          
+          .mobile-menu-toggle .fa {
+            transition: transform 0.3s ease;
+          }
+          
+          .mobile-menu-toggle[aria-expanded="true"] .fa {
+            transform: rotate(180deg);
+          }
+          
+          .mobile-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: none;
+          }
+          
+          .mobile-menu-list.show {
+            display: block;
+          }
+          
+          .mobile-menu-list li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+          
+          .mobile-menu-list li:last-child {
+            border-bottom: none;
+          }
+          
+          .mobile-menu-list a {
+            display: block;
+            padding: 0.75rem 1rem 0.75rem 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+          }
+          
+          .mobile-menu-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+          }
+        </style>
 </head>
 
 <body>
@@ -196,35 +257,71 @@
                     <nav class="list-group list-group-flush">
                         <a class='list-group-item text-light' href='index.html'>Home</a>
 
-                        <a class='list-group-item text-light d-flex justify-content-between align-items-center' data-toggle="collapse" href="#mobileCategories" aria-expanded="false" aria-controls="mobileCategories">
-                            Categories <span class="fa fa-angle-down"></span>
-                        </a>
-                        <div class="collapse" id="mobileCategories">
-                            <div class="list-group">
-                                <a class='list-group-item text-light' href='/category/online-slots/'>Online Slots</a>
-                                <a class='list-group-item text-light' href='/category/poker/'>Poker</a>
-                                <a class='list-group-item text-light' href='/category/roulette/'>Roulette</a>
-                                <a class='list-group-item text-light' href='/category/blackjack/'>Blackjack</a>
-                                <a class='list-group-item text-light' href='/category/game-reviews/'>Game Reviews</a>
-                                <a class='list-group-item text-light' href='/category/strategies-tips/'>Strategies & Tips</a>
-                                <a class='list-group-item text-light' href='/category/cricket-betting/'>Cricket Betting</a>
-                                <a class='list-group-item text-light' href='/category/football-betting/'>Football Betting</a>
-                                <a class='list-group-item text-light' href='/category/kabaddi-betting/'>Kabaddi Betting</a>
-                                <a class='list-group-item text-light' href='/category/tennis-betting/'>Tennis Betting</a>
-                                <a class='list-group-item text-light' href='/category/live-betting-strategies/'>Live Betting Strategies</a>
-                                <a class='list-group-item text-light' href='/category/match-previews-predictions/'>Match Previews & Predictions</a>
-                                <a class='list-group-item text-light' href='/category/casino-bonuses/'>Casino Bonuses</a>
-                                <a class='list-group-item text-light' href='/category/sportsbook-promotions/'>Sportsbook Promotions</a>
-                                <a class='list-group-item text-light' href='/category/loyalty-vip-programs/'>Loyalty & VIP Programs</a>
-                                <a class='list-group-item text-light' href='/category/tips-to-maximize-bonuses/'>Tips to Maximize Bonuses</a>
-                                <a class='list-group-item text-light' href='/category/how-to-guides/'>How-To Guides</a>
-                                <a class='list-group-item text-light' href='/category/responsible-gambling/'>Responsible Gambling</a>
-                                <a class='list-group-item text-light' href='/category/legal-regulatory-updates/'>Legal & Regulatory Updates</a>
-                                <a class='list-group-item text-light' href='/category/news-industry-updates/'>News & Industry Updates</a>
-                                <a class='list-group-item text-light' href='/category/culture-lifestyle/'>Culture & Lifestyle</a>
-                                <a class='list-group-item text-light' href='/category/tips-strategies-hub/'>Tips & Strategies Hub</a>
-                                <a class='list-group-item text-light' href='/category/faqs-beginner-resources/'>FAQs & Beginner Resources</a>
-                            </div>
+                        <!-- Categories Section -->
+                        <div class="mobile-menu-section">
+                            <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCategories')" aria-expanded="false">
+                                Categories <span class="fa fa-angle-down"></span>
+                            </button>
+                            <ul class="mobile-menu-list" id="mobileCategories">
+                                <!-- Casino Games -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCasinoGames')" aria-expanded="false" style="padding-left: 2rem;">
+                                        Casino Games <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileCasinoGames">
+                                        <li><a href="/category/online-slots/">Online Slots</a></li>
+                                        <li><a href="/category/poker/">Poker</a></li>
+                                        <li><a href="/category/roulette/">Roulette</a></li>
+                                        <li><a href="/category/blackjack/">Blackjack</a></li>
+                                        <li><a href="/category/game-reviews/">Game Reviews</a></li>
+                                        <li><a href="/category/strategies-tips/">Strategies & Tips</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Sports Betting -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileSportsBetting')" aria-expanded="false" style="padding-left: 2rem;">
+                                        Sports Betting <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileSportsBetting">
+                                        <li><a href="/category/cricket-betting/">Cricket Betting</a></li>
+                                        <li><a href="/category/football-betting/">Football Betting</a></li>
+                                        <li><a href="/category/kabaddi-betting/">Kabaddi Betting</a></li>
+                                        <li><a href="/category/tennis-betting/">Tennis Betting</a></li>
+                                        <li><a href="/category/live-betting-strategies/">Live Betting Strategies</a></li>
+                                        <li><a href="/category/match-previews-predictions/">Match Previews & Predictions</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Bonuses & Promotions -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileBonuses')" aria-expanded="false" style="padding-left: 2rem;">
+                                        Bonuses & Promotions <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileBonuses">
+                                        <li><a href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                        <li><a href="/category/sportsbook-promotions/">Sportsbook Promotions</a></li>
+                                        <li><a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a></li>
+                                        <li><a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- More Categories -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileMoreCategories')" aria-expanded="false" style="padding-left: 2rem;">
+                                        More Categories <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileMoreCategories">
+                                        <li><a href="/category/how-to-guides/">How-To Guides</a></li>
+                                        <li><a href="/category/responsible-gambling/">Responsible Gambling</a></li>
+                                        <li><a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                        <li><a href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                        <li><a href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                        <li><a href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                        <li><a href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
 
                         <a class='list-group-item text-light' href='contact.html'>Contact</a>
@@ -232,10 +329,7 @@
                     </nav>
                 </div>
                 <div class="modal-footer">
-                    <p> 2020 <a href="http://retenvi.com/" title="Premium WordPress news &amp; magazine theme">Magzrenvi</a>
-                        -
-                        Premium template news, blog & magazine &amp;
-                        magazine theme by <a href="http://retenvi.com/" title="retenvi">RETENVI.COM</a>.</p>
+                    <p style="color: #e6e9ef;">© 2025 GangaGames. All rights reserved.</p>
                 </div>
             </div>
         </div> <!-- modal-bialog .// -->
@@ -284,7 +378,19 @@
                         <div class="wrap__article-detail-image mt-4">
                             <figure id="article-image"></figure>
                         </div>
-                        <div class="wrap__article-detail-content"></div>
+                        <div class="wrap__article-detail-content">
+                            <!-- Loading State -->
+                            <div id="article-loading" class="article-loading-state">
+                                <div class="loading-content text-center py-5">
+                                    <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <h5 class="text-muted">Loading your content...</h5>
+                                    <p class="text-muted small">Fetching the latest article from our database</p>
+                                </div>
+                            </div>
+                            <!-- End Loading State -->
+                        </div>
 
 
                     </div>
@@ -839,6 +945,43 @@
     // Submit handlers are wired by js/auth.supabase.js
   </script>
   <script src="js/header-global.js?v=tz1"></script>
+
+  <!-- Mobile Menu Toggle Function -->
+  <script>
+  function toggleMobileMenu(menuId) {
+      const menu = document.getElementById(menuId);
+      const button = event.target.closest('.mobile-menu-toggle');
+      
+      if (menu && button) {
+          const isExpanded = button.getAttribute('aria-expanded') === 'true';
+          
+          // Toggle the menu visibility
+          if (isExpanded) {
+              menu.classList.remove('show');
+              button.setAttribute('aria-expanded', 'false');
+          } else {
+              menu.classList.add('show');
+              button.setAttribute('aria-expanded', 'true');
+          }
+      }
+  }
+
+  // Hide loading state when article is loaded
+  document.addEventListener('article:loaded', function() {
+    const loadingElement = document.getElementById('article-loading');
+    if (loadingElement) {
+      loadingElement.style.display = 'none';
+    }
+  });
+
+  // Show loading state initially
+  document.addEventListener('DOMContentLoaded', function() {
+    const loadingElement = document.getElementById('article-loading');
+    if (loadingElement) {
+      loadingElement.style.display = 'block';
+    }
+  });
+  </script>
 </body>
 
 

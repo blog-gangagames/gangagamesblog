@@ -12,7 +12,8 @@
 
     <link rel="manifest" href="/site.webmanifest">
     <!-- favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
 
     <meta name="theme-color" content="#030303">
     <!-- google fonts -->
@@ -24,6 +25,65 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Consistent header styles -->
     <style>
+        /* Mobile Menu Custom Styles */
+        .mobile-menu-toggle {
+            background: none;
+            border: none;
+            color: #ffffff;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-toggle .fa {
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-toggle[aria-expanded="true"] .fa {
+            transform: rotate(180deg);
+        }
+        
+        .mobile-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .mobile-menu-list.show {
+            display: block;
+        }
+        
+        .mobile-menu-list li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-menu-list a {
+            display: block;
+            padding: 0.75rem 1rem 0.75rem 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        
+        .mobile-menu-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
         .dropdown-toggle { color: #fff !important; text-decoration: none !important; padding: 8px 12px !important; border-radius: 4px !important; transition: all 0.3s ease !important; display: flex !important; align-items: center !important; }
         .dropdown-toggle:hover { background-color: rgba(255, 255, 255, 0.1) !important; color: #fff !important; }
         .dropdown-menu { background-color: #1a1c4a !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 8px !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important; min-width: 200px !important; padding: 0 !important; margin-top: 10px !important; }
@@ -320,42 +380,78 @@
 						<nav class="list-group list-group-flush">
                             <a class='list-group-item text-light' href='index.html'>Home</a>
 
-                            <a class='list-group-item text-light d-flex justify-content-between align-items-center' data-toggle="collapse" href="#mobileCategories" aria-expanded="false" aria-controls="mobileCategories">
-                                Categories <span class="fa fa-angle-down"></span>
-                            </a>
-                            <div class="collapse" id="mobileCategories">
-                                <div class="list-group list-group-flush">
-                                    <a href="/category/online-slots/" class="list-group-item list-group-item-action text-light pl-5">Online Slots</a>
-                                    <a href="/category/poker/" class="list-group-item list-group-item-action text-light pl-5">Poker</a>
-                                    <a href="/category/roulette/" class="list-group-item list-group-item-action text-light pl-5">Roulette</a>
-                                    <a href="/category/blackjack/" class="list-group-item list-group-item-action text-light pl-5">Blackjack</a>
-                                    <a href="/category/game-reviews/" class="list-group-item list-group-item-action text-light pl-5">Game Reviews</a>
-                                    <a href="/category/strategies-tips/" class="list-group-item list-group-item-action text-light pl-5">Strategies & Tips</a>
-                                    <a href="/category/sports-betting/" class="list-group-item list-group-item-action text-light pl-5">Sports Betting</a>
-                                    <a href="/category/esports/" class="list-group-item list-group-item-action text-light pl-5">eSports</a>
-                                    <a href="/category/casino-bonuses/" class="list-group-item list-group-item-action text-light pl-5">Casino Bonuses</a>
-                                    <a href="/category/free-spins/" class="list-group-item list-group-item-action text-light pl-5">Free Spins</a>
-                                    <a href="/category/payment-methods/" class="list-group-item list-group-item-action text-light pl-5">Payment Methods</a>
-                                    <a href="/category/tips-to-maximize-bonuses/" class="list-group-item list-group-item-action text-light pl-5">Tips to Maximize Bonuses</a>
-                                    <a href="/category/how-to-guides/" class="list-group-item list-group-item-action text-light pl-5">How-To Guides</a>
-                                    <a href="/category/responsible-gambling/" class="list-group-item list-group-item-action text-light pl-5">Responsible Gambling</a>
-                                    <a href="/category/legal-regulatory-updates/" class="list-group-item list-group-item-action text-light pl-5">Legal & Regulatory Updates</a>
-                                    <a href="/category/news-industry-updates/" class="list-group-item list-group-item-action text-light pl-5">News & Industry Updates</a>
-                                    <a href="/category/culture-lifestyle/" class="list-group-item list-group-item-action text-light pl-5">Culture & Lifestyle</a>
-                                    <a href="/category/tips-strategies-hub/" class="list-group-item list-group-item-action text-light pl-5">Tips & Strategies Hub</a>
-                                    <a href="/category/faqs-beginner-resources/" class="list-group-item list-group-item-action text-light pl-5">FAQs & Beginner Resources</a>
-                                </div>
+                            <!-- Categories Section -->
+                            <div class="mobile-menu-section">
+                                <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCategories')" aria-expanded="false">
+                                    Categories <span class="fa fa-angle-down"></span>
+                                </button>
+                                <ul class="mobile-menu-list" id="mobileCategories">
+                                    <!-- Casino Games -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCasinoGames')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Casino Games <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileCasinoGames">
+                                            <li><a href="/category/online-slots/">Online Slots</a></li>
+                                            <li><a href="/category/poker/">Poker</a></li>
+                                            <li><a href="/category/roulette/">Roulette</a></li>
+                                            <li><a href="/category/blackjack/">Blackjack</a></li>
+                                            <li><a href="/category/game-reviews/">Game Reviews</a></li>
+                                            <li><a href="/category/strategies-tips/">Strategies & Tips</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Sports Betting -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileSportsBetting')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Sports Betting <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileSportsBetting">
+                                            <li><a href="/category/cricket-betting/">Cricket Betting</a></li>
+                                            <li><a href="/category/football-betting/">Football Betting</a></li>
+                                            <li><a href="/category/kabaddi-betting/">Kabaddi Betting</a></li>
+                                            <li><a href="/category/tennis-betting/">Tennis Betting</a></li>
+                                            <li><a href="/category/live-betting-strategies/">Live Betting Strategies</a></li>
+                                            <li><a href="/category/match-previews-predictions/">Match Previews & Predictions</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Bonuses & Promotions -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileBonuses')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Bonuses & Promotions <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileBonuses">
+                                            <li><a href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                            <li><a href="/category/sportsbook-promotions/">Sportsbook Promotions</a></li>
+                                            <li><a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a></li>
+                                            <li><a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- More Categories -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileMoreCategories')" aria-expanded="false" style="padding-left: 2rem;">
+                                            More Categories <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileMoreCategories">
+                                            <li><a href="/category/how-to-guides/">How-To Guides</a></li>
+                                            <li><a href="/category/responsible-gambling/">Responsible Gambling</a></li>
+                                            <li><a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                            <li><a href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                            <li><a href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                            <li><a href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                            <li><a href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
 
                             <a class='list-group-item text-light' href='contact.html'>Contact</a>
                         </nav>
 					</div>
 					<div class="modal-footer">
-						<p>© 2020 <a href="http://retenvi.com/"
-								title="Premium WordPress news &amp; magazine theme">Magzrenvi</a>
-							-
-							Premium template news, blog & magazine &amp;
-							magazine theme by <a href="http://retenvi.com/" title="retenvi">RETENVI.COM</a>.</p>
+						<p style="color: #e6e9ef;">© 2025 GangaGames. All rights reserved.</p>
 					</div>
 				</div>
 			</div> <!-- modal-bialog .// -->
@@ -1381,6 +1477,27 @@
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src="js/header-global.js?v=tz1"></script>
+
+<!-- Mobile Menu Toggle Function -->
+<script>
+function toggleMobileMenu(menuId) {
+    const menu = document.getElementById(menuId);
+    const button = event.target.closest('.mobile-menu-toggle');
+    
+    if (menu && button) {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle the menu visibility
+        if (isExpanded) {
+            menu.classList.remove('show');
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            menu.classList.add('show');
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+}
+</script>
 </body>
 
 

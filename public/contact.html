@@ -6,13 +6,14 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
-    <title>Retnews &#8211; Best news, blog & magazine template</title>
+	<title>GangaGames Blog; Best Betting Blogs in India</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="manifest" href="/site.webmanifest">
     <!-- favicon.ico in the root directory -->
-    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
 
     <meta name="theme-color" content="#030303">
     <!-- google fonts -->
@@ -23,6 +24,65 @@
         <link href="css/news-dropdown-fix.css?brandhoverfix2" rel="stylesheet">
     <!-- Consistent header styles -->
     <style>
+        /* Mobile Menu Custom Styles */
+        .mobile-menu-toggle {
+            background: none;
+            border: none;
+            color: #ffffff;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-toggle .fa {
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-toggle[aria-expanded="true"] .fa {
+            transform: rotate(180deg);
+        }
+        
+        .mobile-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .mobile-menu-list.show {
+            display: block;
+        }
+        
+        .mobile-menu-list li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-menu-list a {
+            display: block;
+            padding: 0.75rem 1rem 0.75rem 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        
+        .mobile-menu-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
         /* Account/Dropdown base */
         .dropdown-toggle { color: #fff !important; text-decoration: none !important; padding: 8px 12px !important; border-radius: 4px !important; transition: all 0.3s ease !important; display: flex !important; align-items: center !important; }
         .dropdown-toggle:hover { background-color: rgba(255, 255, 255, 0.1) !important; color: #fff !important; }
@@ -277,14 +337,81 @@
                     </div>
                     <div class="modal-body">
                         <nav class="list-group list-group-flush">
-                            <a class='list-group-item text-dark' href='index.html'>Home</a>
-                            <a class='list-group-item text-dark' href='category-style-v2.html'>Categories</a>
-                            <a class='list-group-item text-dark' href='contact.html'>Contact</a>
+                            <a class='list-group-item text-light' href='index.html'>Home</a>
+
+                            <!-- Categories Section -->
+                            <div class="mobile-menu-section">
+                                <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCategories')" aria-expanded="false">
+                                    Categories <span class="fa fa-angle-down"></span>
+                                </button>
+                                <ul class="mobile-menu-list" id="mobileCategories">
+                                    <!-- Casino Games -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCasinoGames')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Casino Games <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileCasinoGames">
+                                            <li><a href="/category/online-slots/">Online Slots</a></li>
+                                            <li><a href="/category/poker/">Poker</a></li>
+                                            <li><a href="/category/roulette/">Roulette</a></li>
+                                            <li><a href="/category/blackjack/">Blackjack</a></li>
+                                            <li><a href="/category/game-reviews/">Game Reviews</a></li>
+                                            <li><a href="/category/strategies-tips/">Strategies & Tips</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Sports Betting -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileSportsBetting')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Sports Betting <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileSportsBetting">
+                                            <li><a href="/category/cricket-betting/">Cricket Betting</a></li>
+                                            <li><a href="/category/football-betting/">Football Betting</a></li>
+                                            <li><a href="/category/kabaddi-betting/">Kabaddi Betting</a></li>
+                                            <li><a href="/category/tennis-betting/">Tennis Betting</a></li>
+                                            <li><a href="/category/live-betting-strategies/">Live Betting Strategies</a></li>
+                                            <li><a href="/category/match-previews-predictions/">Match Previews & Predictions</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Bonuses & Promotions -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileBonuses')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Bonuses & Promotions <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileBonuses">
+                                            <li><a href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                            <li><a href="/category/sportsbook-promotions/">Sportsbook Promotions</a></li>
+                                            <li><a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a></li>
+                                            <li><a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- More Categories -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileMoreCategories')" aria-expanded="false" style="padding-left: 2rem;">
+                                            More Categories <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileMoreCategories">
+                                            <li><a href="/category/how-to-guides/">How-To Guides</a></li>
+                                            <li><a href="/category/responsible-gambling/">Responsible Gambling</a></li>
+                                            <li><a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                            <li><a href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                            <li><a href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                            <li><a href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                            <li><a href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a class='list-group-item text-light' href='contact.html'>Contact</a>
                             
                         </nav>
                     </div>
                     <div class="modal-footer">
-                        
+                        <p style="color: #e6e9ef;">© 2025 GangaGames. All rights reserved.</p>
                     </div>
                 </div>
             </div>
@@ -323,39 +450,53 @@
             <div class="row">
                 <div class="col-md-8 mx-auto">
                     <h5>contact us</h5>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group form-group-name">
-                                <label>Your name <span class="required"></span></label>
-                                <input type="text" class="form-control" name="name" required="">
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-name">
+                                    <label>Your name <span class="required"></span></label>
+                                    <input type="text" class="form-control" name="name" id="contactName" required="">
 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-group-name">
+                                    <label>Your email <span class="required"></span></label>
+                                    <input type="email" class="form-control" name="email" id="contactEmail" required="">
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="col-md-12">
+                              <div class="form-group form-group-name">
+                                <label>Subject <span class="required"></span></label>
+                                <input type="text" class="form-control" name="subject" id="contactSubject" required="">
+
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Your message </label>
+                                    <textarea class="form-control" rows="8" name="message" id="contactMessage" required=""></textarea>
+                                </div>
+                                <div class="form-group float-right mb-4">
+                                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                                        <span id="submitText">Submit</span>
+                                        <span id="submitSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-name">
-                                <label>Your email <span class="required"></span></label>
-                                <input type="email" class="form-control" name="email" required="">
-
-                            </div>
-                        </div>
-
-                        
-                        <div class="col-md-12">
-                          <div class="form-group form-group-name">
-                            <label>Subject <span class="required"></span></label>
-                            <input type="text" class="form-control" name="subject" required="">
-
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Your message </label>
-                                <textarea class="form-control" rows="8" name="message"></textarea>
-                            </div>
-                            <div class="form-group float-right mb-4">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
+                    </form>
+                    
+                    <!-- Success/Error Messages -->
+                    <div id="contactMessage" class="alert alert-success d-none" role="alert">
+                        <i class="fa fa-check-circle"></i> Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    </div>
+                    <div id="contactError" class="alert alert-danger d-none" role="alert">
+                        <i class="fa fa-exclamation-circle"></i> Sorry, there was an error sending your message. Please try again or contact us directly at blog.gangagames@gmail.com
+                    </div>
                     </div>
                 </div>
 
@@ -482,51 +623,7 @@
                     </div>
                 </div>
 
-                <!-- Footer bottom -->
-                <div class="wrapper__footer-bottom bg__footer-dark">
-                    <div class="container ">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="border-top-1 bg__footer-bottom-section">
-                                    <ul class="list-inline link-column">
-                                        <li class="list-inline-item">
-                                            <a href="contact-us.html">
-                                                contact us
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#"> terms of use</a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#">
-                                                adchoice
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href='about-us.html'>
-                                                about us
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#">
-                                                sitemap
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#">
-                                                magrenvi store
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <!-- Footer bottom removed as requested -->
 </footer>
 <!-- Copyright under footer -->
 <div class="wrapper__footer-bottom bg__footer-dark" style="background-color: #000 !important; padding: 24px 0;">
@@ -550,6 +647,9 @@
     <script src="js/supabase.config.js"></script>
     <script src="js/auth.supabase.js"></script>
     <script src="js/news-dropdown.supabase.js"></script>
+    
+    <!-- EmailJS for contact form -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <!-- Sign In/Up Forms Modal -->
     <!-- Modern Sign In Modal -->
@@ -687,6 +787,125 @@
         $(document).ready(function() { $('.dropdown-toggle').dropdown(); });
     </script>
     <script src="js/header-global.js?v=tz1"></script>
+
+    <!-- Mobile Menu Toggle Function -->
+    <script>
+    function toggleMobileMenu(menuId) {
+        const menu = document.getElementById(menuId);
+        const button = event.target.closest('.mobile-menu-toggle');
+        
+        if (menu && button) {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            
+            // Toggle the menu visibility
+            if (isExpanded) {
+                menu.classList.remove('show');
+                button.setAttribute('aria-expanded', 'false');
+            } else {
+                menu.classList.add('show');
+                button.setAttribute('aria-expanded', 'true');
+            }
+        }
+    }
+
+    // Contact Form Functionality
+    (function() {
+        // Wait for EmailJS to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize EmailJS
+            emailjs.init("6NetCRyHOZ2P_ad9i");
+            
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitSpinner = document.getElementById('submitSpinner');
+            const successMessage = document.getElementById('contactMessage');
+            const errorMessage = document.getElementById('contactError');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading state
+                    submitBtn.disabled = true;
+                    submitText.textContent = 'Sending...';
+                    submitSpinner.classList.remove('d-none');
+                    
+                    // Hide previous messages
+                    successMessage.classList.add('d-none');
+                    errorMessage.classList.add('d-none');
+                    
+                    // Get form data
+                    const formData = {
+                        from_name: document.getElementById('contactName').value,
+                        from_email: document.getElementById('contactEmail').value,
+                        subject: document.getElementById('contactSubject').value,
+                        message: document.getElementById('contactMessage').value,
+                        to_email: 'blog.gangagames@gmail.com'
+                    };
+                    
+                    // Debug: Log form data and EmailJS status
+                    console.log('Form data being sent:', formData);
+                    console.log('EmailJS initialized:', typeof emailjs !== 'undefined');
+                    
+                    // Try different EmailJS API formats
+                    const sendEmail = async () => {
+                        try {
+                            // Method 1: Try the standard send method
+                            console.log('Attempting to send with service_wdmdvu6...');
+                            
+                            const response = await emailjs.send('service_wdmdvu6', 'template_8mirlci', formData);
+                            console.log('SUCCESS!', response.status, response.text);
+                            console.log('Full response:', response);
+                            
+                            // Show success message
+                            successMessage.classList.remove('d-none');
+                            
+                            // Reset form
+                            contactForm.reset();
+                            
+                            // Reset button state
+                            submitBtn.disabled = false;
+                            submitText.textContent = 'Submit';
+                            submitSpinner.classList.add('d-none');
+                            
+                            // Scroll to success message
+                            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            
+                        } catch (error) {
+                            console.log('FAILED...', error);
+                            console.log('Error details:', {
+                                status: error.status,
+                                text: error.text,
+                                fullError: error
+                            });
+                            
+                            // Show error message with more details
+                            errorMessage.innerHTML = `
+                                <i class="fa fa-exclamation-circle"></i> 
+                                Sorry, there was an error sending your message. 
+                                <br><small>Error: ${error.status || 'Unknown'} - ${error.text || error.message || 'Service not found'}</small>
+                                <br>Please try again or contact us directly at blog.gangagames@gmail.com
+                            `;
+                            errorMessage.classList.remove('d-none');
+                            
+                            // Reset button state
+                            submitBtn.disabled = false;
+                            submitText.textContent = 'Submit';
+                            submitSpinner.classList.add('d-none');
+                            
+                            // Scroll to error message
+                            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    };
+                    
+                    // Execute the email sending
+                    sendEmail();
+                });
+            }
+        });
+    })();
+    </script>
 </body>
 
 
