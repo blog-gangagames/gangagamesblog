@@ -76,6 +76,8 @@
   }
 
   function renderMobileMenu(){
+    // Disabled - using static HTML mobile menu instead
+    return;
     try {
       var modalBody = document.querySelector('#modal_aside_right .modal-body');
       if (!modalBody) return;

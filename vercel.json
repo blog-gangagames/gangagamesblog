@@ -1,13 +1,6 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/public/index.html" },
-
-    { "source": "/category/:slug", "destination": "/public/category-style-v2.html" },
-    { "source": "/category/:slug/", "destination": "/public/category-style-v2.html" },
-
-    { "source": "/:slug", "destination": "/public/article-detail-v1.html" },
-    { "source": "/:slug/", "destination": "/public/article-detail-v1.html" },
-
-    { "source": "/:path*", "destination": "/public/:path*" }
+    { "source": "/admin", "destination": "/test.html" },
+    { "source": "/dashboard/:path*", "destination": "/admin/index.html" }
   ]
 }

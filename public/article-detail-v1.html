@@ -21,8 +21,9 @@
         rel="stylesheet">
         <link href="css/styles3875.css?brandhoverfix2" rel="stylesheet">
         <link href="css/news-dropdown-fix.css?brandhoverfix2" rel="stylesheet">
-  <link rel="stylesheet" href="css/comments-theme.css">
-  <link rel="stylesheet" href="css/related-layout.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/comments-theme.css">
+        <link rel="stylesheet" href="css/related-layout.css">
 </head>
 
 <body>
@@ -193,9 +194,40 @@
                 </div>
                 <div class="modal-body">
                     <nav class="list-group list-group-flush">
-                        <a class='list-group-item text-dark' href='index.html'>Home</a>
-                        <a class='list-group-item text-dark' href='category-style-v2.html'>Categories</a>
-                        <a class='list-group-item text-dark' href='contact.html'>Contact</a>
+                        <a class='list-group-item text-light' href='index.html'>Home</a>
+
+                        <a class='list-group-item text-light d-flex justify-content-between align-items-center' data-toggle="collapse" href="#mobileCategories" aria-expanded="false" aria-controls="mobileCategories">
+                            Categories <span class="fa fa-angle-down"></span>
+                        </a>
+                        <div class="collapse" id="mobileCategories">
+                            <div class="list-group">
+                                <a class='list-group-item text-light' href='/category/online-slots/'>Online Slots</a>
+                                <a class='list-group-item text-light' href='/category/poker/'>Poker</a>
+                                <a class='list-group-item text-light' href='/category/roulette/'>Roulette</a>
+                                <a class='list-group-item text-light' href='/category/blackjack/'>Blackjack</a>
+                                <a class='list-group-item text-light' href='/category/game-reviews/'>Game Reviews</a>
+                                <a class='list-group-item text-light' href='/category/strategies-tips/'>Strategies & Tips</a>
+                                <a class='list-group-item text-light' href='/category/cricket-betting/'>Cricket Betting</a>
+                                <a class='list-group-item text-light' href='/category/football-betting/'>Football Betting</a>
+                                <a class='list-group-item text-light' href='/category/kabaddi-betting/'>Kabaddi Betting</a>
+                                <a class='list-group-item text-light' href='/category/tennis-betting/'>Tennis Betting</a>
+                                <a class='list-group-item text-light' href='/category/live-betting-strategies/'>Live Betting Strategies</a>
+                                <a class='list-group-item text-light' href='/category/match-previews-predictions/'>Match Previews & Predictions</a>
+                                <a class='list-group-item text-light' href='/category/casino-bonuses/'>Casino Bonuses</a>
+                                <a class='list-group-item text-light' href='/category/sportsbook-promotions/'>Sportsbook Promotions</a>
+                                <a class='list-group-item text-light' href='/category/loyalty-vip-programs/'>Loyalty & VIP Programs</a>
+                                <a class='list-group-item text-light' href='/category/tips-to-maximize-bonuses/'>Tips to Maximize Bonuses</a>
+                                <a class='list-group-item text-light' href='/category/how-to-guides/'>How-To Guides</a>
+                                <a class='list-group-item text-light' href='/category/responsible-gambling/'>Responsible Gambling</a>
+                                <a class='list-group-item text-light' href='/category/legal-regulatory-updates/'>Legal & Regulatory Updates</a>
+                                <a class='list-group-item text-light' href='/category/news-industry-updates/'>News & Industry Updates</a>
+                                <a class='list-group-item text-light' href='/category/culture-lifestyle/'>Culture & Lifestyle</a>
+                                <a class='list-group-item text-light' href='/category/tips-strategies-hub/'>Tips & Strategies Hub</a>
+                                <a class='list-group-item text-light' href='/category/faqs-beginner-resources/'>FAQs & Beginner Resources</a>
+                            </div>
+                        </div>
+
+                        <a class='list-group-item text-light' href='contact.html'>Contact</a>
 
                     </nav>
                 </div>
@@ -339,7 +371,7 @@
                                             4.6k followers
                                         </span>
                                         <span class="social__media__widget-name">
-                                            join
+                                            WhatsApp
                                         </span>
                                     </div>
                                 </a>
@@ -352,7 +384,7 @@
                                             2.7k followers
                                         </span>
                                         <span class="social__media__widget-name">
-                                            join
+                                            Telegram
                                         </span>
                                     </div>
                                 </a>
@@ -616,6 +648,7 @@
                 </div>
 </footer>
 <!-- Copyright under footer -->
+<!-- REMOVE DUPLICATE FOOTER -->
 <div class="wrapper__footer-bottom bg__footer-dark" style="background-color: #000 !important; padding: 24px 0;">
     <div class="container">
         <div class="row">
@@ -735,6 +768,24 @@
           var containerSelector = '.row';
           var el = document.querySelector(stickySelector);
           if (!el) return;
+          var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+          // Disable sticky on small screens to prevent overlay/glitch
+          if (w < 992) {
+            if (stickyInstance && typeof stickyInstance.destroy === 'function') {
+              try { stickyInstance.destroy(); } catch(_){}
+              stickyInstance = null;
+            }
+            try {
+              el.classList.remove('is-affixed');
+              el.style.position = '';
+              el.style.top = '';
+              el.style.bottom = '';
+              el.style.transform = '';
+              var inner = el.querySelector('.inner-wrapper-sticky');
+              if (inner) inner.removeAttribute('style');
+            } catch(_){}
+            return;
+          }
           if (stickyInstance && typeof stickyInstance.destroy === 'function') {
             try { stickyInstance.destroy(); } catch(_){}
             stickyInstance = null;
@@ -746,7 +797,7 @@
             innerWrapperSelector: '.inner-wrapper-sticky',
             stickyClass: 'is-affixed',
             resizeSensor: true,
-            minWidth: 0
+            minWidth: 992
           });
         } catch (e) { console.warn('[sticky] article init failed:', e); }
       }
