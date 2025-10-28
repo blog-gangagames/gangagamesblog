@@ -10,13 +10,6 @@
       "destination": "/api/blog/:slug"
     }
   ],
-  "redirects": [
-    {
-      "source": "/article-detail-v1.html",
-      "destination": "/api/blog/:slug",
-      "permanent": false
-    }
-  ],
   "headers": [
     {
       "source": "/api/blog/(.*)",
