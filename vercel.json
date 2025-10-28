@@ -1,6 +1,48 @@
 {
+  "functions": {
+    "api/blog/[slug].js": {
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
-    { "source": "/admin", "destination": "/test.html" },
-    { "source": "/dashboard/:path*", "destination": "/admin/index.html" }
+    {
+      "source": "/:category/:slug",
+      "destination": "/api/blog/:slug"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/article-detail-v1.html",
+      "destination": "/api/blog/:slug",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/blog/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
   ]
 }

@@ -367,7 +367,9 @@
   function articleUrl(p){
     var title = safeTitle(p);
     var slug = slugifyTitle(title);
-    return slug ? ('/' + slug) : '/';
+    // Include category in URL to match Vercel routing pattern
+    var category = (p && (p.subcategory || p.main_category)) ? (p.subcategory || p.main_category).toLowerCase() : 'uncategorized';
+    return slug ? ('/' + category + '/' + slug) : '/';
   }
 
   function normalizeKey(s){

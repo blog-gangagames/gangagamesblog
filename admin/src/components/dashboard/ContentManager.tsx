@@ -43,6 +43,12 @@ import {
 } from "@/components/ui/select";
 import { CreatePostDialogShared, NewPostPayload } from "@/components/dashboard/CreatePostDialogShared";
 import { supabase } from "@/lib/supabaseClient";
+import { 
+  handlePostPublish, 
+  handlePostUnpublish, 
+  handlePostUpdate, 
+  handlePostDelete 
+} from "@/lib/staticHtmlIntegration";
 
 type PostItem = {
   id: string;
@@ -302,6 +308,15 @@ export function ContentManager() {
           alert(`Deleted ${deletedIds.length} of ${selectedIds.length} selected posts due to permissions.`);
         }
         setItems(prev => prev.filter(p => !deletedIds.includes(p.id)));
+        
+        // Delete static HTML for deleted posts
+        for (const id of deletedIds) {
+          try {
+            await handlePostDelete(id);
+          } catch (error) {
+            console.error(`Failed to delete static HTML for post ${id}:`, error);
+          }
+        }
       } else if (action === 'feature') {
         const { data, error } = await supabase
           .from('posts')
@@ -336,6 +351,15 @@ export function ContentManager() {
         if (updatedIds.length === 0) { alert('No posts were updated. Check permissions.'); return; }
         if (updatedIds.length < selectedIds.length) { alert(`Updated ${updatedIds.length} of ${selectedIds.length} posts due to permissions.`); }
         setItems(prev => prev.map(p => updatedIds.includes(p.id) ? { ...p, status: 'published', date: nowIso.slice(0,10) } : p));
+        
+        // Generate static HTML for published posts
+        for (const id of updatedIds) {
+          try {
+            await handlePostPublish(id);
+          } catch (error) {
+            console.error(`Failed to generate static HTML for post ${id}:`, error);
+          }
+        }
       } else if (action === 'draft') {
         const { data, error } = await supabase
           .from('posts')
@@ -347,6 +371,15 @@ export function ContentManager() {
         if (updatedIds.length === 0) { alert('No posts were updated. Check permissions.'); return; }
         if (updatedIds.length < selectedIds.length) { alert(`Updated ${updatedIds.length} of ${selectedIds.length} posts due to permissions.`); }
         setItems(prev => prev.map(p => updatedIds.includes(p.id) ? { ...p, status: 'draft' } : p));
+        
+        // Delete static HTML for unpublished posts
+        for (const id of updatedIds) {
+          try {
+            await handlePostUnpublish(id);
+          } catch (error) {
+            console.error(`Failed to delete static HTML for post ${id}:`, error);
+          }
+        }
       }
       setSelectedIds([]);
       await refreshPosts();
@@ -570,7 +603,7 @@ export function ContentManager() {
                           {post.featured ? "Remove Featured" : "Make Featured"}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem className="text-destructive" onClick={async () => {
+                        <DropdownMenuItem className="text-destructive"                         onClick={async () => {
                           try {
                             const { error } = await supabase
                               .from('posts')
@@ -578,6 +611,13 @@ export function ContentManager() {
                               .eq('id', post.id);
                             if (error) throw error;
                             setItems(prev => prev.filter(p => p.id !== post.id));
+                            
+                            // Delete static HTML for deleted post
+                            try {
+                              await handlePostDelete(post.id);
+                            } catch (error) {
+                              console.error('Failed to delete static HTML for post:', error);
+                            }
                           } catch (e: any) {
                             alert('Failed to delete post: ' + (e?.message || e));
                           }
@@ -635,6 +675,14 @@ export function ContentManager() {
               status: payload.status,
               date: (payload.publishAt || p.date),
             } : p));
+            
+            // Handle static HTML generation for updated post
+            try {
+              await handlePostUpdate(editingPost.id);
+            } catch (error) {
+              console.error('Failed to update static HTML for post:', error);
+            }
+            
             setEditingPost(null);
             setEditingOpen(false);
           } catch (e: any) {

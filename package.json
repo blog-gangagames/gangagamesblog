@@ -2,10 +2,13 @@
   "name": "ganga-root",
   "private": true,
   "version": "1.0.0",
-  "engines": { "node": "20.x" },
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "build": "rm -rf admin/dist && npm --prefix admin ci && npm --prefix admin run build && mkdir -p public/admin && cp -r admin/dist/* public/admin/ && cp admin.html public/signin.html && echo 'Build completed successfully'"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.76.1"
   }
 }
-
-
