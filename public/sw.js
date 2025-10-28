@@ -47,7 +47,8 @@ self.addEventListener('fetch', (event) => {
       if (!excluded && /^\/([a-z0-9\-]+)\/?$/i.test(path)) {
         return fetch('/article-detail-v1.html');
       }
-      // Otherwise return the original response (even if not ok)
+      // REMOVE: Service worker fallback logic for static HTML (category-style-v2.html, article-detail-v1.html, etc.)
+      // ENSURE: No fallback to static HTML; allow normal fetch and error handling
       return response;
     } catch (err) {
       // Network failed (offline or server missing) — fallback based on path heuristic

@@ -21,7 +21,7 @@
     "http",
     "net"
   ],
-  "liveServer.settings.port": 5508
+  "liveServer.settings.port": 5509
   ,
   "css.lint.unknownAtRules": "ignore",
   "git.ignoreLimitWarning": true

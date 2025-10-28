@@ -16,13 +16,13 @@
   function writeCache(key, data){
     try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data: data })); } catch(_){}
   }
+  // All cache logic removed. Article detail now always fetches fresh data from Supabase.
   function extractSlugFromLocation(){
     try {
       // Prefer explicit query param first
       var params = new URLSearchParams(window.location.search || '');
       var fromQuery = (params.get('slug') || '').trim();
       if (fromQuery) return String(fromQuery).toLowerCase();
-
       var path = window.location.pathname || '';
       // Expect top-level "/<slug>" (exclude known routes/files)
       var segs = path.split('/').filter(Boolean);
