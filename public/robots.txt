@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /admin-build/
+Disallow: /api-server/
+Allow: /
+Sitemap: https://gangagamesblog.com/sitemap.xml
