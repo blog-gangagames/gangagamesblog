@@ -1,5 +1,6 @@
 // Simple service worker to support pretty slug URLs like "/my-post-title"
-// It serves the article detail shell for non-existent top-level paths while keeping the URL.
+// For slug paths, try serving fully rendered article HTML from /api/blog/{slug}.
+// Falls back to the article detail shell when API or network is unavailable.
 self.addEventListener('install', (event) => {
   // Activate immediately
   self.skipWaiting();
@@ -25,6 +26,14 @@ self.addEventListener('fetch', (event) => {
       // If the request was a 404 or otherwise not OK, decide whether to fallback
       const url = new URL(event.request.url);
       const path = url.pathname || '/';
+      const isSlugPath = (p) => /^\/([a-z0-9\-]+)\/?$/i.test(p);
+      const isCategorySlugPath = (p) => /^\/[a-z0-9\-]+\/[a-z0-9\-]+\/?$/i.test(p);
+      const extractSlug = (p) => {
+        try {
+          const parts = p.replace(/^\/+|\/+$/g, '').split('/');
+          return parts[parts.length - 1] || '';
+        } catch (_) { return ''; }
+      };
       // Exclude known routes and file paths
       const excluded = (
         /\.(html|css|js|png|jpg|jpeg|gif|svg|webp|ico|json|map)(\?|$)/i.test(path) ||
@@ -43,12 +52,22 @@ self.addEventListener('fetch', (event) => {
       if (/^\/category\/[a-z0-9\-]+\/?$/i.test(path)) {
         return fetch('/category-style-v2.html');
       }
-      // If it's a top-level slug path like "/my-post" and not excluded, serve article detail shell
-      if (!excluded && /^\/([a-z0-9\-]+)\/?$/i.test(path)) {
+      // If it's a top-level slug path like "/my-post" and not excluded, try API first
+      if (!excluded && isSlugPath(path)) {
+        const slug = extractSlug(path);
+        try {
+          const apiResp = await fetch(`/api/blog/${encodeURIComponent(slug)}`, { headers: { 'X-From-SW': '1' } });
+          if (apiResp && apiResp.ok) return apiResp;
+        } catch (_) { /* fall through to shell */ }
         return fetch('/article-detail-v1.html');
       }
-      // If it's a two-segment path like "/<category>/<slug>", serve article detail shell
-      if (!excluded && /^\/[a-z0-9\-]+\/[a-z0-9\-]+\/?$/i.test(path)) {
+      // If it's a two-segment path like "/<category>/<slug>", try API using the slug segment
+      if (!excluded && isCategorySlugPath(path)) {
+        const slug = extractSlug(path);
+        try {
+          const apiResp = await fetch(`/api/blog/${encodeURIComponent(slug)}`, { headers: { 'X-From-SW': '1' } });
+          if (apiResp && apiResp.ok) return apiResp;
+        } catch (_) { /* fall through to shell */ }
         return fetch('/article-detail-v1.html');
       }
       // REMOVE: Service worker fallback logic for static HTML (category-style-v2.html, article-detail-v1.html, etc.)
@@ -59,9 +78,8 @@ self.addEventListener('fetch', (event) => {
       try {
         const url = new URL(event.request.url);
         const path = url.pathname || '/';
-        if (/^\/[a-z0-9\-]+\/?$/i.test(path) || /^\/[a-z0-9\-]+\/[a-z0-9\-]+\/?$/i.test(path)) {
-          return fetch('/article-detail-v1.html');
-        }
+        const isSlugPath = (p) => /^\/([a-z0-9\-]+)\/?$/i.test(p) || /^\/[a-z0-9\-]+\/[a-z0-9\-]+\/?$/i.test(p);
+        if (isSlugPath(path)) return fetch('/article-detail-v1.html');
       } catch (_) {}
       // As a last resort, show the homepage
       return fetch('/index.html');
