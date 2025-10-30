@@ -39,23 +39,21 @@ async function generateStaticHTML() {
   
   let success = 0;
   let failed = 0;
+  const siteDomain = (process.env.NEXT_PUBLIC_DOMAIN || process.env.SITE_DOMAIN || 'https://gangagamesblog.com').replace(/\/$/, '');
   
   for (const post of posts) {
     try {
-      // Generate slug if missing
-      if (!post.slug) {
-        post.slug = slugify(post.title);
-        await supabase.from('posts').update({ slug: post.slug }).eq('id', post.id);
-        console.log(`Generated slug: ${post.slug}`);
-      }
+      // Generate slug locally if missing (do not depend on DB column)
+      const postSlug = post.slug && String(post.slug).trim().length > 0 ? post.slug : slugify(post.title);
       
       // Prepare data
-      const category = post.subcategory || post.main_category || 'uncategorized';
+      const rawCategory = post.subcategory || post.main_category || 'uncategorized';
+      const category = slugify(rawCategory);
       const html = template
         .replace(/\{\{TITLE\}\}/g, post.meta_title || post.title)
         .replace(/\{\{DESCRIPTION\}\}/g, post.meta_description || post.excerpt || '')
         .replace(/\{\{OG_IMAGE\}\}/g, post.og_image || post.image_url || '')
-        .replace(/\{\{CANONICAL_URL\}\}/g, `https://yourdomain.com/${category}/${post.slug}`)
+        .replace(/\{\{CANONICAL_URL\}\}/g, `${siteDomain}/${category}/${postSlug}`)
         .replace(/\{\{CATEGORY_SLUG\}\}/g, category)
         .replace(/\{\{CATEGORY_NAME\}\}/g, category)
         .replace(/\{\{PUBLISH_DATE\}\}/g, post.published_at ? new Date(post.published_at).toLocaleDateString() : '')
@@ -68,14 +66,14 @@ async function generateStaticHTML() {
       // Upload
       const { error: uploadError } = await supabase.storage
         .from('blog')
-        .upload(`${post.slug}.html`, Buffer.from(html, 'utf8'), {
+        .upload(`${postSlug}.html`, Buffer.from(html, 'utf8'), {
           contentType: 'text/html',
           upsert: true
         });
       
       if (uploadError) throw uploadError;
       
-      console.log(`✅ ${post.slug}.html`);
+      console.log(`✅ ${postSlug}.html`);
       success++;
     } catch (err) {
       console.log(`❌ ${post.title}:`, err.message);

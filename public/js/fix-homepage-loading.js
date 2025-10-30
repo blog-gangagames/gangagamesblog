@@ -36,6 +36,7 @@
   preloadImages();
   
   // Reduce preloader timing
-  window.MIN_PRELOAD_MS = 1000; // Reduced from 2200ms
-  window.MAX_PRELOAD_MS = 1500; // Reduced from 4000ms
+  // Show content immediately when data is ready
+  window.MIN_PRELOAD_MS = 0;
+  window.MAX_PRELOAD_MS = 0;
 })();

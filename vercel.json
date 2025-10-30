@@ -2,12 +2,23 @@
   "functions": {
     "api/blog/[slug].js": {
       "maxDuration": 10
+    },
+    "api/sitemap.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
     {
+      "source": "/category/:slug",
+      "destination": "/category-style-v2.html"
+    },
+    {
       "source": "/:category/:slug",
       "destination": "/api/blog/:slug"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
     }
   ],
   "headers": [

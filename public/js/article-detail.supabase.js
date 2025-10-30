@@ -30,8 +30,8 @@
       var last = segs[segs.length - 1];
       // Ignore common non-article paths
       if (/^(index\.html|article-detail-v1\.html|category|contact\.html|search-result\.html)$/i.test(last)) return '';
-      // Only accept single segment slugs (no further path like /category/slug)
-      if (segs.length === 1) {
+      // Accept single segment "/<slug>" OR two-segment "/<category>/<slug>"
+      if (segs.length === 1 || segs.length === 2) {
         return String(last || '').toLowerCase();
       }
       return '';

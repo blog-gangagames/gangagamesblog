@@ -47,6 +47,10 @@ self.addEventListener('fetch', (event) => {
       if (!excluded && /^\/([a-z0-9\-]+)\/?$/i.test(path)) {
         return fetch('/article-detail-v1.html');
       }
+      // If it's a two-segment path like "/<category>/<slug>", serve article detail shell
+      if (!excluded && /^\/[a-z0-9\-]+\/[a-z0-9\-]+\/?$/i.test(path)) {
+        return fetch('/article-detail-v1.html');
+      }
       // REMOVE: Service worker fallback logic for static HTML (category-style-v2.html, article-detail-v1.html, etc.)
       // ENSURE: No fallback to static HTML; allow normal fetch and error handling
       return response;
@@ -55,7 +59,7 @@ self.addEventListener('fetch', (event) => {
       try {
         const url = new URL(event.request.url);
         const path = url.pathname || '/';
-        if (/^\/[a-z0-9\-]+\/?$/i.test(path)) {
+        if (/^\/[a-z0-9\-]+\/?$/i.test(path) || /^\/[a-z0-9\-]+\/[a-z0-9\-]+\/?$/i.test(path)) {
           return fetch('/article-detail-v1.html');
         }
       } catch (_) {}

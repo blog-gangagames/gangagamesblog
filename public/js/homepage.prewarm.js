@@ -90,6 +90,9 @@
     seedCache('home:tips-strategies', tips);
     seedCache('home:latest-sidebar', sidebar);
 
+    // Note: Do NOT seed 'home:latest' to avoid dummy content overriding
+    // real static snapshot or live data on first paint.
+
     // Done
     console.log('[prewarm] Homepage caches seeded for instant content.');
   } catch(e){ console.warn('[prewarm] failed:', e); }

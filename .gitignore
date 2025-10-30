@@ -18,6 +18,7 @@ pnpm-debug.log*
 .env*
 supabase/.branches
 supabase/.temp
+github.token
 
 # Databases / caches
 *.db

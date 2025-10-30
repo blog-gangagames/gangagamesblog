@@ -12068,6 +12068,19 @@ input[type="number"] {
         left: 30px !important;
     }
 }
+/* --- Homepage spacing fix: remove outside gap above Sports --- */
+.popular__section-news {
+    /* Prevent bottom margins of last children from escaping outside */
+    overflow: hidden;
+}
+.popular__section-news #latestGamingGrid {
+    /* Restore internal spacing under the featured grid (keep outside gap collapsed) */
+    margin-bottom: 1rem !important; /* 16px, same as .mb-3 */
+}
+.popular__section-news .wrapper__list__article:last-of-type {
+    /* Ensure the right column wrapper doesn’t push space outward */
+    margin-bottom: 0 !important;
+}
 .wrap__profile {
     border: 1px solid #ddd;
     padding: 20px;
