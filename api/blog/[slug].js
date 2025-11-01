@@ -20,20 +20,179 @@ module.exports = async function handler(req, res) {
 
     console.log(`Fetching static HTML for slug: ${slug}`);
 
-    // Fetch HTML from Supabase storage
-    const { data, error } = await supabase.storage
-      .from('blog')
-      .download(`${slug}.html`);
+    // Try multiple slug formats in case of variations
+    const slugVariations = [
+      slug,
+      slug.toLowerCase(),
+      slug.replace(/-/g, '_'),
+      slug.replace(/_/g, '-'),
+    ];
 
-    if (error) {
-      console.error('Error fetching HTML from Supabase:', error);
+    let data = null;
+    let error = null;
+    let triedSlug = null;
+
+    // Try each variation until one works
+    for (const slugVar of slugVariations) {
+      const result = await supabase.storage
+        .from('blog')
+        .download(`${slugVar}.html`);
       
-      // If file not found, return 404
-      if (error.message.includes('Object not found')) {
-        return res.status(404).json({ 
-          error: 'Post not found',
-          message: `No static HTML found for slug: ${slug}`
-        });
+      if (!result.error && result.data) {
+        data = result.data;
+        triedSlug = slugVar;
+        break;
+      }
+      
+      // If this wasn't "not found", it's a real error - break
+      if (result.error && !result.error.message?.includes('Object not found')) {
+        error = result.error;
+        break;
+      }
+    }
+
+    if (!data && !error) {
+      // File not found in storage - try to find post in database
+      error = { message: 'Object not found', code: 'NOT_FOUND' };
+      
+      try {
+        // Try to find post by slug (exact match or slugified title)
+        const { data: posts, error: dbError } = await supabase
+          .from('posts')
+          .select('id, title, slug')
+          .eq('status', 'published')
+          .limit(50);
+        
+        if (!dbError && posts && posts.length > 0) {
+          // Find matching post by comparing slugified titles
+          const slugify = (str) => String(str || '').toLowerCase()
+            .replace(/['"]/g, '')
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+          
+          const targetSlug = slugify(slug);
+          const matchingPost = posts.find(p => {
+            const postSlug = slugify(p.slug || p.title);
+            return postSlug === targetSlug;
+          });
+          
+          if (matchingPost) {
+            // Post exists in DB but no static HTML - redirect to article-detail page
+            // The article-detail page will load content from DB seamlessly
+            const redirectUrl = `/article-detail-v1.html?slug=${encodeURIComponent(slug)}${matchingPost.id ? '&id=' + encodeURIComponent(matchingPost.id) : ''}`;
+            res.setHeader('Location', redirectUrl);
+            res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+            return res.status(307).send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=${redirectUrl}">
+  <title>Loading article...</title>
+  <script>window.location.href = ${JSON.stringify(redirectUrl)};</script>
+</head>
+<body><p>Loading article...</p></body>
+</html>`);
+          }
+        }
+      } catch (fallbackError) {
+        console.error('Fallback lookup failed:', fallbackError);
+      }
+    }
+
+    if (error || !data) {
+      console.error('Error fetching HTML from Supabase:', error || 'No data found');
+      
+      // If file not found, try to serve article-detail shell instead of 404
+      // This ensures no 404 errors when clicking from homepage
+      if (error && error.message && error.message.includes('Object not found')) {
+        try {
+          // Try to find post in database first
+          const { data: posts, error: dbError } = await supabase
+            .from('posts')
+            .select('id, title, slug')
+            .eq('status', 'published')
+            .limit(50);
+          
+          if (!dbError && posts && posts.length > 0) {
+            const slugify = (str) => String(str || '').toLowerCase()
+              .replace(/['"]/g, '')
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/-+/g, '-')
+              .replace(/^-|-$/g, '');
+            
+            const targetSlug = slugify(slug);
+            const matchingPost = posts.find(p => {
+              const postSlug = slugify(p.slug || p.title);
+              return postSlug === targetSlug;
+            });
+            
+            if (matchingPost) {
+              // Redirect to article-detail page which will load content from DB
+              const redirectUrl = `/article-detail-v1.html?slug=${encodeURIComponent(slug)}${matchingPost.id ? '&id=' + encodeURIComponent(matchingPost.id) : ''}`;
+              res.setHeader('Location', redirectUrl);
+              res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+              return res.status(307).send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=${redirectUrl}">
+  <title>Loading article...</title>
+  <script>window.location.href = ${JSON.stringify(redirectUrl)};</script>
+</head>
+<body><p>Loading article...</p></body>
+</html>`);
+            }
+          }
+          
+          // If post not found in DB, redirect to article-detail page anyway
+          // It will try to load from DB and handle gracefully
+          const redirectUrl = `/article-detail-v1.html?slug=${encodeURIComponent(slug)}`;
+          res.setHeader('Location', redirectUrl);
+          res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+          return res.status(307).send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=${redirectUrl}">
+  <title>Loading article...</title>
+  <script>window.location.href = ${JSON.stringify(redirectUrl)};</script>
+</head>
+<body><p>Loading article...</p></body>
+</html>`);
+        } catch (fallbackError) {
+          console.error('Fallback to article shell failed:', fallbackError);
+          // Even if DB lookup fails, still redirect to article-detail page
+          // It will handle the error gracefully client-side
+          const redirectUrl = `/article-detail-v1.html?slug=${encodeURIComponent(slug)}`;
+          res.setHeader('Location', redirectUrl);
+          res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+          return res.status(307).send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=${redirectUrl}">
+  <title>Loading article...</title>
+  <script>window.location.href = ${JSON.stringify(redirectUrl)};</script>
+</head>
+<body><p>Loading article...</p></body>
+</html>`);
+        }
+        
+        // This should never be reached, but as absolute last resort, redirect instead of 404
+        const redirectUrl = `/article-detail-v1.html?slug=${encodeURIComponent(slug)}`;
+        res.setHeader('Location', redirectUrl);
+        res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300');
+        return res.status(307).send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0;url=${redirectUrl}">
+  <title>Loading article...</title>
+  <script>window.location.href = ${JSON.stringify(redirectUrl)};</script>
+</head>
+<body><p>Loading article...</p></body>
+</html>`);
       }
       
       return res.status(500).json({ 
@@ -44,6 +203,7 @@ module.exports = async function handler(req, res) {
 
     // Convert blob to text
     const htmlContent = await data.text();
+    console.log(`Successfully fetched HTML for slug: ${triedSlug || slug}`);
 
     // Set appropriate headers
     res.setHeader('Content-Type', 'text/html; charset=utf-8');

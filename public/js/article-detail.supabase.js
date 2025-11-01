@@ -233,12 +233,52 @@
     } catch(_) { return ''; }
   }
 
+  // Try to load static HTML from Supabase storage first
+  async function tryLoadStaticHtml(client, slug){
+    try {
+      if (!client || !slug) return null;
+      // Try multiple slug variations
+      var variations = [slug, slug.toLowerCase(), slug.replace(/-/g, '_'), slug.replace(/_/g, '-')];
+      for (var i = 0; i < variations.length; i++) {
+        try {
+          var result = await client.storage.from('blog').download(variations[i] + '.html');
+          if (!result.error && result.data) {
+            var text = await result.data.text();
+            // Parse the HTML and extract article data if it's a full HTML page
+            // For now, just return success indicator - we'll let the page handle rendering
+            return { success: true, slug: variations[i] };
+          }
+        } catch(_) { continue; }
+      }
+      return null;
+    } catch(_) { return null; }
+  }
+
   async function loadArticle(){
     try {
       var id = extractIdFromLocation();
       var slugPath = extractSlugFromLocation();
       var client = getClient();
-      if (!client) return;
+      if (!client) {
+        // Check for preloaded post data
+        if (window.__PRELOADED_POST__) {
+          var preloaded = window.__PRELOADED_POST__;
+          if (preloaded.id) id = preloaded.id;
+          if (preloaded.slug) slugPath = preloaded.slug;
+        }
+        if (!id && !slugPath) return;
+        client = getClient();
+        if (!client) return;
+      }
+      
+      // Check for preloaded post data from API route
+      if (window.__PRELOADED_POST__) {
+        var preloaded = window.__PRELOADED_POST__;
+        if (preloaded.id) id = preloaded.id;
+        if (!slugPath && preloaded.slug) slugPath = preloaded.slug;
+        // Preloaded data means API already found the post - we can fetch it directly
+      }
+      
       // Cache-first: paint cached article immediately if available
       var cacheKey = id ? ('article:id:' + id) : (slugPath ? ('article:slug:' + slugPath) : 'article:latest');
       var cached = readCache(cacheKey, 86400);
@@ -246,7 +286,18 @@
         applyArticleData(cached);
         var loader = document.querySelector('.loading-container');
         if (loader) { try { loader.style.display = 'none'; } catch(_){} }
+        // Hide article loading state
+        try {
+          var articleLoader = document.getElementById('article-loading');
+          if (articleLoader) articleLoader.style.display = 'none';
+        } catch(_){}
       }
+      
+      // Try to check if static HTML exists (but don't block - let DB fetch proceed)
+      if (slugPath && !cached) {
+        tryLoadStaticHtml(client, slugPath).catch(function(_){});
+      }
+      
       var data = null, error = null;
       if (id) {
         var out = await client
@@ -283,12 +334,49 @@
         error = res2.error || null;
         data = Array.isArray(res2.data) && res2.data.length ? res2.data[0] : null;
       }
-      if (error) { console.warn('[article] fetch error:', error.message || error); return; }
-      if (!data) { console.warn('[article] post not found for id:', id); return; }
-      // Render fresh data and update cache, short-circuit original render block
-      applyArticleData(data);
-      try { var loader2 = document.querySelector('.loading-container'); if (loader2) loader2.style.display = 'none'; } catch(_){}
-      writeCache(cacheKey, data);
+      if (error) { 
+        console.warn('[article] fetch error:', error.message || error); 
+        // If we have cached data, keep showing it
+        if (cached) return;
+        return; 
+      }
+      if (!data) { 
+        console.warn('[article] post not found for id:', id); 
+        // If we have cached data, keep showing it
+        if (cached) return;
+        return; 
+      }
+      
+      // Only update if data has changed (to avoid visible flicker)
+      var shouldUpdate = true;
+      if (cached && cached.id === data.id) {
+        // Check if content actually changed
+        var cachedContent = (cached.content_html || cached.content || '').substring(0, 100);
+        var newContent = (data.content_html || data.content || '').substring(0, 100);
+        if (cachedContent === newContent && cached.title === data.title) {
+          // Content appears same - only update cache timestamp, don't re-render
+          writeCache(cacheKey, data);
+          try { 
+            var loader3 = document.querySelector('.loading-container'); 
+            if (loader3) loader3.style.display = 'none'; 
+            var articleLoader2 = document.getElementById('article-loading');
+            if (articleLoader2) articleLoader2.style.display = 'none';
+          } catch(_){}
+          return;
+        }
+      }
+      
+      // Render fresh data and update cache
+      if (shouldUpdate) {
+        applyArticleData(data);
+        try { 
+          var loader2 = document.querySelector('.loading-container'); 
+          if (loader2) loader2.style.display = 'none'; 
+          var articleLoader3 = document.getElementById('article-loading');
+          if (articleLoader3) articleLoader3.style.display = 'none';
+        } catch(_){}
+        writeCache(cacheKey, data);
+      }
       return;
 
       // Title

@@ -478,10 +478,11 @@
     var html = '';
     posts.forEach(function(p){
       var cat = categoryLabel(p) || 'Tips & Strategies Hub';
+      var seoUrl = generateSeoUrl(p);
       html += (
         '<div class="card__post card__post-list" style="margin-bottom: 1.25rem;">'
         + '  <div class="card__post__body d-flex">'
-        + '    <a href="article-detail-v1.html?id=' + esc(p.id) + '" class="mr-3" style="flex:0 0 240px;min-width:240px;">'
+        + '    <a href="' + esc(seoUrl) + '" class="mr-3" style="flex:0 0 240px;min-width:240px;">'
         + '      <img src="' + esc(safeImg(p)) + '" class="img-fluid" alt="' + esc(p.title || '') + '" style="width:240px;height:150px;object-fit:cover;">'
         + '    </a>'
         + '    <div style="flex:1;min-width:0;">'
@@ -490,7 +491,7 @@
         + '        <li class="list-inline-item"><span style="font-size:12px;color:#7ea9ff;">' + AUTHOR_TEXT + '</span></li>'
         + '        <li class="list-inline-item"><span style="font-size:12px;">' + esc(fmtDate(p.published_at || p.created_at)) + '</span></li>'
         + '      </ul>'
-        + '      <h6 class="card__post__title" style="margin:0;font-size:16px;line-height:1.45;"><a href="article-detail-v1.html?id=' + esc(p.id) + '">' + esc(p.title || 'Untitled') + '</a></h6>'
+        + '      <h6 class="card__post__title" style="margin:0;font-size:16px;line-height:1.45;"><a href="' + esc(seoUrl) + '">' + esc(p.title || 'Untitled') + '</a></h6>'
         + '    </div>'
         + '  </div>'
         + '</div>'
@@ -838,28 +839,42 @@
       painted = true;
     }
 
-    // 2) Fresh fetch
+    // 2) Fresh fetch (silent update - only update if we have data, never show error if static content exists)
     var fresh = await fetchLatestPosts(client, 30);
     var t1 = (performance && performance.now) ? performance.now() : Date.now();
     try { showStatus('Fetched posts: ' + (fresh && fresh.length ? fresh.length : 0) + ' in ' + Math.round(t1 - t0) + 'ms', true); } catch(_){}
     if (fresh && fresh.length) {
       writeCache(cacheKey, fresh);
+      // Silently update the page with fresh content - no visual disruption
       paintAll(fresh);
-    } else if (!cached || !cached.length) {
-      try {
-        var wrap = document.querySelector('.popular__section-news .container');
-        if (wrap) {
-          var note = document.createElement('div');
-          note.style.padding = '10px';
-          note.style.margin = '10px 0';
-          note.style.border = '1px dashed rgba(255,255,255,0.2)';
-          note.style.color = '#bbb';
-          note.textContent = 'No posts returned from database.';
-          wrap.prepend(note);
-        }
-      } catch(_) {}
-      try { showStatus('No posts returned from database', false); } catch(_){}
-      paintAll([]);
+    } else {
+      // Only show error if we have NO content at all (neither cached, static, nor inline)
+      // If we already painted something (from inline, cache, or static), don't show error
+      var hasAnyContent = painted || (Array.isArray(inlineSnapshot) && inlineSnapshot.length) || 
+                         (Array.isArray(cached) && cached.length) || 
+                         (Array.isArray(staticSnapshot) && staticSnapshot.length);
+      
+      if (!hasAnyContent) {
+        // Only show error if truly no content exists anywhere
+        try {
+          var wrap = document.querySelector('.popular__section-news .container');
+          if (wrap) {
+            var note = document.createElement('div');
+            note.style.padding = '10px';
+            note.style.margin = '10px 0';
+            note.style.border = '1px dashed rgba(255,255,255,0.2)';
+            note.style.color = '#bbb';
+            note.textContent = 'No posts returned from database.';
+            wrap.prepend(note);
+          }
+        } catch(_) {}
+        try { showStatus('No posts returned from database', false); } catch(_){}
+        paintAll([]);
+      }
+      // If we have content already painted, silently log the fetch failure but don't disrupt UI
+      else {
+        console.warn('[home] Fresh fetch returned no data, but static content is already displayed');
+      }
     }
   }
 
