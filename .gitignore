@@ -1,0 +1,41 @@
+# Node / Bun
+node_modules/
+**/node_modules/
+bun.lockb
+
+# Builds / output
+dist/
+public/admin/
+admin/dist/
+admin-build/
+blog-zen-core/dist/
+
+# Vercel
+.vercel/
+.vercel
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment / local config
+.env*
+supabase/.branches
+supabase/.temp
+github.token
+
+# Databases / caches
+*.db
+*.sqlite
+*.sqlite3
+.cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+
