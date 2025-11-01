@@ -1,12 +1,18 @@
 # Node / Bun
 node_modules/
+**/node_modules/
 bun.lockb
 
 # Builds / output
 dist/
 public/admin/
 admin/dist/
+admin-build/
 blog-zen-core/dist/
+
+# Vercel
+.vercel/
+.vercel
 
 # Logs
 npm-debug.log*
