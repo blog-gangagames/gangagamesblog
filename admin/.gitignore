@@ -1,0 +1,30 @@
+# Node/Vite
+node_modules/
+dist/
+.vite/
+
+# Env files (do not commit secrets)
+.env
+.env.*
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Build cache
+*.tsbuildinfo
+
+# Hosting providers
+.vercel/
+.netlify/
+
+# Coverage
+coverage/

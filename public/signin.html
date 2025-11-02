@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In • Ganga Games Blog</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #0f172a; color: #e2e8f0; margin: 0; }
+    .wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .card { width: 100%; max-width: 420px; background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    .head { padding: 20px 22px; border-bottom: 1px solid #1f2937; display: flex; align-items: center; gap: 10px; }
+    .head h1 { font-size: 18px; margin: 0; }
+    .body { padding: 22px; display: grid; gap: 14px; }
+    label { font-size: 13px; color: #94a3b8; }
+    input[type="password"] { width: 100%; padding: 12px 12px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: #e2e8f0; outline: none; }
+    input::placeholder { color: #64748b; }
+    .row { display: grid; gap: 6px; }
+    .muted { font-size: 12px; color: #94a3b8; }
+    .actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+    button { appearance: none; border: none; border-radius: 10px; padding: 12px 14px; background: #16a34a; color: white; font-weight: 600; cursor: pointer; }
+    button[disabled] { opacity: 0.6; cursor: not-allowed; }
+    .error { color: #fecaca; background: #7f1d1d; border: 1px solid #ef4444; padding: 10px; border-radius: 10px; font-size: 13px; }
+    .ok { color: #dcfce7; background: #14532d; border: 1px solid #22c55e; padding: 10px; border-radius: 10px; font-size: 13px; }
+    .hint { font-size: 12px; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="head">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="#22c55e" stroke-width="2"/><path d="M8 12l2.5 2.5L16 9" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h1>Sign in to GangaGames</h1>
+      </div>
+      <div class="body">
+        <div id="msg" aria-live="polite"></div>
+        <div class="row">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter password" />
+          <div class="hint">Password: <strong>Gangagames@2025</strong></div>
+        </div>
+        <div class="actions">
+          <button id="submit">Sign In</button>
+        </div>
+        <div class="muted">You’ll be redirected to the dashboard after sign in.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Config with Supabase URL & Key, and Admin URL -->
+  <script src="/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const FIXED_EMAIL = window.AUTH_EMAIL || 'gangagamesblog@gangagames.local';
+    const FIXED_PASSWORD = 'Gangagames@2025';
+    const ADMIN_URL_FALLBACK = 'http://localhost:5173/';
+
+    const $ = (id) => document.getElementById(id);
+    const msg = (html, kind='error') => { const el = document.getElementById('msg'); el.className = kind === 'ok' ? 'ok' : 'error'; el.innerHTML = html; };
+
+    function getAdminUrl() {
+      return window.ADMIN_URL || ADMIN_URL_FALLBACK;
+    }
+
+    function validConfig() {
+      return Boolean(window.SUPABASE_URL && window.SUPABASE_ANON_KEY);
+    }
+
+    async function getClient() {
+      if (!validConfig()) { msg('Missing Supabase config. Please set SUPABASE_URL and SUPABASE_ANON_KEY in config.js.'); throw new Error('Missing config'); }
+      return window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+    }
+
+    async function redirectToAdmin() { window.location.href = getAdminUrl(); }
+
+    async function handleSubmit() {
+      const pass = $('password').value.trim();
+      if (!pass) { msg('Please enter the password.'); return; }
+      if (pass !== FIXED_PASSWORD) { msg('Incorrect password.'); return; }
+
+      $('submit').disabled = true;
+      msg('Signing in…', 'ok');
+
+      const supabase = await getClient();
+
+      let { error: signInError } = await supabase.auth.signInWithPassword({ email: FIXED_EMAIL, password: FIXED_PASSWORD });
+      if (signInError) {
+        const { error: signUpError } = await supabase.auth.signUp({ email: FIXED_EMAIL, password: FIXED_PASSWORD });
+        if (signUpError) {
+          $('submit').disabled = false;
+          msg('Sign-up failed. Disable email confirmations or confirm '+ FIXED_EMAIL + ' in Supabase.');
+          return;
+        }
+        ({ error: signInError } = await supabase.auth.signInWithPassword({ email: FIXED_EMAIL, password: FIXED_PASSWORD }));
+        if (signInError) {
+          $('submit').disabled = false;
+          msg('Sign-in failed after registration. Check Supabase Auth settings.');
+          return;
+        }
+      }
+
+      try { localStorage.setItem('GG_AUTH_OK', '1'); } catch {}
+      msg('Signed in successfully. Redirecting…', 'ok');
+      setTimeout(redirectToAdmin, 500);
+    }
+
+    $('submit').addEventListener('click', handleSubmit);
+  </script>
+</body>
+</html>

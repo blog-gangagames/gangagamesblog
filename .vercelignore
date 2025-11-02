@@ -1,0 +1,16 @@
+node_modules
+.vscode
+.git
+api-server
+blog-zen-code
+GangaGames
+supabase
+tools
+*.db
+*.log
+admin/
+admin/**
+admin-build/
+admin-build/**
+public/admin/
+public/admin/**

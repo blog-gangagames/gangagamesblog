@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{{TITLE}} - Ganga Games Blog</title>
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <meta name="theme-color" content="#030303">
+    
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="/css/styles3875.css?brandhoverfix2" rel="stylesheet">
+    <link href="/css/news-dropdown-fix.css?brandhoverfix2" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/comments-theme.css">
+    <link rel="stylesheet" href="/css/related-layout.css">
+    
+    <!-- SEO & Social Meta Tags -->
+    <meta property="og:title" content="{{TITLE}}">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:image" content="{{OG_IMAGE}}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{CANONICAL_URL}}">
+    <meta property="og:site_name" content="Ganga Games Blog">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{TITLE}}">
+    <meta name="twitter:description" content="{{DESCRIPTION}}">
+    <meta name="twitter:image" content="{{OG_IMAGE}}">
+    
+    <link rel="canonical" href="{{CANONICAL_URL}}">
+    
+    <style>
+        /* Mobile Menu Custom Styles */
+        .mobile-menu-toggle {
+            background: none;
+            border: none;
+            color: #ffffff;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-toggle .fa {
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-toggle[aria-expanded="true"] .fa {
+            transform: rotate(180deg);
+        }
+        
+        .mobile-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .mobile-menu-list.show {
+            display: block;
+        }
+        
+        .mobile-menu-list li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-menu-list a {
+            display: block;
+            padding: 0.75rem 1rem 0.75rem 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        
+        .mobile-menu-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        
+        /* Start Earning Button Styles - Green gradient for earning theme */
+        .btn-join-now {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+            color: #ffffff !important;
+            padding: 10px 24px !important;
+            border-radius: 25px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.35) !important;
+        }
+        
+        .btn-join-now:hover {
+            background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.45) !important;
+        }
+        
+        .btn-join-now:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3) !important;
+        }
+        
+        .btn-join-now .fa {
+            font-size: 14px !important;
+        }
+
+        /* Ensure proper alignment with navigation */
+        .navbar-nav .nav-item {
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        .navbar-nav .btn-join-now {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        
+        /* Mobile Start Earning Button - Match Desktop Exactly */
+        .btn-join-now-mobile {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+            color: #ffffff !important;
+            padding: 12px 24px !important;
+            border-radius: 25px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            margin: 10px 0 !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.35) !important;
+            display: block !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+        }
+        
+        .btn-join-now-mobile i {
+            margin-right: 8px !important;
+        }
+        
+        .btn-join-now-mobile:hover {
+            background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.45) !important;
+        }
+        
+        .btn-join-now-mobile:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3) !important;
+        }
+
+        /* Mobile Menu Close Button */
+        .mobile-menu-close {
+            position: absolute !important;
+            top: 15px !important;
+            right: 15px !important;
+            width: 35px !important;
+            height: 35px !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border-radius: 50% !important;
+            color: #ffffff !important;
+            font-size: 18px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            z-index: 10000 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.3) !important;
+            border-color: rgba(255, 255, 255, 0.8) !important;
+            transform: scale(1.1) !important;
+        }
+        
+        .mobile-menu-close:active {
+            transform: scale(0.95) !important;
+        }
+        
+        .mobile-menu-close:focus {
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        .mobile-menu-close i {
+            color: #ffffff !important;
+        }
+
+        /* Pop-up Modal for App Download and Social Media */
+        #promoModal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(36, 38, 86, 0.85); /* matches #242656 with more opacity */
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+        #promoModal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .promo-modal-content {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(60, 60, 120, 0.18);
+            max-width: 400px;
+            width: 90vw;
+            padding: 0;
+            position: relative;
+            animation: modalPop 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .promo-modal-header {
+            background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            color: #fff;
+            padding: 22px 24px 16px 24px;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .promo-modal-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        .promo-modal-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.7rem;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 12px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .promo-modal-close:hover {
+            color: #ffd700;
+        }
+        .promo-modal-body {
+            padding: 28px 18px 22px 18px;
+            background: #fff;
+            border-bottom-left-radius: 18px;
+            border-bottom-right-radius: 18px;
+        }
+        .app-download-section {
+            background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            border-radius: 12px;
+            padding: 18px 12px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .app-icon {
+            margin-bottom: 10px;
+        }
+        .app-icon i {
+            font-size: 2.2rem;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .app-download-section h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+        .app-download-section p {
+            color: rgba(255,255,255,0.9);
+            font-size: 13px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .download-button a {
+            border-radius: 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+            transition: all 0.3s ease;
+            color: #333 !important;
+            background-color: #fff !important;
+            border: none !important;
+            padding: 10px 24px;
+            font-size: 1rem;
+            display: inline-block;
+        }
+        .download-button a:hover {
+            background: #f7f7f7 !important;
+            color: #764ba2 !important;
+        }
+        .wrap__social__media {
+            margin-bottom: 2px;
+        }
+        .social__media__widget {
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(60,60,120,0.07);
+            transition: box-shadow 0.2s;
+        }
+        .social__media__widget:hover {
+            box-shadow: 0 4px 16px rgba(60,60,120,0.13);
+        }
+        .social__media__widget.whatsapp {
+            background: #25d366;
+        }
+        .social__media__widget.telegram {
+            background: #0088cc;
+        }
+        .social__media__widget-icon {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-right: 10px;
+        }
+        .social__media__widget-counter {
+            color: #fff;
+            font-weight: 600;
+            margin-right: 8px;
+            font-size: 0.95rem;
+        }
+        .social__media__widget-name {
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        @media (max-width: 600px) {
+            .promo-modal-content {
+                max-width: 96vw;
+                width: 96vw;
+                padding: 0;
+            }
+            .promo-modal-header {
+                padding: 16px 12px 12px 16px;
+                font-size: 1rem;
+            }
+            .promo-modal-title {
+                font-size: 1rem;
+            }
+            .promo-modal-body {
+                padding: 18px 8px 16px 8px;
+            }
+            .app-download-section {
+                padding: 12px 6px;
+            }
+            .download-button a {
+                font-size: 0.95rem;
+                padding: 8px 12px;
+            }
+            .social__media__widget {
+                padding: 8px 8px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- loading -->
+    <div class="loading-container">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <ul class="list-unstyled">
+                <li>
+                    <img src="/images/gangalogo.png" alt="GangaGames" class="preloader-logo" style="height:45px;max-height:10vh;width:auto;max-width:80vw;object-fit:contain;display:block;" />
+                </li>
+                <li>
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </li>
+                <li>
+                    <p>Loading</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- End loading -->
+
+    <!-- Header news -->
+    <!-- Navbar menu  -->
+    <div class="navigation-wrap navigation-shadow bg-white">
+        <nav class="navbar navbar-hover navbar-expand-lg navbar-soft">
+            <div class="container">
+                <div class="offcanvas-header">
+                    <div data-toggle="modal" data-target="#modal_aside_right" class="btn-md">
+                        <span class="navbar-toggler-icon"></span>
+                    </div>
+                </div>
+                <figure class="mb-0 mx-auto">
+                    <a href='/'>
+                        <img src="/images/gangalogo.png" alt="GangaGames" class="img-fluid logo">
+                    </a>
+                </figure>
+                <div class="collapse navbar-collapse justify-content-between" id="main_nav99">
+                    <ul class="navbar-nav ml-auto ">
+                        <li class="nav-item"><a class="nav-link" href="/"> Home </a></li>
+                        <li class="nav-item dropdown has-megamenu categories-megamenu">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Categories </a>
+                            <div class="dropdown-menu animate fade-down megamenu mx-auto" role="menu">
+                                <div class="container wrap__mobile-megamenu">
+                                    <div class="row">
+                                        <!-- Casino Games Column -->
+                                        <div class="col-lg-3 col-md-6 col-megamenu">
+                                            <h6 class="title">Casino Games</h6>
+                                            <ul class="list-unstyled">
+                                                <li><a href="/category/online-slots/">Online Slots</a></li>
+                                                <li><a href="/category/poker/">Poker</a></li>
+                                                <li><a href="/category/roulette/">Roulette</a></li>
+                                                <li><a href="/category/blackjack/">Blackjack</a></li>
+                                                <li><a href="/category/game-reviews/">Game Reviews</a></li>
+                                                <li><a href="/category/strategies-tips/">Strategies & Tips</a></li>
+                                            </ul>
+                                        </div>
+                    
+                                        <!-- Sports Betting Column -->
+                                        <div class="col-lg-3 col-md-6 col-megamenu">
+                                            <h6 class="title">Sports Betting</h6>
+                                            <ul class="list-unstyled">
+                                                <li><a href="/category/cricket-betting/">Cricket Betting</a></li>
+                                                <li><a href="/category/football-betting/">Football Betting</a></li>
+                                                <li><a href="/category/kabaddi-betting/">Kabaddi Betting</a></li>
+                                                <li><a href="/category/tennis-betting/">Tennis Betting</a></li>
+                                                <li><a href="/category/live-betting-strategies/">Live Betting Strategies</a></li>
+                                                <li><a href="/category/match-previews-predictions/">Match Previews & Predictions</a></li>
+                                            </ul>
+                                        </div>
+                    
+                                        <!-- Bonuses & Promotions Column -->
+                                        <div class="col-lg-3 col-md-6 col-megamenu">
+                                            <h6 class="title">Bonuses & Promotions</h6>
+                                            <ul class="list-unstyled">
+                                                <li><a href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                                <li><a href="/category/sportsbook-promotions/">Sportsbook Promotions</a></li>
+                                                <li><a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a></li>
+                                                <li><a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a></li>
+                                            </ul>
+                                        </div>
+                    
+                                        <!-- Other Categories Column -->
+                                        <div class="col-lg-3 col-md-6 col-megamenu">
+                                            <h6 class="title">More Categories</h6>
+                                            <ul class="list-unstyled">
+                                                <li><a href="/category/how-to-guides/">How-To Guides</a></li>
+                                                <li><a href="/category/responsible-gambling/">Responsible Gambling</a></li>
+                                                <li><a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                                <li><a href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                                <li><a href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                                <li><a href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                                <li><a href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item"><a class='nav-link' href='/contact.html'> Contact </a></li>
+                    </ul>
+
+                    <ul class="navbar-nav ">
+                        <li class="nav-item search hidden-xs hidden-sm "> <a class="nav-link" href="#">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 10px;">
+                            <a class="btn-join-now" href="https://gangagame.vip/#/register?invitationCode=56882495177" target="_blank" rel="noopener">
+                                <i class="fa fa-rocket mr-2"></i>
+                                Start Earning
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="top-search navigation-shadow">
+                        <div class="container">
+                            <div class="input-group ">
+                                <form action="#">
+                                    <div class="row no-gutters mt-3">
+                                        <div class="col">
+                                            <input class="form-control border-secondary border-right-0 rounded-0" type="search" value="" placeholder="Search " id="example-search-input4">
+                                        </div>
+                                        <div class="col-auto">
+                                            <a class='btn btn-outline-secondary border-left-0 rounded-0 rounded-right' href='/search-result.html'>
+                                                <i class="fa fa-search"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- navbar-collapse.// -->
+            </div>
+        </nav>
+    </div>
+    <!-- End Navbar menu  -->
+
+    <!-- Navbar sidebar menu  -->
+    <div id="modal_aside_right" class="modal fixed-left fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-aside" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="widget__form-search-bar  ">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <input class="form-control border-secondary border-right-0 rounded-0" value="" placeholder="Search">
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="close mobile-menu-close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <nav class="list-group list-group-flush">
+                        <a class='list-group-item text-light' href='/'>Home</a>
+
+                        <!-- Categories Section -->
+                        <div class="mobile-menu-section">
+                            <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCategories')" aria-expanded="false">
+                                Categories <span class="fa fa-angle-down"></span>
+                            </button>
+                            <ul class="mobile-menu-list" id="mobileCategories">
+                                <!-- Casino Games -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCasinoGames')" aria-expanded="false" style="padding-left: 2rem;">
+                                        Casino Games <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileCasinoGames">
+                                        <li><a href="/category/online-slots/">Online Slots</a></li>
+                                        <li><a href="/category/poker/">Poker</a></li>
+                                        <li><a href="/category/roulette/">Roulette</a></li>
+                                        <li><a href="/category/blackjack/">Blackjack</a></li>
+                                        <li><a href="/category/game-reviews/">Game Reviews</a></li>
+                                        <li><a href="/category/strategies-tips/">Strategies & Tips</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Sports Betting -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileSportsBetting')" aria-expanded="false" style="padding-left: 2rem;">
+                                        Sports Betting <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileSportsBetting">
+                                        <li><a href="/category/cricket-betting/">Cricket Betting</a></li>
+                                        <li><a href="/category/football-betting/">Football Betting</a></li>
+                                        <li><a href="/category/kabaddi-betting/">Kabaddi Betting</a></li>
+                                        <li><a href="/category/tennis-betting/">Tennis Betting</a></li>
+                                        <li><a href="/category/live-betting-strategies/">Live Betting Strategies</a></li>
+                                        <li><a href="/category/match-previews-predictions/">Match Previews & Predictions</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- Bonuses & Promotions -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileBonuses')" aria-expanded="false" style="padding-left: 2rem;">
+                                        Bonuses & Promotions <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileBonuses">
+                                        <li><a href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                        <li><a href="/category/sportsbook-promotions/">Sportsbook Promotions</a></li>
+                                        <li><a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a></li>
+                                        <li><a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a></li>
+                                    </ul>
+                                </li>
+
+                                <!-- More Categories -->
+                                <li>
+                                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileMoreCategories')" aria-expanded="false" style="padding-left: 2rem;">
+                                        More Categories <span class="fa fa-angle-down"></span>
+                                    </button>
+                                    <ul class="mobile-menu-list" id="mobileMoreCategories">
+                                        <li><a href="/category/how-to-guides/">How-To Guides</a></li>
+                                        <li><a href="/category/responsible-gambling/">Responsible Gambling</a></li>
+                                        <li><a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                        <li><a href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                        <li><a href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                        <li><a href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                        <li><a href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a class='list-group-item text-light' href='/contact.html'>Contact</a>
+                        
+                        <!-- Start Earning Button in Mobile Menu -->
+                        <a class="btn-join-now-mobile" href="https://gangagame.vip/#/register?invitationCode=56882495177" target="_blank" rel="noopener">
+                            <i class="fa fa-rocket mr-2"></i>
+                            Start Earning
+                        </a>
+
+                    </nav>
+                </div>
+                <div class="modal-footer">
+                    <p style="color: #e6e9ef;">© 2025 GangaGames. All rights reserved.</p>
+                </div>
+            </div>
+        </div> <!-- modal-bialog .// -->
+    </div> <!-- modal.// -->
+    <!-- End Navbar sidebar menu  -->
+
+    <section class="pb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumbs bg-light mb-4">
+                        <li class="breadcrumbs__item">
+                            <a class='breadcrumbs__url' href='/'>
+                                <i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a class='breadcrumbs__url' href='/category/{{CATEGORY_SLUG}}/'>{{CATEGORY_NAME}}</a>
+                        </li>
+                        <li class="breadcrumbs__item breadcrumbs__item--current">
+                            {{TITLE}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8">
+
+                    <!-- Article Detail -->
+                    <div class="wrap__article-detail">
+                        <div class="wrap__article-detail-title">
+                            <h1>{{TITLE}}</h1>
+                            <h3>{{SUBTITLE}}</h3>
+                        </div>
+                        <hr>
+                        <div class="wrap__article-detail-info">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <span class="text-dark text-capitalize ml-1">{{PUBLISH_DATE}}</span>
+                                </li>
+                                <li class="list-inline-item">
+                                    <span class="text-dark text-capitalize">
+                                        in
+                                    </span>
+                                    <a href="/category/{{CATEGORY_SLUG}}/">{{CATEGORY_NAME}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="wrap__article-detail-image mt-4">
+                            <figure>
+                                <img src="{{FEATURED_IMAGE}}" alt="{{TITLE}}" class="img-fluid">
+                            </figure>
+                        </div>
+                        <div class="wrap__article-detail-content">
+                            {{CONTENT}}
+                        </div>
+                    </div>
+
+                    <!-- News Tags -->
+                    <div class="blog-tags">
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fa fa-tags"></i></li>
+                            {{TAGS}}
+                        </ul>
+                    </div>
+
+                    <!-- Comment  -->
+                    <div class="comments-area">
+                        <h3 class="comments-title">Comments:</h3>
+
+                        <ol class="comment-list"></ol>
+
+                        <div class="comment-respond">
+                            <h3 class="comment-reply-title">Leave a Reply</h3>
+
+                            <form class="comment-form">
+                                <p class="comment-form-comment">
+                                    <label for="comment">Comment</label>
+                                    <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525" required="required"></textarea>
+                                </p>
+                                <p class="form-submit">
+                                    <input type="submit" name="submit" id="submit" class="submit" value="Post Comment">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Comment -->
+
+                    <div class="related-article">
+                        <h4>
+                            you may also like
+                        </h4>
+
+                        <div class="related__list">
+                            {{RELATED_POSTS}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="sidebar-sticky">
+                        <aside class="wrapper__list__article ">
+                            <div class="mb-4">
+                                <div class="widget__form-search-bar  ">
+                                    <div class="row no-gutters">
+                                        <div class="col">
+                                            <input class="form-control border-secondary border-right-0 rounded-0"
+                                                value="" placeholder="Search">
+                                        </div>
+                                        <div class="col-auto">
+                                            <button
+                                                class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper__list__article-small">
+                                {{SIDEBAR_POSTS}}
+                            </div>
+                        </aside>
+
+                        <!-- social media -->
+                        <aside class="wrapper__list__article">
+                            <h4 class="border_section">stay connected</h4>
+                            <!-- widget Social media -->
+                            <div class="wrap__social__media">
+                                <a href="https://www.whatsapp.com/channel/0029VbBEUcq5fM5atJQXlg1i" target="_blank" rel="noopener">
+                                    <div class="social__media__widget whatsapp">
+                                        <span class="social__media__widget-icon">
+                                            <i class="fa fa-whatsapp"></i>
+                                        </span>
+                                        <span class="social__media__widget-counter">
+                                            4.6k followers
+                                        </span>
+                                        <span class="social__media__widget-name">
+                                            WhatsApp
+                                        </span>
+                                    </div>
+                                </a>
+                                <a href="https://t.me/+G91l6T-5ORphNDE1" target="_blank" rel="noopener">
+                                    <div class="social__media__widget telegram">
+                                        <span class="social__media__widget-icon">
+                                            <i class="fa fa-telegram"></i>
+                                        </span>
+                                        <span class="social__media__widget-counter">
+                                            2.7k followers
+                                        </span>
+                                        <span class="social__media__widget-name">
+                                            Telegram
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </aside>
+                        <!-- End social media -->
+
+                        <aside class="wrapper__list__article">
+                            <h4 class="border_section">Popular Categories</h4>
+                            <div class="blog-tags p-0">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><a class="cat-color-green" href="/category/sports-betting/">Sports Betting</a></li>
+                                    <li class="list-inline-item"><a class="cat-color-orange" href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                    <li class="list-inline-item"><a class="cat-color-gold" href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                    <li class="list-inline-item"><a class="cat-color-gold" href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                    <li class="list-inline-item"><a class="cat-color-gold" href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                    <li class="list-inline-item"><a class="cat-color-orange" href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                    <li class="list-inline-item"><a class="cat-color-orange" href="/category/how-to-guides/">How-To Guides</a></li>
+                                    <li class="list-inline-item"><a class="cat-color-green" href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                </ul>
+                            </div>
+                        </aside>
+
+                        <aside class="wrapper__list__article">
+                            <h4 class="border_section">Advertise</h4>
+                            <a href="https://www.gangagames.com">
+                                <figure>
+                                    <img src="/images/andy.jpg" alt="Gangagames" class="img-fluid">
+                                </figure>
+                            </a>
+                        </aside>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wrapper__section p-0">
+        <div class="wrapper__section__components">
+            <footer>
+                <div class="wrapper__footer bg__footer-dark pb-0">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer ">
+                                        <h4 class="footer-title">
+                                            Casino Games
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/online-slots/">Online Slots</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/poker/">Poker</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/roulette/">Roulette</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/blackjack/">Blackjack</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/game-reviews/">Game Reviews</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/strategies-tips/">Strategies & Tips</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer">
+                                        <h4 class="footer-title">
+                                            Sports Betting
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/cricket-betting/">Cricket Betting</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/football-betting/">Football Betting</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/kabaddi-betting/">Kabaddi Betting</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/tennis-betting/">Tennis Betting</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/live-betting-strategies/">Live Betting Strategies</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/match-previews-predictions/">Match Previews & Predictions</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer">
+                                        <h4 class="footer-title">
+                                            Bonuses & Promotions
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/casino-bonuses/">Casino Bonuses</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/sportsbook-promotions/">Sportsbook Promotions</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer">
+                                        <h4 class="footer-title">
+                                            How-To Guides
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+                                    </div>
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/how-to-guides/">How-To Guides</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/responsible-gambling/">Responsible Gambling</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/news-industry-updates/">News & Industry Updates</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/culture-lifestyle/">Culture & Lifestyle</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <figure class="image-logo">
+                                        <img src="/images/gangalogo.png" alt="GangaGames" class="logo-footer">
+                                    </figure>
+                                </div>
+                                <div class="col-md-8 my-auto ">
+                                    <div class="social__media">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white facebook">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white twitter">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white whatsapp">
+                                                    <i class="fa fa-whatsapp"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white telegram">
+                                                    <i class="fa fa-telegram"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white linkedin">
+                                                    <i class="fa fa-linkedin"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer bottom -->
+                <div class="wrapper__footer-bottom bg__footer-dark">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="border-top-1 bg__footer-bottom-section">
+                                    <ul class="list-inline link-column">
+                                        <li class="list-inline-item">
+                                            <a href="/contact.html">
+                                                contact
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#"> terms of use</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                adchoice
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href='/about-us.html'>
+                                                about us
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="/sitemap.xml">
+                                                sitemap
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Footer bottom -->
+    <div class="wrapper__footer-bottom bg__footer-dark" style="background-color: #000 !important; padding: 24px 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <span style="color: #fff; font-size: 14px;">© 2025 GangaGames. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modals -->
+    <div id="signInModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="signInForm">
+                        <div class="form-group">
+                            <label for="signInEmail">Email</label>
+                            <input type="email" class="form-control" id="signInEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="signInPassword">Password</label>
+                            <input type="password" class="form-control" id="signInPassword" placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="signUpModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signUpModalLabel">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="signUpForm">
+                        <div class="form-group">
+                            <label for="signUpName">Full Name</label>
+                            <input type="text" class="form-control" id="signUpName" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpEmail">Email</label>
+                            <input type="email" class="form-control" id="signUpEmail" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpPassword">Password</label>
+                            <input type="password" class="form-control" id="signUpPassword" placeholder="Create a password">
+                        </div>
+                        <div class="form-group">
+                            <label for="signUpConfirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="signUpConfirmPassword" placeholder="Confirm your password">
+                        </div>
+                        <div class="form-group">
+                            <label for="userType">Account Type</label>
+                            <select class="form-control" id="userType">
+                                <option value="author">Author</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <script src="/js/index.bundle3875.js"></script>
+    
+    <!-- Supabase JS CDN and wiring for article detail -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/js/supabase.config.js"></script>
+    <script src="/js/supabase.healthcheck.js"></script>
+    <script src="/js/supabase.status-ui.js"></script>
+    <script src="/js/auth.supabase.js"></script>
+    <script src="/js/news-dropdown.supabase.js"></script>
+    <script src="/js/tag-routing.js"></script>
+    <script src="/js/article-detail.supabase.js"></script>
+    <script src="/js/comments.supabase.js"></script>
+    
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_container');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="/js/related-posts.supabase.js"></script>
+    <script src="/js/search-box.js"></script>
+    <script src="/js/article-sidebar.supabase.js"></script>
+    
+    <script>
+        // Ensure the article sidebar sticks under the header and parks at the row bottom
+        (function(){
+            var stickyInstance = null;
+            function setupSticky(){
+                try {
+                    if (!window.StickySidebar) return;
+                    var stickySelector = '.sidebar-sticky';
+                    var containerSelector = '.row';
+                    var el = document.querySelector(stickySelector);
+                    if (!el) return;
+                    var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                    // Disable sticky on small screens to prevent overlay/glitch
+                    if (w < 992) {
+                        if (stickyInstance && typeof stickyInstance.destroy === 'function') {
+                            try { stickyInstance.destroy(); } catch(_){}
+                            stickyInstance = null;
+                        }
+                        try {
+                            el.classList.remove('is-affixed');
+                            el.style.position = '';
+                            el.style.top = '';
+                            el.style.bottom = '';
+                            el.style.transform = '';
+                            var inner = el.querySelector('.inner-wrapper-sticky');
+                            if (inner) inner.removeAttribute('style');
+                        } catch(_){}
+                        return;
+                    }
+                    if (stickyInstance && typeof stickyInstance.destroy === 'function') {
+                        try { stickyInstance.destroy(); } catch(_){}
+                        stickyInstance = null;
+                    }
+                    stickyInstance = new StickySidebar(stickySelector, {
+                        topSpacing: 60,
+                        bottomSpacing: 60,
+                        containerSelector: containerSelector,
+                        innerWrapperSelector: '.inner-wrapper-sticky',
+                        stickyClass: 'is-affixed',
+                        resizeSensor: true,
+                        minWidth: 992
+                    });
+                } catch (e) { console.warn('[sticky] article init failed:', e); }
+            }
+            function onReady(fn){ if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', fn); } else { fn(); } }
+            onReady(setupSticky);
+            try { document.addEventListener('article:loaded', function(){ setupSticky(); }); } catch(_){}
+            window.addEventListener('resize', function(){ setupSticky(); });
+        })();
+    </script>
+    
+    <script>
+        // Register service worker to support pretty post slugs like "/my-post-title"
+        (function(){
+            try {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js').catch(function(err){ console.warn('[SW] register failed:', err); });
+                }
+            } catch (e) { /* ignore */ }
+        })();
+    </script>
+    
+    <script>
+        let currentUserType = 'author';
+        function showSignInForm(userType = null) {
+            if (userType) currentUserType = userType;
+            if (window.$) {
+                $('#signUpModal').modal('hide');
+                $('#signInModal').modal('show');
+                $('#signInModalLabel').text(currentUserType.charAt(0).toUpperCase() + currentUserType.slice(1) + ' Sign In');
+            }
+        }
+        function showSignUpForm(userType = null) {
+            if (userType) currentUserType = userType;
+            if (window.$) {
+                $('#signInModal').modal('hide');
+                $('#signUpModal').modal('show');
+                $('#signUpModalLabel').text(currentUserType.charAt(0).toUpperCase() + currentUserType.slice(1) + ' Sign Up');
+                $('#userType').val(currentUserType);
+            }
+        }
+        // Submit handlers are wired by js/auth.supabase.js
+    </script>
+    
+    <script src="/js/header-global.js?v=tz1"></script>
+
+    <!-- Mobile Menu Toggle Function -->
+    <script>
+        function toggleMobileMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            const button = event.target.closest('.mobile-menu-toggle');
+            
+            if (menu && button) {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                
+                // Toggle the menu visibility
+                if (isExpanded) {
+                    menu.classList.remove('show');
+                    button.setAttribute('aria-expanded', 'false');
+                } else {
+                    menu.classList.add('show');
+                    button.setAttribute('aria-expanded', 'true');
+                }
+            }
+        }
+    </script>
+
+    <!-- Pop-up Modal for App Download and Social Media -->
+    <div id="promoModal">
+        <div class="promo-modal-content">
+            <div class="promo-modal-header">
+                <span class="promo-modal-title">Welcome to GangaGames!</span>
+                <button class="promo-modal-close" onclick="closePromoModal()" aria-label="Close">&times;</button>
+            </div>
+            <div class="promo-modal-body">
+                <!-- App Download Block -->
+                <div class="app-download-section mb-4">
+                    <div class="app-download-content text-center text-white">
+                        <div class="app-icon mb-3">
+                            <i class="fa fa-gamepad"></i>
+                        </div>
+                        <h5>Ganga Game</h5>
+                        <p>Ultimate Mobile Gaming Adventure<br>4.7 ⭐ (250K+ reviews)</p>
+                        <div class="download-button">
+                            <a href="https://gangagameapp.top/" target="_blank" rel="noopener">
+                                <i class="fa fa-download mr-2"></i> Download Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Social Media Block -->
+                <div class="wrap__social__media mb-2">
+                    <a href="https://www.whatsapp.com/channel/0029VbBEUcq5fM5atJQXlg1i" target="_blank" rel="noopener">
+                        <div class="social__media__widget whatsapp">
+                            <span class="social__media__widget-icon"><i class="fa fa-whatsapp"></i></span>
+                            <span class="social__media__widget-counter">4.6k followers</span>
+                            <span class="social__media__widget-name">WhatsApp</span>
+                        </div>
+                    </a>
+                    <a href="https://t.me/+G91l6T-5ORphNDE1" target="_blank" rel="noopener">
+                        <div class="social__media__widget telegram">
+                            <span class="social__media__widget-icon"><i class="fa fa-telegram"></i></span>
+                            <span class="social__media__widget-counter">2.7k followers</span>
+                            <span class="social__media__widget-name">Telegram</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function showPromoModal() {
+        var modal = document.getElementById('promoModal');
+        modal.classList.add('show');
+        document.body.classList.add('modal-open');
+    }
+    function closePromoModal() {
+        var modal = document.getElementById('promoModal');
+        modal.classList.remove('show');
+        document.body.classList.remove('modal-open');
+    }
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(showPromoModal, 5000);
+    });
+    </script>
+</body>
+</html>

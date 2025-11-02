@@ -1,0 +1,52 @@
+{
+  "functions": {
+    "api/blog/[slug].js": {
+      "maxDuration": 10
+    },
+    "api/sitemap.js": {
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/category/:slug",
+      "destination": "/category-style-v2.html"
+    },
+    {
+      "source": "/:category/:slug",
+      "destination": "/api/blog/:slug"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/blog/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+/* Horizontal layout for "You may also like" related posts */
+.related__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.related__list .item {
+  flex: 1 1 calc(25% - 16px);
+  min-width: 240px;
+}
+
+/* Adjust internal card spacing for compact horizontal tiles */
+.related__list .article__entry {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.related__list .article__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .related__list .item { flex: 1 1 calc(50% - 16px); }
+}
+
+@media (max-width: 576px) {
+  .related__list { flex-wrap: nowrap; overflow-x: auto; }
+  .related__list .item { flex: 0 0 80%; min-width: 280px; }
+}

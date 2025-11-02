@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="">
+
+
+<!-- Mirrored from retnews.netlify.app/category-style-v2 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Sep 2025 08:50:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <title>Categories - Ganga Games Blog</title>
+<meta name="description" content="Explore all categories on Ganga Games Blog: casino games, sports betting, guides, tips, and more for Indian players.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="/site.webmanifest">
+    <!-- favicon.ico in the root directory -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <meta name="theme-color" content="#030303">
+    <!-- google fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,300;1,500&amp;family=Poppins:ital,wght@0,300;0,500;0,700;1,300;1,400&amp;display=swap"
+        rel="stylesheet">
+        <link href="css/styles3875.css?brandhoverfix2" rel="stylesheet">
+        <link href="css/news-dropdown-fix.css?brandhoverfix2" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Consistent header styles -->
+    <style>
+        /* Mobile Menu Custom Styles */
+        .mobile-menu-toggle {
+            background: none;
+            border: none;
+            color: #ffffff;
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-toggle .fa {
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-toggle[aria-expanded="true"] .fa {
+            transform: rotate(180deg);
+        }
+        
+        .mobile-menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .mobile-menu-list.show {
+            display: block;
+        }
+        
+        .mobile-menu-list li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .mobile-menu-list a {
+            display: block;
+            padding: 0.75rem 1rem 0.75rem 2rem;
+            color: #ffffff;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        
+        .mobile-menu-list a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .dropdown-toggle { color: #fff !important; text-decoration: none !important; padding: 8px 12px !important; border-radius: 4px !important; transition: all 0.3s ease !important; display: flex !important; align-items: center !important; }
+        .dropdown-toggle:hover { background-color: rgba(255, 255, 255, 0.1) !important; color: #fff !important; }
+        .dropdown-menu { background-color: #1a1c4a !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 8px !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important; min-width: 200px !important; padding: 0 !important; margin-top: 10px !important; }
+        .dropdown-item { color: #e6e9ef !important; padding: 12px 20px !important; display: flex !important; align-items: center !important; transition: all 0.3s ease !important; border: none !important; background: none !important; width: 100% !important; }
+        .dropdown-item:hover, .dropdown-item:focus { background-color: rgba(74, 144, 226, 0.16) !important; color: #eaf0ff !important; transform: none !important; }
+        .dropdown-item:active { background-color: rgba(74, 144, 226, 0.26) !important; color: #ffffff !important; }
+        .dropdown-item div { color: #fff !important; }
+        .topbar-right { display: flex !important; justify-content: flex-end !important; align-items: center !important; gap: 20px !important; }
+        .topbar { display: none !important; }
+        .navbar { min-height: 88px !important; }
+        .navbar .nav-link { padding-top: 24px !important; padding-bottom: 24px !important; color: #fff !important; font-weight: 600 !important; text-decoration: none !important; transition: all 0.3s ease !important; }
+        .navbar-nav { display: flex !important; align-items: center !important; gap: 0 !important; }
+        .nav-link:hover { color: #4a90e2 !important; background-color: rgba(255, 255, 255, 0.1) !important; }
+
+        /* Align topbar links like home page */
+        .topbar-link { display: flex !important; align-items: center !important; gap: 20px !important; margin: 0 !important; padding: 0 !important; }
+        .topbar-link li { list-style: none !important; margin: 0 !important; padding: 0 !important; }
+        .topbar-link a { color: #fff !important; text-decoration: none !important; transition: all 0.3s ease !important; padding: 8px 12px !important; border-radius: 4px !important; display: inline-block !important; }
+
+        /* Start Earning Button Styles - Green gradient for earning theme */
+        .btn-join-now {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+            color: #ffffff !important;
+            padding: 10px 24px !important;
+            border-radius: 25px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.35) !important;
+        }
+        .btn-join-now:hover {
+            background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.45) !important;
+        }
+        .btn-join-now:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3) !important;
+        }
+        .btn-join-now .fa {
+            font-size: 14px !important;
+        }
+
+        /* Mobile Start Earning Button - Match Desktop Exactly */
+        .btn-join-now-mobile {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+            color: #ffffff !important;
+            padding: 12px 24px !important;
+            border-radius: 25px !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            margin: 10px 0 !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.35) !important;
+            display: block !important;
+            text-align: center !important;
+            white-space: nowrap !important;
+        }
+        .btn-join-now-mobile i {
+            margin-right: 8px !important;
+        }
+        .btn-join-now-mobile:hover {
+            background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.45) !important;
+        }
+        .btn-join-now-mobile:active {
+            transform: translateY(0) !important;
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3) !important;
+        }
+
+        /* Mobile Menu Close Button */
+        .mobile-menu-close {
+            position: absolute !important;
+            top: 15px !important;
+            right: 15px !important;
+            width: 35px !important;
+            height: 35px !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border-radius: 50% !important;
+            color: #ffffff !important;
+            font-size: 18px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            z-index: 10000 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .mobile-menu-close:hover {
+            background: rgba(255, 255, 255, 0.3) !important;
+            border-color: rgba(255, 255, 255, 0.8) !important;
+            transform: scale(1.1) !important;
+        }
+        
+        .mobile-menu-close:active {
+            transform: scale(0.95) !important;
+        }
+        
+        .mobile-menu-close:focus {
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        .mobile-menu-close i {
+            color: #ffffff !important;
+        }
+    </style>
+    
+    <!-- Arrow and dropdown overrides to match homepage -->
+    <style>
+        /* Use text glyphs for dropdown arrows to avoid FontAwesome dependency */
+        .dropdown-toggle[data-toggle="dropdown"]::after {
+            content: "▼" !important;
+            border: none !important;
+            vertical-align: middle !important;
+            margin-left: 6px !important;
+            font-size: 10px !important;
+            color: #4a90e2 !important;
+            transition: transform 0.3s ease !important;
+        }
+
+        .show > .dropdown-toggle[data-toggle="dropdown"]::after,
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg) !important;
+        }
+
+        /* Megamenu link hover arrow */
+        .megamenu .list-unstyled li a:before {
+            content: "▶" !important;
+            position: absolute !important;
+            left: 8px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: #4a90e2 !important;
+            font-size: 10px !important;
+            opacity: 0 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .megamenu .list-unstyled li a:hover:before {
+            opacity: 1 !important;
+            left: 12px !important;
+        }
+
+        /* Ensure Account dropdown appears over header elements */
+        .topbar .dropdown-menu {
+            position: absolute !important;
+            z-index: 1050 !important;
+        }
+    </style>
+    </head>
+
+<body>
+    <!-- loading -->
+    <div class="loading-container">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <ul class="list-unstyled">
+                <li>
+                    <img src="images/gangalogo.png" alt="GangaGames" class="preloader-logo" style="height:45px;max-height:10vh;width:auto;max-width:80vw;object-fit:contain;display:block;" />
+
+                </li>
+                <li>
+
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+
+                    </div>
+
+                </li>
+                <li>
+                    <p>Loading</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+
+
+<!-- Header news -->
+	<header class="bg-light">
+		<!-- Navbar  Top-->
+        <div class="topbar">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <div class="topbar-left">
+                            <div class="topbar-text">
+                                Monday, March 22, 2020
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <div class="list-unstyled topbar-right">
+                            <ul class="topbar-link">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="" style="color: #fff !important; text-decoration: none; padding: 8px 12px; border-radius: 0; transition: all 0.3s ease; background: transparent;">
+										<i class="fa fa-user" style="margin-right: 5px;"></i>Account
+									</a>
+						<ul class="dropdown-menu" style="background-color: #1a1c4a !important; border: 1px solid rgba(255, 255, 255, 0.15) !important; border-radius: 8px !important; box-shadow: none !important; min-width: 200px !important; padding: 8px 0 !important;">
+								
+										<li style="border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;">
+											<a href="#" class="dropdown-item" onclick="showSignInForm('author')" style="color: #fff !important; padding: 12px 20px !important; display: flex !important; align-items: center !important; transition: all 0.3s ease !important;">
+												<i class="fa fa-pencil" style="margin-right: 10px; color: #28a745; width: 16px;"></i>
+												<div>
+													<div style="font-weight: 600; font-size: 14px;">Author Login</div>
+									<div style="font-size: 12px; color: #ffffff; margin-top: 2px;">Sign in to write articles</div>
+												</div>
+											</a>
+										</li>
+										<li>
+											<a href="#" class="dropdown-item" onclick="showSignUpForm('author')" style="color: #fff !important; padding: 12px 20px !important; display: flex !important; align-items: center !important; transition: all 0.3s ease !important;">
+												<i class="fa fa-user-plus" style="margin-right: 10px; color: #ffc107; width: 16px;"></i>
+												<div>
+													<div style="font-weight: 600; font-size: 14px;">Join as Author</div>
+									<div style="font-size: 12px; color: #ffffff; margin-top: 2px;">Start writing for us</div>
+												</div>
+											</a>
+										</li>
+                                    </ul>
+                                </li>
+                                <li id="topbar-translate"><div id="google_translate_container" style="display:inline-block; line-height:1"></div></li>
+                            </ul>
+							<ul class="topbar-sosmed">
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-instagram"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Navbar Top  -->
+		<!-- Navbar menu  -->
+		<div class="navigation-wrap navigation-shadow bg-white">
+			<nav class="navbar navbar-hover navbar-expand-lg navbar-soft">
+				<div class="container">
+					<div class="offcanvas-header">
+						<div data-toggle="modal" data-target="#modal_aside_right" class="btn-md">
+							<span class="navbar-toggler-icon"></span>
+						</div>
+					</div>
+					<figure class="mb-0 mx-auto">
+						<a href='index.html'>
+							<img src="images/gangalogo.png" alt="" class="img-fluid logo">
+						</a>
+					</figure>
+					<div class="collapse navbar-collapse justify-content-between" id="main_nav99">
+						<ul class="navbar-nav ml-auto ">
+							<li class="nav-item"><a class="nav-link" href="index.html"> Home </a></li>
+                            <li class="nav-item dropdown has-megamenu categories-megamenu">
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Categories </a>
+                                <div class="dropdown-menu animate fade-down megamenu mx-auto" role="menu">
+									<div class="container wrap__mobile-megamenu">
+										<div class="row">
+											<!-- Casino Games Column -->
+											<div class="col-lg-3 col-md-6 col-megamenu">
+												<h6 class="title">Casino Games</h6>
+                                            <ul class="list-unstyled">
+                                <li><a href="/category/online-slots/">Online Slots</a></li>
+                                                <li><a href="/category/poker/">Poker</a></li>
+                                <li><a href="/category/roulette/">Roulette</a></li>
+                                <li><a href="/category/blackjack/">Blackjack</a></li>
+                                <li><a href="/category/game-reviews/">Game Reviews</a></li>
+                                <li><a href="/category/strategies-tips/">Strategies & Tips</a></li>
+                                            </ul>
+											</div>
+											
+											<!-- Sports Betting Column -->
+											<div class="col-lg-3 col-md-6 col-megamenu">
+												<h6 class="title">Sports Betting</h6>
+                                            <ul class="list-unstyled">
+                                <li><a href="/category/cricket-betting/">Cricket Betting</a></li>
+                                <li><a href="/category/football-betting/">Football Betting</a></li>
+                                <li><a href="/category/kabaddi-betting/">Kabaddi Betting</a></li>
+                                <li><a href="/category/tennis-betting/">Tennis Betting</a></li>
+                                <li><a href="/category/live-betting-strategies/">Live Betting Strategies</a></li>
+                                <li><a href="/category/match-previews-predictions/">Match Previews & Predictions</a></li>
+                                            </ul>
+											</div>
+											
+											<!-- Bonuses & Promotions Column -->
+											<div class="col-lg-3 col-md-6 col-megamenu">
+												<h6 class="title">Bonuses & Promotions</h6>
+                                            <ul class="list-unstyled">
+                                <li><a href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                <li><a href="/category/sportsbook-promotions/">Sportsbook Promotions</a></li>
+                                <li><a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a></li>
+                                <li><a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a></li>
+                                            </ul>
+											</div>
+											
+											<!-- Other Categories Column -->
+											<div class="col-lg-3 col-md-6 col-megamenu">
+												<h6 class="title">More Categories</h6>
+                                            <ul class="list-unstyled">
+                                <li><a href="/category/how-to-guides/">How-To Guides</a></li>
+                                <li><a href="/category/responsible-gambling/">Responsible Gambling</a></li>
+                                <li><a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                <li><a href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                <li><a href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                <li><a href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                <li><a href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                            </ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+                            <!-- News dropdown removed on Category page -->
+							<li class="nav-item"><a class='nav-link' href='contact.html'> Contact </a></li>
+						</ul>
+
+
+						<ul class="navbar-nav ">
+							<li class="nav-item search hidden-xs hidden-sm "> <a class="nav-link" href="#">
+								<i class="fa fa-search"></i>
+							</a>
+							</li>
+							<li class="nav-item" style="margin-left: 10px;">
+								<a class="btn-join-now" href="https://gangagame.vip/#/register?invitationCode=56882495177" target="_blank" rel="noopener">
+									<i class="fa fa-rocket mr-2"></i>
+									Start Earning
+								</a>
+							</li>
+						</ul>
+						<div class="top-search navigation-shadow">
+							<div class="container">
+								<div class="input-group ">
+									<form action="#">
+
+										<div class="row no-gutters mt-3">
+											<div class="col">
+												<input class="form-control border-secondary border-right-0 rounded-0"
+													type="search" value="" placeholder="Search "
+													id="example-search-input4">
+											</div>
+											<div class="col-auto">
+												<a class='btn btn-outline-secondary border-left-0 rounded-0 rounded-right' href='search-result.html'>
+													<i class="fa fa-search"></i>
+												</a>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div> <!-- navbar-collapse.// -->
+				</div>
+			</nav>
+		</div>
+		<!-- End Navbar menu  -->
+
+		<!-- Navbar sidebar menu  -->
+		<div id="modal_aside_right" class="modal fixed-left fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-dialog-aside" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="widget__form-search-bar  ">
+							<div class="row no-gutters">
+								<div class="col">
+									<input class="form-control border-secondary border-right-0 rounded-0" value=""
+										placeholder="Search">
+								</div>
+								<div class="col-auto">
+									<button class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right">
+										<i class="fa fa-search"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+						<button type="button" class="close mobile-menu-close" data-dismiss="modal" aria-label="Close">
+							<i class="fa fa-times"></i>
+						</button>
+					</div>
+					<div class="modal-body">
+						<nav class="list-group list-group-flush">
+                            <a class='list-group-item text-light' href='index.html'>Home</a>
+
+                            <!-- Categories Section -->
+                            <div class="mobile-menu-section">
+                                <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCategories')" aria-expanded="false">
+                                    Categories <span class="fa fa-angle-down"></span>
+                                </button>
+                                <ul class="mobile-menu-list" id="mobileCategories">
+                                    <!-- Casino Games -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileCasinoGames')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Casino Games <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileCasinoGames">
+                                            <li><a href="/category/online-slots/">Online Slots</a></li>
+                                            <li><a href="/category/poker/">Poker</a></li>
+                                            <li><a href="/category/roulette/">Roulette</a></li>
+                                            <li><a href="/category/blackjack/">Blackjack</a></li>
+                                            <li><a href="/category/game-reviews/">Game Reviews</a></li>
+                                            <li><a href="/category/strategies-tips/">Strategies & Tips</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Sports Betting -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileSportsBetting')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Sports Betting <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileSportsBetting">
+                                            <li><a href="/category/cricket-betting/">Cricket Betting</a></li>
+                                            <li><a href="/category/football-betting/">Football Betting</a></li>
+                                            <li><a href="/category/kabaddi-betting/">Kabaddi Betting</a></li>
+                                            <li><a href="/category/tennis-betting/">Tennis Betting</a></li>
+                                            <li><a href="/category/live-betting-strategies/">Live Betting Strategies</a></li>
+                                            <li><a href="/category/match-previews-predictions/">Match Previews & Predictions</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Bonuses & Promotions -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileBonuses')" aria-expanded="false" style="padding-left: 2rem;">
+                                            Bonuses & Promotions <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileBonuses">
+                                            <li><a href="/category/casino-bonuses/">Casino Bonuses</a></li>
+                                            <li><a href="/category/sportsbook-promotions/">Sportsbook Promotions</a></li>
+                                            <li><a href="/category/loyalty-vip-programs/">Loyalty & VIP Programs</a></li>
+                                            <li><a href="/category/tips-to-maximize-bonuses/">Tips to Maximize Bonuses</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- More Categories -->
+                                    <li>
+                                        <button class="mobile-menu-toggle" onclick="toggleMobileMenu('mobileMoreCategories')" aria-expanded="false" style="padding-left: 2rem;">
+                                            More Categories <span class="fa fa-angle-down"></span>
+                                        </button>
+                                        <ul class="mobile-menu-list" id="mobileMoreCategories">
+                                            <li><a href="/category/how-to-guides/">How-To Guides</a></li>
+                                            <li><a href="/category/responsible-gambling/">Responsible Gambling</a></li>
+                                            <li><a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a></li>
+                                            <li><a href="/category/news-industry-updates/">News & Industry Updates</a></li>
+                                            <li><a href="/category/culture-lifestyle/">Culture & Lifestyle</a></li>
+                                            <li><a href="/category/tips-strategies-hub/">Tips & Strategies Hub</a></li>
+                                            <li><a href="/category/faqs-beginner-resources/">FAQs & Beginner Resources</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a class='list-group-item text-light' href='contact.html'>Contact</a>
+                            
+                            <!-- Start Earning Button for Mobile -->
+                            <a class="btn-join-now-mobile" href="https://gangagame.vip/#/register?invitationCode=56882495177" target="_blank" rel="noopener">
+                                <i class="fa fa-rocket"></i>
+                                Start Earning
+                            </a>
+                        </nav>
+					</div>
+					<div class="modal-footer">
+						<p style="color: #e6e9ef;">© 2025 GangaGames. All rights reserved.</p>
+					</div>
+				</div>
+			</div> <!-- modal-bialog .// -->
+		</div> <!-- modal.// -->
+		<!-- End Navbar sidebar menu  -->
+	</header>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Breadcrumb -->
+                    <ul class="breadcrumbs bg-light mb-4">
+                        <li class="breadcrumbs__item">
+                            <a class='breadcrumbs__url' href='index.html'>
+                                <i class="fa fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a class='breadcrumbs__url' href='category/index.html'>Categories</a>
+                        </li>
+                        <li class="breadcrumbs__item breadcrumbs__item--current"><span id="breadcrumbsCurrent">World</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <aside class="wrapper__list__article ">
+            <h4 class="border_section title-orange" id="categoryTitle">News world</h4>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/news13.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Laptop yang selalu menemani di kala gabut
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/news14.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Proin eu nisl et arcu iaculis placerat sollicitudin ut est
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/news15.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Wrana warni kisah cinta dan kehidupan.
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/news16.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Di manakah keadilan untuk kaum muslimin yang terimpa musibah di rohingya
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/newsimage10.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Proin eu nisl et arcu iaculis placerat sollicitudin ut est
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/newsimage11.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Jangan lupa olahraga demi menjaga kesehatan tubuh kita.
+
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/newsimage12.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Proin eu nisl et arcu iaculis placerat sollicitudin ut est
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/newsimage20.png" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Gara-gara virus covid-19 semua pertandingan batal dan para pemain ingin
+                                                pulang kampung.
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </aside>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="sidebar-sticky">
+                        <aside class="wrapper__list__article ">
+                            <h4 class="border_section">recent post</h4>
+                            <div class="wrapper__list__article-small">
+                                <div class="mb-3">
+                                    <!-- Post Article -->
+                                    <div class="card__post card__post-list">
+                                        <div class="image-sm">
+                                            <a href="#">
+                                                <img src="images/thumb/news6.jpg" class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+
+
+                                        <div class="card__post__body ">
+                                            <div class="card__post__content">
+
+                                                <div class="card__post__author-info mb-2">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item">
+                                                            <span class="text-primary">
+                                                                by david hall
+                                                            </span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <span class="text-dark text-capitalize">
+                                                                descember 09, 2016
+                                                            </span>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="card__post__title">
+                                                    <h6>
+                                                        <a href="#">
+                                                            6 Best Tips for Building a Good Shipping Boat
+                                                        </a>
+                                                    </h6>
+                                                    <!-- <p class="d-none d-lg-block d-xl-block">
+                    Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu iaculis placerat
+                    sollicitudin ut est. In fringilla dui dui.
+                </p> -->
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <!-- Post Article -->
+                                    <div class="card__post card__post-list">
+                                        <div class="image-sm">
+                                            <a href="#">
+                                                <img src="images/thumb/news7.jpg" class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+
+
+                                        <div class="card__post__body ">
+                                            <div class="card__post__content">
+
+                                                <div class="card__post__author-info mb-2">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item">
+                                                            <span class="text-primary">
+                                                                by david hall
+                                                            </span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <span class="text-dark text-capitalize">
+                                                                descember 09, 2016
+                                                            </span>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="card__post__title">
+                                                    <h6>
+                                                        <a href="#">
+                                                            Pembalap mulai melaju kencang
+                                                        </a>
+                                                    </h6>
+                                                    <!-- <p class="d-none d-lg-block d-xl-block">
+                    Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu iaculis placerat
+                    sollicitudin ut est. In fringilla dui dui.
+                </p> -->
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <!-- Post Article -->
+                                    <div class="card__post card__post-list">
+                                        <div class="image-sm">
+                                            <a href="#">
+                                                <img src="images/thumb/news8.jpg" class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+
+
+                                        <div class="card__post__body ">
+                                            <div class="card__post__content">
+
+                                                <div class="card__post__author-info mb-2">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item">
+                                                            <span class="text-primary">
+                                                                by david hall
+                                                            </span>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <span class="text-dark text-capitalize">
+                                                                descember 09, 2016
+                                                            </span>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <div class="card__post__title">
+                                                    <h6>
+                                                        <a href="#">
+                                                            Cristian ronaldo mulai mengocek lawannya,
+                                                        </a>
+                                                    </h6>
+                                                    <!-- <p class="d-none d-lg-block d-xl-block">
+                    Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu iaculis placerat
+                    sollicitudin ut est. In fringilla dui dui.
+                </p> -->
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Post Article -->
+                                <div class="article__entry">
+                                    <div class="article__image">
+                                        <a href="#">
+                                            <img src="images/newsimage9.jpg" alt="" class="img-fluid">
+                                        </a>
+                                    </div>
+                                    <div class="article__content">
+                                        <div class="article__category">
+                                            travel
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item">
+                                                <span class="text-primary">
+                                                    by david hall
+                                                </span>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <span class="text-dark text-capitalize">
+                                                    descember 09, 2016
+                                                </span>
+                                            </li>
+
+                                        </ul>
+                                        <h5>
+                                            <a href="#">
+                                                Proin eu nisl et arcu iaculis placerat sollicitudin ut est
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            Maecenas accumsan tortor ut velit pharetra mollis. Proin eu nisl et arcu
+                                            iaculis placerat sollicitudin ut
+                                            est. In fringilla dui dui.
+                                        </p>
+                                        <a href="#" class="btn btn-outline-primary mb-4 text-capitalize"> read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                        <!-- social media -->
+                        <aside class="wrapper__list__article">
+                            <h4 class="border_section">stay conected</h4>
+                            <!-- widget Social media -->
+                            <div class="wrap__social__media">
+                                <a href="https://www.whatsapp.com/channel/0029VbBEUcq5fM5atJQXlg1i" target="_blank" rel="noopener">
+                                    <div class="social__media__widget whatsapp">
+                                        <span class="social__media__widget-icon">
+                                            <i class="fa fa-whatsapp"></i>
+                                        </span>
+                                        <span class="social__media__widget-counter">
+                                            4.6k followers
+                                        </span>
+                                        <span class="social__media__widget-name">
+                                            join
+                                        </span>
+                                    </div>
+                                </a>
+                                <a href="https://t.me/+G91l6T-5ORphNDE1" target="_blank" rel="noopener">
+                                    <div class="social__media__widget telegram">
+                                        <span class="social__media__widget-icon">
+                                            <i class="fa fa-telegram"></i>
+                                        </span>
+                                        <span class="social__media__widget-counter">
+                                            2.7k followers
+                                        </span>
+                                        <span class="social__media__widget-name">
+                                            join
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </aside>
+                        <!-- end social media -->
+                        <!-- tags -->
+                        <aside class="wrapper__list__article">
+                            <h4 class="border_section">Popular Categories</h4>
+                            <div class="blog-tags p-0">
+                                <ul class="list-inline">
+                                    
+                                    <li class="list-inline-item">
+                                        <a href="/category/how-to-guides" class="cat-color-orange">#How-To Guides</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/category/responsible-gambling" class="cat-color-green">#Responsible Gambling</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/category/legal-regulatory-updates" class="cat-color-gold">#Legal & Regulatory Updates</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/category/news-industry-updates" class="cat-color-gold">#News & Industry Updates</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/category/culture-lifestyle" class="cat-color-orange">#Culture & Lifestyle</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/category/tips-strategies-hub" class="cat-color-orange">#Tips & Strategies Hub</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="/category/faqs-beginner-resources" class="cat-color-orange">#FAQ & Beginner Resources</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                        <!-- end tags -->
+                        
+
+                        <aside class="wrapper__list__article">
+                            <h4 class="border_section">Advertise</h4>
+                            <a href="https://gangagame.vip/#/register?invitationCode=56882495177">
+                                <figure>
+                                    <img src="images/andy.jpg" alt="Gangagames" class="img-fluid">
+                                </figure>
+                            </a>
+                        </aside>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- Pagination -->
+            <div class="pagination-area">
+                <div class="pagination wow fadeIn animated" data-wow-duration="2s" data-wow-delay="0.5s"
+                    style="visibility: visible; animation-duration: 2s; animation-delay: 0.5s; animation-name: fadeIn;">
+                    <a href="#">
+                        «
+                    </a>
+                    <a href="#">
+                        1
+                    </a>
+                    <a class="active" href="#">
+                        2
+                    </a>
+                    <a href="#">
+                        3
+                    </a>
+                    <a href="#">
+                        4
+                    </a>
+                    <a href="#">
+                        5
+                    </a>
+
+                    <a href="#">
+                        »
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <section class="wrapper__section p-0">
+        <div class="wrapper__section__components">
+            <footer>
+                <div class="wrapper__footer bg__footer-dark pb-0">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer ">
+                                        <h4 class="footer-title">
+                                            Casino Games
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+
+                                    </div>
+
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/roulette/">Roulette</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/poker/">Poker</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/blackjack/">Blackjack</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/online-slots/">Online Slots</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/game-reviews/">Game Reviews</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer">
+                                        <h4 class="footer-title">
+                                            Sports Betting
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+
+                                    </div>
+
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/cricket-betting/">Cricket Betting</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/football-betting/">Football Betting</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/tennis-betting/">Tennis Betting</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/kabaddi-betting/">Kabaddi Betting</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer">
+                                        <h4 class="footer-title">
+                                            Bonuses & Promotions
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+
+                                    </div>
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/casino-bonuses/">Casino Bonuses</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/culture-lifestyle/">Culture & Lifestyle</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="widget__footer">
+                                    <div class="dropdown-footer">
+                                        <h4 class="footer-title">
+                                            Guides & More
+                                            <span class="fa fa-angle-down"></span>
+                                        </h4>
+
+                                    </div>
+
+                                    <ul class="list-unstyled option-content is-hidden">
+                                        <li>
+                                            <a href="/category/how-to-guides/">How-To Guides</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/strategies-tips/">Strategies & Tips</a>
+                                        </li>
+                                        <li>
+                                            <a href="/category/legal-regulatory-updates/">Legal & Regulatory Updates</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                <figure class="image-logo">
+                                    <img src="images/gangalogo.png" alt="GangaGames" class="logo-footer">
+                                </figure>
+                                </div>
+                                <div class="col-md-8 my-auto ">
+
+                                    <div class="social__media">
+
+                                        <ul class="list-inline">
+
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white facebook">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white twitter">
+                                                    <i class="fa fa-twitter"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white whatsapp">
+                                                    <i class="fa fa-whatsapp"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white telegram">
+                                                    <i class="fa fa-telegram"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="#" class="btn btn-social rounded text-white linkedin">
+                                                    <i class="fa fa-linkedin"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer bottom removed (legacy links and template credit section) -->
+</footer>
+<!-- Copyright under footer -->
+<div class="wrapper__footer-bottom bg__footer-dark" style="background-color: #000 !important; padding: 24px 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <span style="color: #fff; font-size: 14px;">© 2025 GangaGames. All rights reserved.</span>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    </section>
+
+
+    <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/index.bundle3875.js?1fcca2a2c42e9d47a3eb"></script>
+    <script>
+      (function() {
+        function initSticky() {
+          if (!window.jQuery) return;
+          var $ = window.jQuery;
+          $('.sidebar-sticky').each(function() {
+            var $el = $(this);
+            if ($el.data('stickySidebar')) {
+              try { $el.stickySidebar('destroy'); } catch (e) {}
+            }
+            $el.stickySidebar({
+              topSpacing: 60,
+              bottomSpacing: 60,
+              containerSelector: '.row'
+            });
+          });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initSticky);
+        } else {
+          initSticky();
+        }
+        window.addEventListener('load', initSticky);
+      })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.config.js"></script>
+    <script src="js/auth.supabase.js"></script>
+    <script src="js/news-dropdown.supabase.js"></script>
+    <script src="js/category.supabase.js"></script>
+    <script>
+      // Ensure all "Read More" buttons navigate to article detail
+      (function() {
+        function fixReadMoreLinks() {
+          var anchors = document.querySelectorAll('a.btn.btn-outline-primary');
+          anchors.forEach(function(a) {
+            var text = (a.textContent || '').toLowerCase().trim();
+            var href = a.getAttribute('href') || '';
+            if (text.indexOf('read more') !== -1 && (!href || href === '#')) {
+              a.setAttribute('href', 'article-detail-v1.html');
+            }
+          });
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', fixReadMoreLinks);
+        } else {
+          fixReadMoreLinks();
+        }
+      })();
+    </script>
+
+    <!-- Sign In/Up Forms Modal -->
+    <!-- Modern Sign In Modal -->
+    <div id="signInModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 420px;">
+            <div class="modal-content" style="background: #1a1c4a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); overflow: hidden;">
+                
+                <!-- Header with GangaGames Branding -->
+                <div class="modal-header" style="border: none; padding: 32px 32px 0 32px; position: relative;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.1); border: none; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; color: #ffffff; font-size: 14px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div style="text-align: center; width: 100%;">
+                        <div style="margin: 0 auto 20px; text-align: center;">
+                            <img src="images/gangalogo.png" alt="GangaGames" style="height: 48px; width: auto; object-fit: contain;">
+                        </div>
+                        <h4 id="signInModalLabel" style="font-weight: 600; font-size: 24px; margin: 0 0 8px 0; color: #ffffff;">Welcome back</h4>
+                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 14px; margin: 0;">Sign in to your account</p>
+                    </div>
+                </div>
+                
+                <!-- Compact Form Body -->
+                <div class="modal-body" style="padding: 24px 32px 32px 32px;">
+                    <form id="signInForm">
+                        <div style="margin-bottom: 20px;">
+                            <label for="signInEmail" style="font-weight: 500; margin-bottom: 6px; display: block; font-size: 14px; color: #ffffff;">Email</label>
+                            <input type="email" class="form-control" id="signInEmail" placeholder="Enter your email" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff; padding: 12px 16px; border-radius: 8px; font-size: 14px; transition: all 0.2s ease; height: 44px;" onfocus="this.style.borderColor='#4a90e2'; this.style.boxShadow='0 0 0 3px rgba(74, 144, 226, 0.2)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.boxShadow='none'">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label for="signInPassword" style="font-weight: 500; margin-bottom: 6px; display: block; font-size: 14px; color: #ffffff;">Password</label>
+                            <input type="password" class="form-control" id="signInPassword" placeholder="Enter your password" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #ffffff; padding: 12px 16px; border-radius: 8px; font-size: 14px; transition: all 0.2s ease; height: 44px;" onfocus="this.style.borderColor='#4a90e2'; this.style.boxShadow='0 0 0 3px rgba(74, 144, 226, 0.2)'" onblur="this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.boxShadow='none'">
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="rememberMe" style="width: 16px; height: 16px; accent-color: #4a90e2; border-radius: 4px;">
+                                <label for="rememberMe" style="font-size: 13px; color: rgba(255, 255, 255, 0.7); margin: 0;">Remember me</label>
+                            </div>
+                            <a href="#" style="font-size: 13px; color: #4a90e2; text-decoration: none; font-weight: 500;">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" style="width: 100%; background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); border: none; border-radius: 8px; padding: 12px; font-size: 14px; font-weight: 600; color: white; height: 44px; transition: all 0.2s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(74, 144, 226, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(74, 144, 226, 0.2)'">
+                            Sign in
+                        </button>
+                        
+                        <p style="text-align: center; margin-top: 20px; font-size: 13px; color: rgba(255, 255, 255, 0.7);">
+                            Don't have an account? 
+                            <a href="#" onclick="showSignUpForm()" style="color: #4a90e2; text-decoration: none; font-weight: 500;">Sign up</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modern Sign Up Modal -->
+    <div id="signUpModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 480px;">
+            <div class="modal-content" style="background: #1a1c4a; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); overflow: hidden;">
+                <div class="modal-header" style="border: none; background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); padding: 30px; text-align: center;">
+                    <div>
+                        <h4 class="modal-title text-white mb-2" id="signUpModalLabel" style="font-weight: 700; font-size: 28px; margin: 0;">Join GangaGames</h4>
+                        <p class="text-white mb-0" style="opacity: 0.9; font-size: 16px;">Create your account and start your journey</p>
+                    </div>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" style="position: absolute; top: 20px; right: 20px; background: rgba(255, 255, 255, 0.1); border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+                        <span aria-hidden="true" style="font-size: 18px;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 40px;">
+                    <form id="signUpForm">
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label for="signUpName" class="text-white" style="font-weight: 600; margin-bottom: 8px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Full Name</label>
+                            <div style="position: relative;">
+                                <i class="fa fa-user" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #4a90e2; z-index: 2;"></i>
+                                <input type="text" class="form-control" id="signUpName" placeholder="Enter your full name" style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); color: white; padding: 15px 15px 15px 45px; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; height: 55px;">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label for="signUpEmail" class="text-white" style="font-weight: 600; margin-bottom: 8px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</label>
+                            <div style="position: relative;">
+                                <i class="fa fa-envelope" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #4a90e2; z-index: 2;"></i>
+                                <input type="email" class="form-control" id="signUpEmail" placeholder="Enter your email" style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); color: white; padding: 15px 15px 15px 45px; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; height: 55px;">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label for="signUpPassword" class="text-white" style="font-weight: 600; margin-bottom: 8px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Password</label>
+                            <div style="position: relative;">
+                                <i class="fa fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #4a90e2; z-index: 2;"></i>
+                                <input type="password" class="form-control" id="signUpPassword" placeholder="Create a password" style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); color: white; padding: 15px 15px 15px 45px; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; height: 55px;">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label for="signUpConfirmPassword" class="text-white" style="font-weight: 600; margin-bottom: 8px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Confirm Password</label>
+                            <div style="position: relative;">
+                                <i class="fa fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #4a90e2; z-index: 2;"></i>
+                                <input type="password" class="form-control" id="signUpConfirmPassword" placeholder="Confirm your password" style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); color: white; padding: 15px 15px 15px 45px; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; height: 55px;">
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label for="userType" class="text-white" style="font-weight: 600; margin-bottom: 8px; display: block; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">Account Type</label>
+                            <div style="position: relative;">
+                                <i class="fa fa-users" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #4a90e2; z-index: 2;"></i>
+                                <select class="form-control" id="userType" style="background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); color: white; padding: 15px 15px 15px 45px; border-radius: 12px; font-size: 16px; transition: all 0.3s ease; height: 55px; appearance: none; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%200%2024%2024%22 fill=%22white%22%3E%3Cpath d=%22M7%2010l5%205%205-5z%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 15px center; background-size: 20px;">
+                                    <option value="author" style="background: #1a1c4a; color: white;">Author - Write and publish articles</option>
+                                    <option value="admin" style="background: #1a1c4a; color: white;">Admin - Manage content and users</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 30px;">
+                            <div class="form-check" style="display: flex; align-items: center; gap: 12px;">
+                                <input type="checkbox" class="form-check-input" id="agreeTerms" required style="width: 20px; height: 20px; accent-color: #4a90e2;">
+                                <label class="form-check-label text-white" for="agreeTerms" style="font-size: 14px; line-height: 1.5;">I agree to the <a href="#" class="text-primary" style="color: #4a90e2 !important; text-decoration: underline;">Terms and Conditions</a> and <a href="#" class="text-primary" style="color: #4a90e2 !important; text-decoration: underline;">Privacy Policy</a></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" style="background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); border: none; border-radius: 12px; padding: 15px; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; height: 60px; box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3); transition: all 0.3s ease;">
+                            <i class="fa fa-rocket" style="margin-right: 10px;"></i>Create Account
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer" style="border: none; background: rgba(255, 255, 255, 0.05); padding: 25px 40px; text-align: center;">
+                    <p class="text-white mb-0" style="font-size: 16px;">Already have an account? <a href="#" class="text-primary" onclick="showSignInForm()" style="color: #4a90e2 !important; text-decoration: none; font-weight: 600; border-bottom: 2px solid #4a90e2; padding-bottom: 2px;">Sign in here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUserType = 'author';
+        function showSignInForm(userType = null) { if (userType) currentUserType = userType; $('#signUpModal').modal('hide'); $('#signInModal').modal('show'); $('#signInModalLabel').text(currentUserType.charAt(0).toUpperCase() + currentUserType.slice(1) + ' Sign In'); }
+        function showSignUpForm(userType = null) { if (userType) currentUserType = userType; $('#signInModal').modal('hide'); $('#signUpModal').modal('show'); $('#signUpModalLabel').text(currentUserType.charAt(0).toUpperCase() + currentUserType.slice(1) + ' Sign Up'); $('#userType').val(currentUserType); }
+        // Submit handlers are wired by /js/auth.supabase.js
+        $(document).ready(function() { $('.dropdown-toggle').dropdown(); });
+    </script>
+    <script>
+      document.addEventListener('click', function (event) {
+        var anchor = event.target.closest('a');
+        if (!anchor) return;
+        if (anchor.getAttribute('href') === '#') {
+          var container = anchor.closest('.article__entry, .card__post');
+          if (container) {
+            event.preventDefault();
+            window.location.href = 'article-detail-v1.html';
+          }
+        }
+      });
+    </script>
+    <!-- Category page now powered by Supabase via js/category.supabase.js -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,es,fr,de,it,pt,ru,zh-CN,hi',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_container');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="js/header-global.js?v=tz1"></script>
+
+<!-- Mobile Menu Toggle Function -->
+<script>
+function toggleMobileMenu(menuId) {
+    const menu = document.getElementById(menuId);
+    const button = event.target.closest('.mobile-menu-toggle');
+    
+    if (menu && button) {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle the menu visibility
+        if (isExpanded) {
+            menu.classList.remove('show');
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            menu.classList.add('show');
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+}
+</script>
+
+<!-- Pop-up Modal for App Download and Social Media -->
+<style>
+  #promoModal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(36, 38, 86, 0.85); /* matches #242656 with more opacity */
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s;
+  }
+  #promoModal.show {
+    display: flex;
+    opacity: 1;
+  }
+  .promo-modal-content {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(60, 60, 120, 0.18);
+    max-width: 400px;
+    width: 90vw;
+    padding: 0;
+    position: relative;
+    animation: modalPop 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+  }
+  @keyframes modalPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .promo-modal-header {
+    background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    color: #fff;
+    padding: 22px 24px 16px 24px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .promo-modal-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  .promo-modal-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 12px;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+  .promo-modal-close:hover {
+    color: #ffd700;
+  }
+  .promo-modal-body {
+    padding: 28px 18px 22px 18px;
+    background: #fff;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+  }
+  .app-download-section {
+    background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    border-radius: 12px;
+    padding: 18px 12px;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .app-icon {
+    margin-bottom: 10px;
+  }
+  .app-icon i {
+    font-size: 2.2rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .app-download-section h5 {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  .app-download-section p {
+    color: rgba(255,255,255,0.9);
+    font-size: 13px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .download-button a {
+    border-radius: 22px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+    color: #333 !important;
+    background-color: #fff !important;
+    border: none !important;
+    padding: 10px 24px;
+    font-size: 1rem;
+    display: inline-block;
+  }
+  .download-button a:hover {
+    background: #f7f7f7 !important;
+    color: #764ba2 !important;
+  }
+  .wrap__social__media {
+    margin-bottom: 2px;
+  }
+  .social__media__widget {
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(60,60,120,0.07);
+    transition: box-shadow 0.2s;
+  }
+  .social__media__widget:hover {
+    box-shadow: 0 4px 16px rgba(60,60,120,0.13);
+  }
+  .social__media__widget.whatsapp {
+    background: #25d366;
+  }
+  .social__media__widget.telegram {
+    background: #0088cc;
+  }
+  .social__media__widget-icon {
+    font-size: 1.6rem;
+    color: #fff;
+    margin-right: 10px;
+  }
+  .social__media__widget-counter {
+    color: #fff;
+    font-weight: 600;
+    margin-right: 8px;
+    font-size: 0.95rem;
+  }
+  .social__media__widget-name {
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  @media (max-width: 600px) {
+    .promo-modal-content {
+      max-width: 96vw;
+      width: 96vw;
+      padding: 0;
+    }
+    .promo-modal-header {
+      padding: 16px 12px 12px 16px;
+      font-size: 1rem;
+    }
+    .promo-modal-title {
+      font-size: 1rem;
+    }
+    .promo-modal-body {
+      padding: 18px 8px 16px 8px;
+    }
+    .app-download-section {
+      padding: 12px 6px;
+    }
+    .download-button a {
+      font-size: 0.95rem;
+      padding: 8px 12px;
+    }
+    .social__media__widget {
+      padding: 8px 8px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+<div id="promoModal">
+  <div class="promo-modal-content">
+    <div class="promo-modal-header">
+      <span class="promo-modal-title">Welcome to GangaGames!</span>
+      <button class="promo-modal-close" onclick="closePromoModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="promo-modal-body">
+      <!-- App Download Block -->
+      <div class="app-download-section mb-4">
+        <div class="app-download-content text-center text-white">
+          <div class="app-icon mb-3">
+            <i class="fa fa-gamepad"></i>
+          </div>
+          <h5>Ganga Game</h5>
+          <p>Ultimate Mobile Gaming Adventure<br>4.7 ⭐ (250K+ reviews)</p>
+          <div class="download-button">
+            <a href="https://gangagameapp.top/" target="_blank" rel="noopener">
+              <i class="fa fa-download mr-2"></i> Download Now
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Social Media Block -->
+      <div class="wrap__social__media mb-2">
+        <a href="https://www.whatsapp.com/channel/0029VbBEUcq5fM5atJQXlg1i" target="_blank" rel="noopener">
+          <div class="social__media__widget whatsapp">
+            <span class="social__media__widget-icon"><i class="fa fa-whatsapp"></i></span>
+            <span class="social__media__widget-counter">4.6k followers</span>
+            <span class="social__media__widget-name">WhatsApp</span>
+          </div>
+        </a>
+        <a href="https://t.me/+G91l6T-5ORphNDE1" target="_blank" rel="noopener">
+          <div class="social__media__widget telegram">
+            <span class="social__media__widget-icon"><i class="fa fa-telegram"></i></span>
+            <span class="social__media__widget-counter">2.7k followers</span>
+            <span class="social__media__widget-name">Telegram</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function showPromoModal() {
+  var modal = document.getElementById('promoModal');
+  modal.classList.add('show');
+  document.body.classList.add('modal-open');
+}
+function closePromoModal() {
+  var modal = document.getElementById('promoModal');
+  modal.classList.remove('show');
+  document.body.classList.remove('modal-open');
+}
+window.addEventListener('DOMContentLoaded', function() {
+  setTimeout(showPromoModal, 5000);
+});
+</script>
+</body>
+
+
+<!-- Mirrored from retnews.netlify.app/category-style-v2 by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Sep 2025 08:50:03 GMT -->
+</html>
+

@@ -1,0 +1,802 @@
+/* NEWS Dropdown Fixes */
+.dropdown-menu.megamenu {
+    /* Responsive width and equal padding to avoid oversizing */
+    width: 100% !important;
+    max-width: clamp(1040px, 92vw, 1240px) !important;
+    padding: clamp(16px, 2vw, 24px) !important;
+    margin-top: 0 !important;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    z-index: 1050 !important; /* ensure dropdown overlays navbar */
+    display: none !important; /* default: hidden until hovered or .show */
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Unified dropdown arrow indicators across all pages (match homepage) */
+.dropdown-toggle[data-toggle="dropdown"]::after {
+    content: "▼";
+    border: none !important;
+    vertical-align: middle !important;
+    margin-left: 6px !important;
+    font-size: 10px !important;
+    color: #4a90e2 !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Rotate indicator when open via hover or expanded state */
+.dropdown:hover .dropdown-toggle::after,
+.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg) !important;
+}
+
+/* Ensure topbar account dropdown overlays correctly */
+.topbar .dropdown-menu {
+    position: absolute !important;
+    z-index: 1050 !important;
+}
+
+/* Megamenu list link arrows, consistent across pages */
+.megamenu .list-unstyled li {
+    position: relative !important;
+    padding-left: 8px !important;
+}
+
+/* Default: no arrows in megamenu list links (match homepage minimal look) */
+.megamenu .list-unstyled li a::before {
+    content: none !important;
+}
+
+/* No hover arrow shift since arrows are disabled */
+.megamenu .list-unstyled li a:hover::before { content: none !important; }
+
+/* Show dropdown via Bootstrap's .show class (click), not hover */
+.dropdown-menu.megamenu.show {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Enable hover-open behavior so dropdowns show on hover */
+.navbar-hover .dropdown:hover > .dropdown-menu,
+.navbar-hover .nav-item:hover > .dropdown-menu {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Ensure clicked-open menus stay visible even when parent is hovered */
+.navbar-hover .dropdown:hover > .dropdown-menu.show,
+.navbar-hover .nav-item:hover > .dropdown-menu.show {
+    display: block !important;
+}
+
+.dropdown-menu.megamenu .popular__news-header-carousel {
+    padding: 20px !important;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Inject a heading above posts without changing HTML */
+.dropdown-menu.megamenu .popular__news-header-carousel::before {
+    content: "Recent";
+    display: block;
+    color: #bcd0ff !important;
+    letter-spacing: .5px !important;
+    margin: 4px 12px 10px 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    border-bottom: 2px solid rgba(74, 144, 226, 0.35) !important;
+    padding-bottom: 6px !important;
+}
+
+.dropdown-menu.megamenu .top__news__slider {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    margin: 0 auto;
+}
+
+/* Work with the actual HTML structure using .item classes */
+.top__news__slider-container {
+    display: flex !important;
+    visibility: visible !important;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.top__news__slider .item {
+    display: block !important;
+    visibility: visible !important;
+    flex: 0 0 auto;
+    width: 260px;
+    margin: 0 10px;
+}
+
+/* Ensure article entries are visible */
+.top__news__slider .item .article__entry {
+    display: flex !important;
+    visibility: visible !important;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.top__news__slider .item .article__image {
+    display: block !important;
+    visibility: visible !important;
+    height: 140px;
+    overflow: hidden;
+}
+
+.top__news__slider .item .article__image img {
+    display: block !important;
+    visibility: visible !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.top__news__slider .item .article__content {
+    display: flex !important;
+    visibility: visible !important;
+    flex-direction: column;
+    padding: 12px;
+    flex-grow: 1;
+}
+
+.top__news__slider .item .article__content h5 {
+    display: block !important;
+    visibility: visible !important;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: auto;
+    color: #333;
+}
+
+.top__news__slider .item .article__content ul {
+    display: block !important;
+    visibility: visible !important;
+    margin-bottom: 10px;
+}
+
+.top__news__slider .item .article__content li {
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+.scroll-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 10;
+    padding: 0 10px;
+}
+
+.scroll-btn {
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.scroll-btn:hover {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.scroll-left {
+    margin-left: 5px;
+}
+
+.scroll-right {
+    margin-right: 5px;
+}
+
+/* NEWS dropdown beautification: polished card visuals and spacing */
+.top__news__slider .item + .item {
+    margin-left: 16px !important;
+}
+
+.top__news__slider .item {
+    vertical-align: top !important;
+}
+
+.top__news__slider .item .article__entry {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: box-shadow .25s ease, transform .25s ease !important;
+}
+
+.top__news__slider .item .article__entry:hover {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28) !important;
+    transform: translateY(-2px) !important;
+}
+
+.top__news__slider .item .article__image img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+.top__news__slider .item .article__content {
+    padding: 12px 14px 14px 14px !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline span {
+    color: #b9c3d8 !important;
+    font-size: 12px !important;
+}
+
+.top__news__slider .item .article__content h5 {
+    margin: 6px 0 0 0 !important;
+}
+
+.top__news__slider .item .article__content h5 a {
+    color: #eaf0ff !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    line-height: 1.35 !important;
+}
+
+.top__news__slider .item .article__content h5 a:hover {
+    color: #4a90e2 !important;
+}
+
+/* Ensure dropdown slider never hides its children and container isn't absolute */
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider {
+    overflow: visible !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    /* Use a variable gap so items and spaces balance nicely */
+    --news-gap: 24px;
+    gap: 0 !important; /* rely on margin-left for cross-browser spacing */
+    /* Allow horizontal scrolling of posts only */
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+}
+
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider-container {
+    position: relative !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+}
+
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider-container .item {
+    display: flex !important;
+}
+
+/* Force four items on one horizontal line */
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider .item {
+    /* 4 items with 3 gaps: ensure total equals container width */
+    flex: 0 0 calc((100% - (3 * var(--news-gap))) / 4) !important;
+    max-width: calc((100% - (3 * var(--news-gap))) / 4) !important;
+    margin: 0 !important;
+    scroll-snap-align: start !important;
+}
+.nav-item.dropdown.has-megamenu .dropdown-menu .top__news__slider .item + .item {
+    margin-left: var(--news-gap) !important;
+}
+
+/* RECENT NEWS heading style like reference */
+.recent-news-title {
+    color: #bcd0ff !important;
+    letter-spacing: .5px !important;
+    margin: 4px 12px 6px 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+}
+
+/* Remove extra left/right inner gutter to avoid large empty spaces */
+.dropdown-menu.megamenu .popular__news-header-carousel .top__news__slider {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Inline author and date chips */
+.top__news__slider .item .article__content ul.list-inline {
+    display: flex !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline .list-inline-item span {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 9999px !important;
+    padding: 2px 8px !important;
+    color: #eaf0ff !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+/* Consistent card height across dropdown */
+.top__news__slider .item .article__entry {
+    min-height: 270px !important;
+}
+
+/* Widen inner posts container to near full dropdown width and keep equal edges */
+.dropdown-menu.megamenu .container.wrap__mobile-megamenu {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.dropdown-menu.megamenu .popular__news-header-carousel {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    /* Add side gutters so posts don’t touch the edges */
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+}
+
+.dropdown-menu.megamenu .top__news__slider {
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.dropdown-menu.megamenu .top__news__slider-container {
+    width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+}
+
+/* Author and date inline on a single line, no wrapping */
+.top__news__slider .item .article__content ul.list-inline {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-bottom: 8px !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline .list-inline-item {
+    display: inline-flex !important;
+}
+
+.top__news__slider .item .article__content ul.list-inline .list-inline-item span {
+    white-space: nowrap !important;
+}
+
+/* Remove chip backgrounds/borders on author and date */
+.top__news__slider .item .article__content ul.list-inline .list-inline-item span {
+    background: none !important;
+    border: 0 !important;
+    padding: 0 !important;
+    color: #b9c3d8 !important;
+    font-size: 12px !important;
+    line-height: 1 !important;
+}
+
+/* Hover-open behavior: show megamenu on hover for both Categories and News */
+.navbar-hover .nav-item.dropdown.has-megamenu:hover > .dropdown-menu.megamenu {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 1100 !important; /* ensure hovered menu overlays siblings */
+}
+
+/* Ensure hovered menu uses default positioning to avoid squeezing */
+.navbar-hover .nav-item.dropdown.has-megamenu:hover {
+    position: static !important;
+}
+
+/* Keep non-hovered megamenus hidden even if .show was toggled before */
+.navbar-hover .nav-item.dropdown.has-megamenu:not(:hover) > .dropdown-menu.megamenu.show {
+    display: none !important;
+}
+
+/* Categories Dropdown: Center alignment */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .dropdown-menu.megamenu .row {
+    justify-content: center !important;
+}
+
+/* Account dropdown: remove white hover and unify item widths */
+.topbar .topbar-link .dropdown .dropdown-menu {
+    overflow: hidden !important; /* clip hover backgrounds to rounded corners */
+    border-radius: 12px !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu li {
+    width: 100% !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    background: transparent !important; /* no white base */
+    color: #eaf0ff !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item:hover,
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item:focus,
+.topbar .topbar-link .dropdown .dropdown-menu .dropdown-item:active {
+    /* lighter purple hover to match site header */
+    background: rgba(98, 85, 194, 0.22) !important;
+    color: #ffffff !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ensure no white hover from li wrapper */
+.topbar .topbar-link .dropdown .dropdown-menu li:hover {
+    background: rgba(98, 85, 194, 0.22) !important;
+}
+
+.topbar .topbar-link .dropdown .dropdown-menu li:hover > .dropdown-item {
+    background: transparent !important; /* keep anchor transparent so wrapper color shows */
+    color: #ffffff !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .col-megamenu {
+    text-align: center !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .title {
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled {
+    text-align: center !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a {
+    display: inline-block !important;
+    text-align: center !important;
+    width: auto !important;
+}
+/* Center the menu container under the trigger while preserving existing width */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu > .dropdown-menu.megamenu {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* Homepage-aligned Categories Megamenu visuals across all pages */
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu > .dropdown-menu.megamenu {
+  background: linear-gradient(135deg, #1a1c4a 0%, #2a2d5a 100%) !important;
+  border: 1px solid rgba(74, 144, 226, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  padding: 12px 12px 20px 12px !important;
+  min-height: 320px !important;
+  margin-top: 8px !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: absolute !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .wrap__mobile-megamenu { padding-top: 16px !important; padding-bottom: 32px !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .popular__news-header-carousel { padding-top: 16px !important; padding-bottom: 32px !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .top__news__slider { margin-top: 20px !important; }
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .container { max-width: 100% !important; width: 100% !important; padding: 0 24px !important; }
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .title {
+  color: #4a90e2 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+  padding-bottom: 8px !important;
+  border-bottom: 2px solid #4a90e2 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled { margin: 0 !important; padding: 0 !important; text-align: left !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li { margin-bottom: 6px !important; padding-left: 0 !important; }
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a {
+  color: #e6e9ef !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 8px 12px !important;
+  display: block !important;
+  transition: all 0.3s ease !important;
+  border-radius: 6px !important;
+  position: relative !important;
+  text-align: left !important;
+  width: 100% !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a:hover {
+  color: #ffffff !important;
+  background-color: rgba(74, 144, 226, 0.2) !important;
+  padding-left: 16px !important;
+  transform: translateX(4px) !important;
+}
+
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a::before {
+  content: "▶" !important;
+  position: absolute !important;
+  left: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #4a90e2 !important;
+  font-size: 10px !important;
+  opacity: 0 !important;
+  transition: all 0.3s ease !important;
+}
+.navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a:hover::before { opacity: 1 !important; left: 12px !important; }
+
+@media (max-width: 768px) {
+  .navbar .nav-item.dropdown.has-megamenu.categories-megamenu > .dropdown-menu.megamenu {
+    padding: 16px !important;
+    width: 100vw !important;
+    left: 0 !important;
+    transform: none !important;
+  }
+  .navbar .nav-item.dropdown.has-megamenu.categories-megamenu .title { font-size: 14px !important; }
+  .navbar .nav-item.dropdown.has-megamenu.categories-megamenu .list-unstyled li a { font-size: 13px !important; padding: 6px 10px !important; }
+}
+
+/* Modal Visuals: Unified colors, typography, buttons */
+#signUpModal .modal-title,
+#signInModal .modal-title,
+#signUpModalLabel,
+#signInModalLabel {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 24px !important;
+}
+
+#signUpModal .modal-body,
+#signInModal .modal-body {
+  padding: 24px 32px 32px 32px !important;
+}
+
+#signUpModal label,
+#signInModal label {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  margin-bottom: 6px !important;
+}
+
+#signUpModal .form-control,
+#signInModal .form-control,
+#signUpModal select,
+#signInModal select {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  height: 44px !important;
+}
+
+#signUpModal .form-control:focus,
+#signInModal .form-control:focus,
+#signUpModal select:focus,
+#signInModal select:focus {
+  outline: none !important;
+  border-color: #4a90e2 !important;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2) !important;
+}
+
+#signUpModal select,
+#signInModal select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22white%22%3E%3Cpath d=%22M7 10l5 5 5-5z%22/%3E%3C/svg%3E') !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 16px !important;
+  padding-right: 36px !important;
+}
+
+#signUpModal .btn-primary,
+#signInModal .btn-primary {
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+  height: 44px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+#signUpModal .modal-footer,
+#signInModal .modal-footer {
+  border: none !important;
+  background: none !important;
+  padding: 0 32px 32px 32px !important;
+}
+
+#signUpModal .modal-footer p,
+#signInModal .modal-footer p {
+  color: #ffffff !important;
+  font-size: 13px !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+#signUpModal .modal-footer a,
+#signInModal .modal-footer a {
+  color: #4a90e2 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+/* Normalize modal headers and close buttons to match homepage */
+#signUpModal .modal-header,
+#signInModal .modal-header {
+  background: none !important;
+  border: none !important;
+  padding: 32px 32px 0 32px !important;
+}
+
+#signUpModal .close,
+#signInModal .close {
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Hide legacy input icons in modals to keep design clean */
+#signUpModal .modal-body i.fa,
+#signInModal .modal-body i.fa {
+  display: none !important;
+}
+
+/* Constrain Sign Up / Sign In modals within viewport */
+#signUpModal .modal-dialog,
+#signInModal .modal-dialog {
+  width: auto !important;
+  max-width: min(480px, calc(100vw - 32px)) !important;
+  margin: 16px auto !important;
+  box-sizing: border-box !important;
+}
+
+#signUpModal .modal-content,
+#signInModal .modal-content {
+  display: flex !important;
+  flex-direction: column !important;
+  max-height: calc(100vh - 32px) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important; /* keep rounded corners clean */
+}
+
+#signUpModal .modal-header,
+#signInModal .modal-header,
+#signUpModal .modal-footer,
+#signInModal .modal-footer {
+  flex-shrink: 0 !important;
+}
+
+#signUpModal .modal-body,
+#signInModal .modal-body {
+  overflow-y: auto !important;
+}
+
+/* Small screens: slightly tighter gutters */
+@media (max-width: 480px) {
+  #signUpModal .modal-dialog,
+  #signInModal .modal-dialog {
+    max-width: calc(100vw - 24px) !important;
+    margin: 12px auto !important;
+  }
+  #signUpModal .modal-content,
+  #signInModal .modal-content {
+    max-height: calc(100vh - 24px) !important;
+  }
+}
+
+/* Constrain legacy aside modal if used */
+#modal_aside_right .modal-dialog.modal-dialog-aside {
+  width: auto !important;
+  max-width: min(420px, calc(100vw - 16px)) !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+#modal_aside_right .modal-content {
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: auto !important;
+}
+/* Mobile hamburger modal: dark theme and improved list styling */
+#modal_aside_right .modal-content {
+  background: linear-gradient(135deg, #1a1c4a 0%, #2a2d5a 100%) !important;
+  color: #e6e9ef !important;
+  border: 1px solid rgba(74, 144, 226, 0.3) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+#modal_aside_right .modal-header,
+#modal_aside_right .modal-footer {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+#modal_aside_right .close { color: #e6e9ef !important; opacity: 0.8 !important; }
+#modal_aside_right .close:hover { opacity: 1 !important; }
+
+#modal_aside_right .form-control {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+#modal_aside_right .form-control::placeholder { color: #cdd3e0 !important; }
+#modal_aside_right .btn.btn-outline-secondary {
+  color: #e6e9ef !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+#modal_aside_right .list-group-item {
+  background: transparent !important;
+  color: #e6e9ef !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  transition: background 0.2s ease, color 0.2s ease, padding-left 0.2s ease !important;
+}
+#modal_aside_right .list-group-item:hover {
+  background-color: rgba(74, 144, 226, 0.16) !important;
+  color: #ffffff !important;
+  padding-left: 14px !important;
+}
+#modal_aside_right .collapse .list-group-item { padding-left: 24px !important; }
+
+/* Arrow toggle state for Categories */
+#modal_aside_right a[data-toggle="collapse"] .fa-angle-down {
+  color: #4a90e2 !important;
+  transition: transform 0.3s ease !important;
+}
+#modal_aside_right a[data-toggle="collapse"][aria-expanded="true"] .fa-angle-down {
+  transform: rotate(180deg) !important;
+}
+
+/* Arrow toggle state for Categories */
+#modal_aside_right a[data-toggle="collapse"] .fa-angle-down {
+  color: #4a90e2 !important;
+  transition: transform 0.3s ease !important;
+}
+#modal_aside_right a[data-toggle="collapse"][aria-expanded="true"] .fa-angle-down {
+  transform: rotate(180deg) !important;
+}
