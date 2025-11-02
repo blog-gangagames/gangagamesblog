@@ -1,0 +1,34 @@
+/* Mobile scroll behavior fix for homepage bounce issue */
+@media (max-width: 768px) {
+    /* Prevent overscroll bounce on main page */
+    html, body {
+        overscroll-behavior-y: none;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Contain scroll within sections to prevent upward bounce */
+    .wrapper__section,
+    .wrapper__section__components,
+    .container,
+    .popular__section-news,
+    .article__entry-carousel {
+        overscroll-behavior-y: contain;
+        overflow-y: visible;
+    }
+    
+    /* Disable scroll snap that can cause jump behavior */
+    .carousel,
+    .slider,
+    .banner,
+    .hero-section,
+    .popular__news-header-carousel,
+    .top__news__slider {
+        scroll-snap-type: none;
+        -webkit-scroll-snap-type: none;
+    }
+    
+    /* Ensure smooth scrolling without bounce */
+    * {
+        -webkit-overflow-scrolling: touch;
+    }
+}
