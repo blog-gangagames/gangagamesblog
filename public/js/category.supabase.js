@@ -155,10 +155,11 @@
 
   function slugifyTitle(t){
     try {
-      return String(t || '').toLowerCase().trim()
-        .replace(/\s+/g, '-')
-        .replace(/[^\w\-]+/g, '')
-        .replace(/\-\-+/g, '-');
+      return String(t || '')
+        .replace(/['"]/g, '')
+        .replace(/[^a-zA-Z0-9]+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
     } catch(_) { return ''; }
   }
 

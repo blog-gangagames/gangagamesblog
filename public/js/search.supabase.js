@@ -9,7 +9,7 @@
   function safeImage(p){ return (p && p.image_url) ? p.image_url : 'images/newsimage1.png'; }
   function safeTitle(p){ return (p && p.title) ? p.title : 'Untitled'; }
   function safeCategory(p){ var raw=(p&&p.subcategory)?p.subcategory:(p&&p.main_category?p.main_category:''); return String(raw || ''); }
-  function slugifyTitle(t){ try { return String(t || '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-'); } catch(_) { return ''; } }
+  function slugifyTitle(t){ try { return String(t||'').replace(/['"]/g,'').replace(/[^a-zA-Z0-9]+/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,''); } catch(_) { return ''; } }
   function articleUrl(p){
     var title=safeTitle(p); var slug=slugifyTitle(title);
     return slug ? ('/' + slug) : '/';

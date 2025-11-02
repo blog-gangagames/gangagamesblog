@@ -17,15 +17,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static site (homepage, category pages, article detail template, assets)
 app.use(express.static(STATIC_ROOT));
 
-// Ensure homepage serves the public index.html
-app.get('/', (req, res) => {
-  try {
-    return res.sendFile(path.join(STATIC_ROOT, 'public', 'index.html'));
-  } catch (e) {
-    return res.status(500).send('Internal server error');
-  }
-});
-
 // Initialize SQLite database
 const db = new sqlite3.Database('./blog.db', (err) => {
   if (err) {

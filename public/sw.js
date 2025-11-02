@@ -26,6 +26,10 @@ self.addEventListener('fetch', (event) => {
       // If the request was a 404 or otherwise not OK, decide whether to fallback
       const url = new URL(event.request.url);
       const path = url.pathname || '/';
+      // Explicitly fallback homepage to static index.html to avoid API JSON errors
+      if (path === '/' || /^\/index\.html$/i.test(path)) {
+        return fetch('/index.html');
+      }
       const isSlugPath = (p) => /^\/([a-z0-9\-]+)\/?$/i.test(p);
       const isCategorySlugPath = (p) => /^\/[a-z0-9\-]+\/[a-z0-9\-]+\/?$/i.test(p);
       const extractSlug = (p) => {
@@ -48,10 +52,6 @@ self.addEventListener('fetch', (event) => {
         /^\/index\.html$/i.test(path) ||
         path === '/'
       );
-      // If it's the homepage and the response was not OK, serve static index.html
-      if (path === '/' || /^\/index\.html$/i.test(path)) {
-        try { const home = await fetch('/index.html'); if (home && home.ok) return home; } catch(_){}
-      }
       // If it's a category path like "/category/blackjack" and not found, serve the category shell
       if (/^\/category\/[a-z0-9\-]+\/?$/i.test(path)) {
         return fetch('/category-style-v2.html');
