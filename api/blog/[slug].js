@@ -65,11 +65,10 @@ module.exports = async function handler(req, res) {
         
         if (!dbError && posts && posts.length > 0) {
           // Find matching post by comparing slugified titles
-          const slugify = (str) => String(str || '').toLowerCase()
-            .replace(/['"]/g, '')
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/-+/g, '-')
-            .replace(/^-|-$/g, '');
+          const slugify = (str) => String(str || '').toLowerCase().trim()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-');
           
           const targetSlug = slugify(slug);
           const matchingPost = posts.find(p => {
@@ -115,11 +114,10 @@ module.exports = async function handler(req, res) {
             .limit(50);
           
           if (!dbError && posts && posts.length > 0) {
-            const slugify = (str) => String(str || '').toLowerCase()
-              .replace(/['"]/g, '')
-              .replace(/[^a-z0-9]+/g, '-')
-              .replace(/-+/g, '-')
-              .replace(/^-|-$/g, '');
+            const slugify = (str) => String(str || '').toLowerCase().trim()
+              .replace(/\s+/g, '-')
+              .replace(/[^\w\-]+/g, '')
+              .replace(/\-\-+/g, '-');
             
             const targetSlug = slugify(slug);
             const matchingPost = posts.find(p => {
