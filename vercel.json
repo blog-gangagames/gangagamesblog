@@ -13,6 +13,10 @@
       "destination": "/category-style-v2.html"
     },
     {
+      "source": "/category/:slug/",
+      "destination": "/category-style-v2.html"
+    },
+    {
       "source": "/:category/:slug",
       "destination": "/api/blog/:slug"
     },
@@ -28,6 +32,15 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    },
+    {
+      "source": "/category-style-v2.html",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
         }
       ]
     },
