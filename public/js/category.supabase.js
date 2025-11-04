@@ -6,6 +6,8 @@
 */
 
 (function () {
+  // Track current slug for reinitialization when navigating between categories
+  var __currentCategorySlug = null;
   function getClient() {
     if (window.supabaseClient) return window.supabaseClient;
     if (window.supabase && typeof window.supabase.createClient === 'function' && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
@@ -323,6 +325,13 @@
     if (heading) heading.textContent = displayName;
     var crumb = document.getElementById('breadcrumbsCurrent');
     if (crumb) crumb.textContent = displayName;
+    // Clean up any lingering modal/backdrop from previous page state
+    try {
+      document.body.classList.remove('modal-open');
+      [].slice.call(document.querySelectorAll('.modal-backdrop')).forEach(function(el){ el.parentNode && el.parentNode.removeChild(el); });
+      var aside = document.getElementById('modal_aside_right');
+      if (aside) { aside.classList.remove('show'); aside.style.display = 'none'; }
+    } catch(_){}
   }
 
   // Render a specific page into grid and sidebar slices
@@ -388,6 +397,12 @@
   async function init() {
     var slug = getSelectedSlug();
     if (!slug) return; // keep default page if no slug
+    // If we're already showing this slug, allow a hard refresh to re-render, but skip redundant work
+    if (__currentCategorySlug && __currentCategorySlug === slug) {
+      // Still ensure header/crumb reflect the path
+      updateChrome(labelFromSlug(slug));
+    }
+    __currentCategorySlug = slug;
     var displayName = labelFromSlug(slug);
     updateChrome(displayName);
     // Cache-first paint without removing placeholders unless we have something
@@ -412,12 +427,24 @@
   } else {
     init();
   }
+  // Reinitialize when browser history changes or page becomes visible again
+  try {
+    window.addEventListener('popstate', function(){ setTimeout(init, 0); });
+    window.addEventListener('pageshow', function(){ setTimeout(init, 0); });
+    window.addEventListener('hashchange', function(){ setTimeout(init, 0); });
+  } catch(_){}
   // Intercept pretty slug links for local preview routing
   try {
     document.addEventListener('click', function(e){
       var a = e.target.closest && e.target.closest('a');
       if (!a) return;
       var href = a.getAttribute('href') || '';
+      // If user clicks another category link while on category page, allow normal navigation
+      if (/^\/category\/[a-z0-9\-]+\/?$/i.test(href)) {
+        // Ensure full navigation even if a parent prevents default
+        // Do not intercept; just let browser navigate
+        return;
+      }
       var id = a.getAttribute('data-article-id') || '';
       var slug = a.getAttribute('data-article-slug') || '';
       if (/^\/[a-z0-9\-]+\/?$/.test(href) && (id || slug)) {
