@@ -122,7 +122,7 @@
 
       var extras = document.createElement('div');
       extras.className = 'mobile-menu-extras';
-      extras.innerHTML = '<a class="mobile-menu-link" href="/index.html">Home</a>\n<a class="mobile-menu-link" href="#categories">Categories</a>\n<a class="mobile-menu-link" href="/contact.html">Contact</a>';
+      extras.innerHTML = '<a class="mobile-menu-link" href="/" target="_top">Home</a>\n<a class="mobile-menu-link" href="#categories">Categories</a>\n<a class="mobile-menu-link" href="/contact.html" target="_top">Contact</a>';
       container.appendChild(extras);
 
       var existingNav = modalBody.querySelector('nav.list-group');
@@ -149,9 +149,31 @@
     }, 200);
   }
 
+  function normalizeHomeLogoLinks(){
+    try {
+      var selectors = [
+        'figure a',
+        '.navbar .nav-link[href*="index.html"]',
+        '#modal_aside_right a[href*="index.html"]',
+        '.breadcrumbs a[href*="index.html"]'
+      ];
+      selectors.forEach(function(sel){
+        document.querySelectorAll(sel).forEach(function(a){
+          try {
+            var href = a.getAttribute('href') || '';
+            if (/index\.html$/i.test(href) || href === '' || href === '#') {
+              a.setAttribute('href', '/');
+            }
+            a.setAttribute('target', '_top');
+          } catch(_){ }
+        });
+      });
+    } catch(_){ }
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
     ensureHeaderDate();
     renderMobileMenu();
-    // No link rewrites: keep absolute category and common links
+    normalizeHomeLogoLinks();
   });
 })();
