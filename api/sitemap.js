@@ -51,6 +51,25 @@ module.exports = async function handler(req, res) {
       console.error('Database error for sitemap (continuing with fallback):', dbErr);
     }
 
+    // Also try to list static post HTML files from Supabase Storage (blog bucket)
+    // This ensures posts that exist as static HTML but aren't in the DB still appear in the sitemap
+    let storageSlugs = [];
+    try {
+      const listRes = await supabase.storage
+        .from('blog')
+        .list('', { limit: 1000 });
+
+      if (listRes && !listRes.error && Array.isArray(listRes.data)) {
+        storageSlugs = listRes.data
+          .filter(obj => obj && typeof obj.name === 'string' && obj.name.toLowerCase().endsWith('.html'))
+          .map(obj => obj.name.replace(/\.html$/i, ''));
+      } else if (listRes && listRes.error) {
+        console.error('Error listing storage posts for sitemap (continuing):', listRes.error);
+      }
+    } catch (storageErr) {
+      console.error('Storage list error for sitemap (continuing):', storageErr);
+    }
+
     const today = new Date().toISOString().split('T')[0];
     let xml = xmlHeader();
 
@@ -77,6 +96,24 @@ module.exports = async function handler(req, res) {
       const cat = slugify(p.subcategory || p.main_category || 'uncategorized');
       const lastmod = (p.updated_at || p.published_at) ? new Date(p.updated_at || p.published_at).toISOString().split('T')[0] : today;
       xml += urlEntry(`${SITE_DOMAIN}/${cat}/${postSlug}/`, lastmod, 'monthly', 0.8);
+    }
+
+    // Storage-only post pages (no DB record) — include under /blog/:slug
+    // Deduplicate against DB-backed slugs
+    try {
+      const dbSlugSet = new Set((posts || []).map(p => {
+        const s = p.slug && String(p.slug).trim().length > 0 ? p.slug : slugify(p.title);
+        return slugify(s);
+      }));
+
+      for (const rawSlug of storageSlugs || []) {
+        const s = slugify(rawSlug);
+        if (!dbSlugSet.has(s)) {
+          xml += urlEntry(`${SITE_DOMAIN}/blog/${s}/`, today, 'monthly', 0.6);
+        }
+      }
+    } catch (dedupeErr) {
+      console.error('Error adding storage-only posts to sitemap:', dedupeErr);
     }
 
     xml += `\n${xmlFooter()}`;
