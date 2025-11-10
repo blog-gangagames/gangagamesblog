@@ -42,8 +42,10 @@ export async function generatePostHTML(post: Post): Promise<string> {
     const fs = require('fs');
     const template = fs.readFileSync(templatePath, 'utf8');
 
-    // Generate canonical URL
-    const canonicalUrl = `https://yourdomain.com/${post.category.slug}/${post.slug}`;
+    // Generate canonical URL using env or default to production domain
+    const baseDomain = (import.meta as any)?.env?.VITE_PUBLIC_SITE_URL || 'https://www.gangagamesblog.com';
+    const normalizedBase = String(baseDomain).replace(/\/$/, '');
+    const canonicalUrl = `${normalizedBase}/${post.category.slug}/${post.slug}`;
 
     // Generate related posts (simplified - you can enhance this)
     const relatedPosts = await generateRelatedPosts(post.category.slug, post.id);
