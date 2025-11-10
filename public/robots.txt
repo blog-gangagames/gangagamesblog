@@ -3,4 +3,4 @@ Disallow: /admin/
 Disallow: /admin-build/
 Disallow: /api-server/
 Allow: /
-Sitemap: https://gangagamesblog.com/sitemap.xml
+Sitemap: https://www.gangagamesblog.com/sitemap.xml

@@ -7,7 +7,19 @@
       "maxDuration": 10
     }
   },
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "gangagamesblog.com" }],
+      "destination": "https://www.gangagamesblog.com/:1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
     {
       "source": "/category/:slug",
       "destination": "/category-style-v2.html"
@@ -23,6 +35,14 @@
     {
       "source": "/sitemap.xml",
       "destination": "/api/sitemap"
+    },
+    {
+      "source": "/",
+      "destination": "/public/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ],
   "headers": [
