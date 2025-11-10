@@ -11,7 +11,7 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "gangagamesblog.com" }],
-      "destination": "https://www.gangagamesblog.com/:1",
+      "destination": "https://www.gangagamesblog.com/$1",
       "permanent": true
     }
   ],
