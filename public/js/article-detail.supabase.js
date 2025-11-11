@@ -1,6 +1,28 @@
 // Article Detail loader powered by Supabase (plain JS)
 // Reads `id` from the query string and renders the full post
 (function(){
+  function setCanonical(data, slugPath){
+    try {
+      var base = 'https://www.gangagamesblog.com'.replace(/\/$/, '');
+      var href = base + (function(){
+        if (data) {
+          var rawCat = String((data.category || data.category_name || '')).trim();
+          var catSlug = slugifyTitle(rawCat || '').replace(/faqs-and-beginner-resources/,'faqs-beginner-resources');
+          var slug = String(data.slug || slugifyTitle(data.title || '') || '').trim();
+          if (catSlug && slug) return '/' + catSlug + '/' + slug + '/';
+        }
+        if (slugPath) return '/blog/' + String(slugPath).toLowerCase() + '/';
+        var p = (window.location && window.location.pathname) ? window.location.pathname : '/';
+        return p.endsWith('/') ? p : (p + '/');
+      })();
+      var link = document.querySelector('link[rel="canonical"]');
+      if (!link) { link = document.createElement('link'); link.setAttribute('rel','canonical'); document.head.appendChild(link); }
+      link.setAttribute('href', href);
+      var og = document.querySelector('meta[property="og:url"]');
+      if (!og) { og = document.createElement('meta'); og.setAttribute('property','og:url'); document.head.appendChild(og); }
+      og.setAttribute('content', href);
+    } catch(_){ }
+  }
   // Lightweight localStorage cache for instant article paint
   function readCache(key, maxAgeSeconds){
     try {
@@ -284,6 +306,7 @@
       var cached = readCache(cacheKey, 86400);
       if (cached) {
         applyArticleData(cached);
+        setCanonical(cached, slugPath);
         var loader = document.querySelector('.loading-container');
         if (loader) { try { loader.style.display = 'none'; } catch(_){} }
         // Hide article loading state
@@ -369,6 +392,7 @@
       // Render fresh data and update cache
       if (shouldUpdate) {
         applyArticleData(data);
+        setCanonical(data, slugPath);
         try { 
           var loader2 = document.querySelector('.loading-container'); 
           if (loader2) loader2.style.display = 'none'; 

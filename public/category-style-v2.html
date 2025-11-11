@@ -10,6 +10,23 @@
 <meta name="description" content="Explore all categories on Ganga Games Blog: casino games, sports betting, guides, tips, and more for Indian players.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link id="canonical-link" rel="canonical" href="">
+    <meta id="og-url-meta" property="og:url" content="">
+    <script>
+      (function(){
+        try {
+          var base = 'https://www.gangagamesblog.com';
+          var path = (window.location && window.location.pathname) ? window.location.pathname : '/category/';
+          // Normalize: enforce trailing slash for directories
+          var href = base.replace(/\/$/,'') + (path.endsWith('/') ? path : (path + '/'));
+          var link = document.getElementById('canonical-link');
+          if (link) link.setAttribute('href', href);
+          var og = document.getElementById('og-url-meta');
+          if (og) og.setAttribute('content', href);
+        } catch(e) { /* noop */ }
+      })();
+    </script>
+
     <link rel="manifest" href="/site.webmanifest">
     <!-- favicon.ico in the root directory -->
     <link rel="icon" type="image/png" href="favicon.png">

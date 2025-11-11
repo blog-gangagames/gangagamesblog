@@ -212,8 +212,23 @@ module.exports = async function handler(req, res) {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-XSS-Protection', '1; mode=block');
 
-    // Return the HTML content
-    return res.status(200).send(htmlContent);
+    // Inject or replace canonical if needed
+    try {
+      const baseDomain = (process.env.NEXT_PUBLIC_DOMAIN || process.env.SITE_DOMAIN || 'https://www.gangagamesblog.com').replace(/\/$/, '');
+      const effectiveSlug = String(triedSlug || slug).toLowerCase();
+      const canonicalUrl = `${baseDomain}/blog/${effectiveSlug}/`;
+      let finalHtml = htmlContent;
+      if (finalHtml.indexOf('{{CANONICAL_URL}}') !== -1) {
+        finalHtml = finalHtml.replace(/{{CANONICAL_URL}}/g, canonicalUrl);
+      } else if (!/rel=['"]canonical['"]/i.test(finalHtml)) {
+        finalHtml = finalHtml.replace(/<\/head>/i, `<link rel="canonical" href="${canonicalUrl}">\n<meta property="og:url" content="${canonicalUrl}">\n</head>`);
+      }
+      // Return the HTML content
+      return res.status(200).send(finalHtml);
+    } catch(_) {
+      // Fallback to original content if injection fails
+      return res.status(200).send(htmlContent);
+    }
 
   } catch (error) {
     console.error('Error in blog API handler:', error);
