@@ -122,7 +122,7 @@
 
       var extras = document.createElement('div');
       extras.className = 'mobile-menu-extras';
-      extras.innerHTML = '<a class="mobile-menu-link" href="/index.html">Home</a>\n<a class="mobile-menu-link" href="#categories">Categories</a>\n<a class="mobile-menu-link" href="/contact.html">Contact</a>';
+      extras.innerHTML = '<a class="mobile-menu-link" href="/">Home</a>\n<a class="mobile-menu-link" href="#categories">Categories</a>\n<a class="mobile-menu-link" href="/contact.html">Contact</a>';
       container.appendChild(extras);
 
       var existingNav = modalBody.querySelector('nav.list-group');
